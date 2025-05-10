@@ -16,3 +16,7 @@ st.markdown(
     Stay tuned for more information and features to come!
     """
 )
+
+# Add a button to return to home page
+if st.button("Return to Home", type="primary"):
+    st.switch_page("Home.py")
