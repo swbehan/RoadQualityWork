@@ -2,20 +2,28 @@ from flask import Blueprint, jsonify, request
 from backend.db_connection import db
 from mysql.connector import Error
 
+# Create a Blueprint for NGO routes
 ngos = Blueprint("ngos", __name__)
 
 
+# Get all NGOs with optional filtering by country, focus area, and founding year
+# Example: /ngo/ngos?country=United%20States&focus_area=Environmental%20Conservation
 @ngos.route("/ngos", methods=["GET"])
 def get_all_ngos():
     try:
         cursor = db.get_db().cursor()
+
+        # Note: Query parameters are added after the main part of the URL.
+        # Here is an example:
+        # http://localhost:4000/ngo/ngos?founding_year=1971
+        # founding_year is the query param.
 
         # Get query parameters for filtering
         country = request.args.get("country")
         focus_area = request.args.get("focus_area")
         founding_year = request.args.get("founding_year")
 
-        # Base query
+        # Prepare the Base query
         query = "SELECT * FROM WorldNGOs WHERE 1=1"
         params = []
 
@@ -39,6 +47,8 @@ def get_all_ngos():
         return jsonify({"error": str(e)}), 500
 
 
+# Get detailed information about a specific NGO including its projects and donors
+# Example: /ngo/ngos/1
 @ngos.route("/ngos/<int:ngo_id>", methods=["GET"])
 def get_ngo(ngo_id):
     try:
@@ -51,15 +61,14 @@ def get_ngo(ngo_id):
         if not ngo:
             return jsonify({"error": "NGO not found"}), 404
 
-        # Get associated projects
+        # Get associated projects then donors
         cursor.execute("SELECT * FROM Projects WHERE NGO_ID = %s", (ngo_id,))
         projects = cursor.fetchall()
 
-        # Get associated donors
         cursor.execute("SELECT * FROM Donors WHERE NGO_ID = %s", (ngo_id,))
         donors = cursor.fetchall()
 
-        # Combine all data
+        # Combine data from multiple related queries into one object to return (after jsonify)
         ngo["projects"] = projects
         ngo["donors"] = donors
 
@@ -69,6 +78,9 @@ def get_ngo(ngo_id):
         return jsonify({"error": str(e)}), 500
 
 
+# Create a new NGO
+# Required fields: Name, Country, Founding_Year, Focus_Area, Website
+# Example: POST /ngo/ngos with JSON body
 @ngos.route("/ngos", methods=["POST"])
 def create_ngo():
     try:
@@ -110,6 +122,9 @@ def create_ngo():
         return jsonify({"error": str(e)}), 500
 
 
+# Update an existing NGO's information
+# Can update any field except NGO_ID
+# Example: PUT /ngo/ngos/1 with JSON body containing fields to update
 @ngos.route("/ngos/<int:ngo_id>", methods=["PUT"])
 def update_ngo(ngo_id):
     try:
@@ -146,6 +161,8 @@ def update_ngo(ngo_id):
         return jsonify({"error": str(e)}), 500
 
 
+# Get all projects associated with a specific NGO
+# Example: /ngo/ngos/1/projects
 @ngos.route("/ngos/<int:ngo_id>/projects", methods=["GET"])
 def get_ngo_projects(ngo_id):
     try:
@@ -166,6 +183,8 @@ def get_ngo_projects(ngo_id):
         return jsonify({"error": str(e)}), 500
 
 
+# Get all donors associated with a specific NGO
+# Example: /ngo/ngos/1/donors
 @ngos.route("/ngos/<int:ngo_id>/donors", methods=["GET"])
 def get_ngo_donors(ngo_id):
     try:
