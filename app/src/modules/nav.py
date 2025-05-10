@@ -48,6 +48,14 @@ def ClassificationNav():
     )
 
 
+def NgoDirectoryNav():
+    st.sidebar.page_link("pages/14_NGO_Directory.py", label="NGO Directory", icon="📁")
+
+
+def AddNgoNav():
+    st.sidebar.page_link("pages/15_Add_NGO.py", label="Add New NGO", icon="➕")
+
+
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
@@ -88,6 +96,8 @@ def SideBarLinks(show_home=False):
             PredictionNav()
             ApiTestNav()
             ClassificationNav()
+            NgoDirectoryNav()
+            AddNgoNav()
 
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "administrator":
