@@ -8,13 +8,13 @@ from modules.nav import SideBarLinks
 SideBarLinks()
 
 st.write("# Accessing a REST API from Within Streamlit")
-
 """
 Simply retrieving data from a REST api running in a separate Docker Container.
 
 If the container isn't running, this will be very unhappy.  But the Streamlit app 
 should not totally die. 
 """
+
 data = {} 
 try:
   data = requests.get('http://api:4000/data').json()
