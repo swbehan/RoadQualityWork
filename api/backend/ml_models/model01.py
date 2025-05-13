@@ -5,8 +5,9 @@ accessed.
 """
 from backend.db_connection import db
 import numpy as np
-import logging
+# import logging
 
+from flask import current_app
 
 def train():
   """
@@ -28,15 +29,11 @@ def predict(var01, var02):
   query = 'SELECT beta_vals FROM model1_params ORDER BY sequence_number DESC LIMIT 1'
   cursor.execute(query)
   return_val = cursor.fetchone()
-
   params = return_val['beta_vals']
-  logging.info(f'params = {params}')
-  logging.info(f'params datatype = {type(params)}')
-
+  
   # turn the values from the database into a numpy array
   params_array = np.array(list(map(float, params[1:-1].split(','))))
-  logging.info(f'params array = {params_array}')
-  logging.info(f'params_array datatype = {type(params_array)}')
+  current_app.logger.info(f'params array = {params_array}')
 
   # turn the variables sent from the UI into a numpy array
   input_array = np.array([1.0, float(var01), float(var02)])

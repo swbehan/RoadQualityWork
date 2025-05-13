@@ -1,16 +1,45 @@
 from flask import Flask
+from dotenv import load_dotenv
+import os
+import logging
+from logging.handlers import RotatingFileHandler
 
 from backend.db_connection import db
-from backend.customers.customer_routes import customers
 from backend.products.products_routes import products
 from backend.simple.simple_routes import simple_routes
 from backend.ngos.ngo_routes import ngos
-import os
-from dotenv import load_dotenv
-
 
 def create_app():
     app = Flask(__name__)
+
+    # Configure logging
+    # Create logs directory if it doesn't exist
+    if not os.path.exists('logs'):
+        os.mkdir('logs')
+
+    # Set up file handler for all levels
+    file_handler = RotatingFileHandler(
+        'logs/api.log',
+        maxBytes=10240,
+        backupCount=10
+    )
+    file_handler.setFormatter(logging.Formatter(
+        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
+    ))
+    file_handler.setLevel(logging.DEBUG)  # Capture all levels in file
+    app.logger.addHandler(file_handler)
+
+    # Set up console handler for all levels
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(logging.Formatter(
+        '%(asctime)s %(levelname)s: %(message)s'
+    ))
+    console_handler.setLevel(logging.DEBUG)  # Capture all levels in console
+    app.logger.addHandler(console_handler)
+
+    # Set the base logging level to DEBUG to capture everything
+    app.logger.setLevel(logging.DEBUG)
+    app.logger.info('API startup')
 
     # Load environment variables
     # This function reads all the values from inside
@@ -41,10 +70,10 @@ def create_app():
 
     # Register the routes from each Blueprint with the app object
     # and give a url prefix to each
-    app.logger.info("current_app(): registering blueprints with Flask app object.")
+    app.logger.info("create_app(): registering blueprints with Flask app object.")
     app.register_blueprint(simple_routes)
-    app.register_blueprint(customers, url_prefix="/c")
-    app.register_blueprint(products, url_prefix="/p")
+    # app.register_blueprint(customers, url_prefix="/c")
+    # app.register_blueprint(products, url_prefix="/p")
     app.register_blueprint(ngos, url_prefix="/ngo")
 
     # Don't forget to return the app object

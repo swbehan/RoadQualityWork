@@ -28,3 +28,4 @@ if st.button("View Classification Demo",
              type='primary',
              use_container_width=True):
   st.switch_page('pages/13_Classification.py')
+  

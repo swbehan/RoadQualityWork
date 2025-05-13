@@ -61,3 +61,11 @@ VALUES
 ('Google.org', 'Organization', 2000000.00, 3),
 ('Open Society Foundations', 'Organization', 3000000.00, 4),
 ('Anonymous Philanthropist', 'Individual', 1000000.00, 5);
+
+CREATE TABLE model1_params (
+    sequence_number INT,
+    beta_vals TEXT
+);
+
+INSERT INTO model1_params (sequence_number, beta_vals) VALUES
+(1, '[0.25, 0.45, 0.67]');
