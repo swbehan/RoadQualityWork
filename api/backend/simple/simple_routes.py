@@ -76,19 +76,8 @@ def getData():
 def get_prediction(var_01, var_02):
     current_app.logger.info("GET /prediction handler")
 
-    # # Get URL parameters
-    # var01 = request.args.get("var_01")
-    # var02 = request.args.get("var_02")
-
-    # if not var_01 or not var02:
-    #     response = make_response(
-    #         jsonify({"error": "Missing required parameters var01 and var02"})
-    #     )
-    #     response.status_code = 400
-    #     return response
     try:
         # Call prediction function from model01
-        
         prediction = model01.predict(var_01, var_02)
         current_app.logger.info(f"prediction value returned is {prediction}")
         
@@ -102,7 +91,6 @@ def get_prediction(var_01, var_02):
         return response
 
     except Exception as e:
-        # current_app.logger.error(f"Error making prediction: {str(e)}")
         response = make_response(
             jsonify({"error": "Error processing prediction request"})
         )
