@@ -19,6 +19,8 @@ This app predicts the **Iris flower** type!
 
 st.sidebar.header('User Input Parameters')
 
+# Below, different user inputs are defined.  When you view the UI, 
+# notice that they are in the sidebar. 
 def user_input_features():
     sepal_length = st.sidebar.slider('Sepal length', 4.3, 7.9, 5.4)
     sepal_width = st.sidebar.slider('Sepal width', 2.0, 4.4, 3.4)
@@ -31,18 +33,24 @@ def user_input_features():
     features = pd.DataFrame(data, index=[0])
     return features
 
+# get a data frame with the input features from the user
 df = user_input_features()
 
+# show the exact values the user entered in a table.
 st.subheader('User Input parameters')
 st.write(df)
 
+# load the standard iris dataset and generate a 
+# random forest classifier 
 iris = datasets.load_iris()
 X = iris.data
 Y = iris.target
-
 clf = RandomForestClassifier()
+
+# fit the model
 clf.fit(X, Y)
 
+# use the values entered by the user for prediction
 prediction = clf.predict(df)
 prediction_proba = clf.predict_proba(df)
 
