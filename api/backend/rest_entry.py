@@ -52,10 +52,16 @@ def create_app():
     return app
 
 def setup_logging(app):
+    """
+    Configure logging for the Flask application in both files and console (Docker Desktop for this project)
+    
+    Args:
+        app: Flask application instance to configure logging for
+    """
     if not os.path.exists('logs'):
         os.mkdir('logs')
 
-    # Set up file handler for all levels
+    ## Set up FILE HANDLER for all levels
     file_handler = RotatingFileHandler(
         'logs/api.log',
         maxBytes=10240,
@@ -64,17 +70,16 @@ def setup_logging(app):
     file_handler.setFormatter(logging.Formatter(
         '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
     ))
+    
+    # Make sure we are capturing all levels of logging into the log files. 
     file_handler.setLevel(logging.DEBUG)  # Capture all levels in file
     app.logger.addHandler(file_handler)
 
-    # Set up console handler for all levels
+    ## Set up CONSOLE HANDLER for all levels
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(logging.Formatter(
         '%(asctime)s %(levelname)s: %(message)s'
     ))
-    console_handler.setLevel(logging.DEBUG)  # Capture all levels in console
+    # Debug level capture makes sure that all log levels are captured
+    console_handler.setLevel(logging.DEBUG)
     app.logger.addHandler(console_handler)
-
-    # Set the base logging level to DEBUG to capture everything
-    app.logger.setLevel(logging.DEBUG)
-    app.logger.info('API startup')

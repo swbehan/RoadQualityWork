@@ -30,6 +30,6 @@ logger.info(f"var_02 = {var_02}")
 # add a button to use the values entered into the number field to send to the
 # prediction function via the REST API
 if st.button("Calculate Prediction", type="primary", use_container_width=True):
-    results = requests.get(f"http://api:4000/prediction/{var_01}/{var_02}")
+    results = requests.get(f"http://web-api:4000/prediction/{var_01}/{var_02}")
     json_results = results.json()
     st.dataframe(json_results)

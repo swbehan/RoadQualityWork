@@ -65,7 +65,7 @@ def getData():
     current_app.logger.info("GET /data handler")
 
     # Create a simple dictionary with nested data
-    data = {"a": {"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+    data = {"a": {"b": "123", "c": "Help"}, "z": {"b": "456", "c": "me"}}
 
     response = make_response(jsonify(data))
     response.status_code = 200
