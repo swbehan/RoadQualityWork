@@ -1,3 +1,5 @@
+name: project-app-team-repo
+
 services:
   app:
     build: ./app

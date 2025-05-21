@@ -83,3 +83,7 @@ def setup_logging(app):
     # Debug level capture makes sure that all log levels are captured
     console_handler.setLevel(logging.DEBUG)
     app.logger.addHandler(console_handler)
+
+    # Set the base logging level to DEBUG to capture everything
+    app.logger.setLevel(logging.DEBUG)
+    app.logger.info('API startup')

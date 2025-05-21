@@ -1,4 +1,5 @@
-name: project-app-testing
+name: project-app-sandbox
+
 services:
   app-test:
     build: ./app
