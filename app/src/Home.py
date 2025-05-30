@@ -34,17 +34,18 @@ SideBarLinks(show_home=True)
 
 # set the title of the page and provide a simple prompt. 
 logger.info("Loading the Home page of the app")
-st.title("Sean, Gabby, Maria and Aidan's Website!")
+st.title("EuroTour 🌍")
 st.write('\n\n')
-st.write('### 2025 Summer 1 Dialogue of Civilizations')
+st.write('### Connecting Journeys, Guiding Policy, Fueling Research')
 st.write('\n')
-st.write('#### HI! As which user would you like to log in?')
+st.write('#### Welcome. Who is logging in today?')
 
 # For each of the user personas for which we are implementing
 # functionality, we put a button on the screen that the user 
 # can click to MIMIC logging in as that mock user. 
 
-if st.button("Act as John, a Political Strategy Advisor", 
+left,middle,right = st.columns(3)
+if st.left.button("Act as Jacques Bon-voyage, a European Traveler", 
             type = 'primary', 
             use_container_width=True):
     # when user clicks the button, they are now considered authenticated
@@ -59,7 +60,7 @@ if st.button("Act as John, a Political Strategy Advisor",
     logger.info("Logging in as Political Strategy Advisor Persona")
     st.switch_page('pages/00_Pol_Strat_Home.py')
 
-if st.button('Act as Mohammad, an USAID worker', 
+if st.middle.button('Act as Nina Petek, a National Director of Tourism', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
@@ -67,7 +68,7 @@ if st.button('Act as Mohammad, an USAID worker',
     st.session_state['first_name'] = 'Mohammad'
     st.switch_page('pages/10_USAID_Worker_Home.py')
 
-if st.button('Act as System Administrator', 
+if st.right.button('Act as Ellie Willems, a European Tourism Researcher', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
