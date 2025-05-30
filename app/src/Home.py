@@ -44,37 +44,36 @@ st.write('#### Welcome. Who is logging in today?')
 # functionality, we put a button on the screen that the user 
 # can click to MIMIC logging in as that mock user. 
 
-left,middle,right = st.columns(3)
-if st.left.button("Act as Jacques Bon-voyage, a European Traveler", 
-            type = 'primary', 
-            use_container_width=True):
-    # when user clicks the button, they are now considered authenticated
-    st.session_state['authenticated'] = True
-    # we set the role of the current user
-    st.session_state['role'] = 'pol_strat_advisor'
-    # we add the first name of the user (so it can be displayed on 
-    # subsequent pages). 
-    st.session_state['first_name'] = 'John'
-    # finally, we ask streamlit to switch to another page, in this case, the 
-    # landing page for this particular user type
-    logger.info("Logging in as Political Strategy Advisor Persona")
-    st.switch_page('pages/00_Pol_Strat_Home.py')
+left_col, middle_col, right_col = st.columns(3)
 
-if st.middle.button('Act as Nina Petek, a National Director of Tourism', 
-            type = 'primary', 
-            use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'usaid_worker'
-    st.session_state['first_name'] = 'Mohammad'
-    st.switch_page('pages/10_USAID_Worker_Home.py')
+with left_col:
+    if st.button("Act as Jacques Bon-voyage, a European Traveler", 
+                 type='primary', 
+                 use_container_width=True):
+        st.session_state['authenticated'] = True
+        st.session_state['role'] = 'pol_strat_advisor'
+        st.session_state['first_name'] = 'John'
+        logger.info("Logging in as Political Strategy Advisor Persona")
+        st.switch_page('pages/00_Pol_Strat_Home.py')
 
-if st.right.button('Act as Ellie Willems, a European Tourism Researcher', 
-            type = 'primary', 
-            use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/20_Admin_Home.py')
+with middle_col:
+    if st.button("Act as Nina Petek, a National Director of Tourism", 
+                 type='primary', 
+                 use_container_width=True):
+        st.session_state['authenticated'] = True
+        st.session_state['role'] = 'usaid_worker'
+        st.session_state['first_name'] = 'Mohammad'
+        st.switch_page('pages/10_USAID_Worker_Home.py')
+
+with right_col:
+    if st.button("Act as Ellie Willems, a European Tourism Researcher", 
+                 type='primary', 
+                 use_container_width=True):
+        st.session_state['authenticated'] = True
+        st.session_state['role'] = 'administrator'
+        st.session_state['first_name'] = 'SysAdmin'
+        st.switch_page('pages/20_Admin_Home.py')
+
 
 
 
