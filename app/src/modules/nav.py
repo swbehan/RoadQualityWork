@@ -21,9 +21,9 @@ def PolStratAdvHomeNav():
     )
 
 
-def WorldBankVizNav():
+def WhereToTravelNav():
     st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
+        "pages/01_Where_To_Travel.py", label="Where to travel?", icon="🚗"
     )
 
 
@@ -86,9 +86,9 @@ def SideBarLinks(show_home=False):
     if st.session_state["authenticated"]:
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state["role"] == "pol_strat_advisor":
+        if st.session_state["role"] == "traveler":
             PolStratAdvHomeNav()
-            WorldBankVizNav()
+            WhereToTravelNav()
             MapDemoNav()
 
         # If the user role is usaid worker, show the Api Testing page
