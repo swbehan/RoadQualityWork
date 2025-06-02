@@ -60,8 +60,8 @@ with left_col:
         st.session_state['first_name'] = 'Jacques'
         # finally, we ask streamlit to switch to another page, in this case, the 
         # landing page for this particular user type
-        logger.info("Logging in as Political Strategy Advisor Persona")
-        st.switch_page('pages/00_Pol_Strat_Home.py')
+        logger.info("Logging in as Traveler Persona")
+        st.switch_page('pages/00_Traveler_Home.py')
 
 with middle_col:
     st.image("assets/official.jpg", use_container_width=True)
@@ -69,9 +69,9 @@ with middle_col:
                  type='primary', 
                  use_container_width=True):
         st.session_state['authenticated'] = True
-        st.session_state['role'] = 'usaid_worker'
-        st.session_state['first_name'] = 'Mohammad'
-        st.switch_page('pages/10_USAID_Worker_Home.py')
+        st.session_state['role'] = 'tourist_offical'
+        st.session_state['first_name'] = 'Nina'
+        st.switch_page('pages/10_Tourist_Offical_Home.py')
 
 with right_col:
     st.image("assets/researcher.jpg", use_container_width=True)
@@ -79,9 +79,9 @@ with right_col:
                  type='primary', 
                  use_container_width=True):
         st.session_state['authenticated'] = True
-        st.session_state['role'] = 'administrator'
-        st.session_state['first_name'] = 'SysAdmin'
-        st.switch_page('pages/20_Admin_Home.py')
+        st.session_state['role'] = 'reseacher'
+        st.session_state['first_name'] = 'Ellie'
+        st.switch_page('pages/20_Reseacher_Home.py')
 
 
 
