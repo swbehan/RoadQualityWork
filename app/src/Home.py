@@ -47,16 +47,24 @@ st.write('#### Welcome. Who is logging in today?')
 left_col, middle_col, right_col = st.columns(3)
 
 with left_col:
+    st.image("traveler.jpg", use_column_width=True)
     if st.button("Act as Jacques Bon-voyage, a European Traveler", 
                  type='primary', 
                  use_container_width=True):
+        # when user clicks the button, they are now considered authenticated
         st.session_state['authenticated'] = True
+        # we set the role of the current user
         st.session_state['role'] = 'pol_strat_advisor'
+        # we add the first name of the user (so it can be displayed on 
+        # subsequent pages). 
         st.session_state['first_name'] = 'John'
+        # finally, we ask streamlit to switch to another page, in this case, the 
+        # landing page for this particular user type
         logger.info("Logging in as Political Strategy Advisor Persona")
         st.switch_page('pages/00_Pol_Strat_Home.py')
 
 with middle_col:
+    st.image("official.jpg", use_column_width=True)
     if st.button("Act as Nina Petek, a National Director of Tourism", 
                  type='primary', 
                  use_container_width=True):
@@ -66,6 +74,7 @@ with middle_col:
         st.switch_page('pages/10_USAID_Worker_Home.py')
 
 with right_col:
+    st.image("researcher.jpg", use_column_width=True)
     if st.button("Act as Ellie Willems, a European Tourism Researcher", 
                  type='primary', 
                  use_container_width=True):
