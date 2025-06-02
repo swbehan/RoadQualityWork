@@ -47,7 +47,7 @@ st.write('#### Welcome. Who is logging in today?')
 left_col, middle_col, right_col = st.columns(3)
 
 with left_col:
-    st.image("traveler.jpg", use_column_width=True)
+    st.image("assets/traveler.jpg", use_container_width=True)
     if st.button("Act as Jacques Bon-voyage, a European Traveler", 
                  type='primary', 
                  use_container_width=True):
@@ -64,7 +64,7 @@ with left_col:
         st.switch_page('pages/00_Pol_Strat_Home.py')
 
 with middle_col:
-    st.image("official.jpg", use_column_width=True)
+    st.image("assets/official.jpg", use_container_width=True)
     if st.button("Act as Nina Petek, a National Director of Tourism", 
                  type='primary', 
                  use_container_width=True):
@@ -74,7 +74,7 @@ with middle_col:
         st.switch_page('pages/10_USAID_Worker_Home.py')
 
 with right_col:
-    st.image("researcher.jpg", use_column_width=True)
+    st.image("assets/researcher.jpg", use_container_width=True)
     if st.button("Act as Ellie Willems, a European Tourism Researcher", 
                  type='primary', 
                  use_container_width=True):
