@@ -4,65 +4,89 @@ CREATE DATABASE EuroTour;
 
 USE EuroTour;
 
-CREATE TABLE road_quality (
-    country VARCHAR(255) NOT NULL,
-    year YEAR,
-    score DECIMAL,
-    PRIMARY KEY (country, year)
+CREATE TABLE RoadQuality (
+    Country VARCHAR(255) NOT NULL,
+    RoadYear YEAR,
+    Score DECIMAL,
+    PRIMARY KEY (Country, RoadYear)
 );
 
-CREATE TABLE tourism_prioritization (
-    country VARCHAR(255) NOT NULL,
-    year YEAR,
-    score DECIMAL,
-    PRIMARY KEY (country, year)
+CREATE TABLE TourismPrioritization (
+    Country VARCHAR(255) NOT NULL,
+    TourismYear YEAR,
+    Score DECIMAL(1, 4),
+    PRIMARY KEY (Country, TourismYear)
 );
 
-CREATE TABLE road_density (
-    country VARCHAR(255) NOT NULL,
-    year YEAR,
-    value DECIMAL,
-    score DECIMAL,
-    PRIMARY KEY (country, year)
+CREATE TABLE RoadDensity (
+    Country VARCHAR(255) NOT NULL,
+    DataYear YEAR,
+    KmRoadPerKmSquared DECIMAL(3, 3),
+    Score DECIMAL(1, 4),
+    PRIMARY KEY (country, DataYear)
 );
 
-CREATE TABLE avg_fuel_price (
-    country VARCHAR(255) NOT NULL,
-    year YEAR,
-    score DECIMAL,
-    value DECIMAL,
-    PRIMARY KEY (country, year)
+CREATE TABLE AvgFuelPrice (
+    Country VARCHAR(255) NOT NULL,
+    FuelPriceYear YEAR,
+    Score DECIMAL(1, 4),
+    AvgPricePerLiter DECIMAL(1, 4),
+    PRIMARY KEY (Country, FuelPriceYear)
 );
 
-CREATE TABLE road_spending (
-    country VARCHAR(255) NOT NULL,
-    year YEAR,
-    road_spending DECIMAL,
-    gdp DECIMAL,
-    spending_by_gdp_percent DECIMAL,
-    PRIMARY KEY (country, year),
-    CONSTRAINT fk_3 FOREIGN KEY (country, year) REFERENCES road_quality (country, year)
+CREATE TABLE RoadSpending (
+    Country VARCHAR(255) NOT NULL,
+    SpendingYear YEAR,
+    RoadSpending DECIMAL(2, 6),
+    GDP DECIMAL(2, 6),
+    SpendingByGDPPercent DECIMAL(2, 6),
+    PRIMARY KEY (Country, SpendingYear),
+    CONSTRAINT fk_3 FOREIGN KEY (country, year) REFERENCES RoadQuality (Country, SpendingYear)
 );
 
-CREATE TABLE passenger_cars (
-    country VARCHAR(255) NOT NULL,
-    year YEAR,
-    motor_type VARCHAR(50),
-    engine_size VARCHAR(100),
-    num_cars INTEGER,
-    PRIMARY KEY (country, year, motor_type, engine_size),
-    CONSTRAINT fk_2 FOREIGN KEY (country, year) REFERENCES road_quality (country, year),
-    CONSTRAINT fk_5 FOREIGN KEY (country, year) REFERENCES road_density (country, year),
-    CONSTRAINT fk_6 FOREIGN KEY (country, year) REFERENCES avg_fuel_price (country, year)
+CREATE TABLE PassengerCars (
+    Country VARCHAR(255) NOT NULL,
+    PCDataYear YEAR,
+    MotorType VARCHAR(50),
+    EngineSize VARCHAR(100),
+    Numcars INT,
+    PRIMARY KEY (Country, PCDataYear, MotorType, EngineSize),
+    CONSTRAINT fk_2 FOREIGN KEY (country, year) REFERENCES RoadQuality (Country, PCDataYear),
+    CONSTRAINT fk_5 FOREIGN KEY (country, year) REFERENCES RoadDensity (Country, PCDataYear),
+    CONSTRAINT fk_6 FOREIGN KEY (country, year) REFERENCES AvgFuelPrice (Country, PCDataYear)
 );
 
-CREATE TABLE trips (
-    country VARCHAR(255) NOT NULL,
-    year YEAR,
-    purpose VARCHAR(255),
-    duration VARCHAR(255),
-    num_trips INTEGER,
-    PRIMARY KEY (country, year, purpose, duration),
-    CONSTRAINT fk_1 FOREIGN KEY (country, year) REFERENCES road_quality (country, year),
-    CONSTRAINT fk_4 FOREIGN KEY (country, year) REFERENCES tourism_prioritization (country, year)
+CREATE TABLE Trips (
+    Country VARCHAR(255) NOT NULL,
+    TripYear YEAR,
+    Purpose VARCHAR(255),
+    Duration VARCHAR(255),
+    NumTrips INTEGER,
+    PRIMARY KEY (Country, TripYear, Purpose, Duration),
+    CONSTRAINT fk_1 FOREIGN KEY (Country, TripYear) REFERENCES RoadQuality (Country, TripYear),
+    CONSTRAINT fk_4 FOREIGN KEY (Country, TripYear) REFERENCES TourismPrioritization (Country, TripYear)
+);
+
+
+-- Researcher Stuff
+CREATE TABLE Researcher (
+    ResearcherID INT AUTO_INCREMENT PRIMARY KEY,
+    ResearcherName VARCHAR(255),
+    FieldOfStudy VARCHAR(255)
+);
+
+CREATE TABLE ResearchFindings (
+    ResearchPostID INT AUTO_INCREMENT PRIMARY KEY,
+    Title VARCHAR(255),
+    PostDate DATE,
+    Research TEXT,
+    AuthorID INT,
+    FOREIGN KEY (AuthorID) REFERENCES Researcher (AuthorID)
+);
+
+CREATE TABLE Image (
+    ImageID INT AUTO_INCREMENT PRIMARY KEY,
+    Link VARCHAR(255),
+    ResearchPostID INT,
+    FOREIGN KEY (ResearchPostID) REFERENCES ResearchFindings (ResearchPostID)
 );
