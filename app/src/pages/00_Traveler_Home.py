@@ -22,4 +22,4 @@ if st.button('Where to Travel?',
 if st.button('Traffic Prediction', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/02_Traffic_Prediction.py')
