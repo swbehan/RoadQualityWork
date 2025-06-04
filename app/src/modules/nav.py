@@ -60,7 +60,10 @@ def AddNgoNav():
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Reseacher_Home.py", label="Reseacher Home", icon="🏠")
     st.sidebar.page_link(
-        "pages/21_Reseacher_Notes.py", label="Notes", icon="📝"
+        "pages/21_Reseacher_Notes.py", label="Create Post", icon="📝"
+    )
+    st.sidebar.page_link(
+        "pages/22_Reseacher_View.py", label="View Posts", icon="🔍"
     )
 
 
