@@ -58,9 +58,9 @@ def AddNgoNav():
 
 #### ------------------------ Examples for Role of reseacher ------------------------
 def AdminPageNav():
-    st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
+    st.sidebar.page_link("pages/20_Reseacher_Home.py", label="Reseacher Home", icon="🏠")
     st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
+        "pages/21_Reseacher_Notes.py", label="Notes", icon="📝"
     )
 
 
@@ -100,7 +100,7 @@ def SideBarLinks(show_home=False):
             AddNgoNav()
 
         # If the user is an administrator, give them access to the administrator pages
-        if st.session_state["role"] == "administrator":
+        if st.session_state["role"] == "reseacher":
             AdminPageNav()
 
     # Always show the About page at the bottom of the list of links
