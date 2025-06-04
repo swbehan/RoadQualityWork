@@ -87,9 +87,17 @@ def get_all_posts():
         
         # Get all records from ResearchFindings
         query = """
-            SELECT ResearchPostID, Title, PostDate, Research, AuthorID
-            FROM ResearchFindings
-            ORDER BY PostDate DESC
+            SELECT 
+                rf.ResearchPostID,
+                rf.Title,
+                rf.PostDate,
+                rf.Research,
+                rf.AuthorID,
+                r.ResearcherName,
+                r.FieldOfStudy
+            FROM ResearchFindings rf
+            LEFT JOIN Researcher r ON rf.AuthorID = r.ResearcherID
+            ORDER BY rf.PostDate DESC
         """
         cursor.execute(query)
         posts = cursor.fetchall()
@@ -102,4 +110,38 @@ def get_all_posts():
         }), 200
         
     except Error as e:
+        return jsonify({"error": str(e)}), 500
+    
+
+@researcher_api.route("/delete_post/<int:post_id>", methods=["DELETE"])
+def delete_post(post_id):
+    try:
+        conn = db.get_db()
+        cursor = conn.cursor()
+        
+        # First check if post exists
+        check_query = "SELECT ResearchPostID FROM ResearchFindings WHERE ResearchPostID = %s"
+        cursor.execute(check_query, (post_id,))
+        post = cursor.fetchone()
+        
+        if not post:
+            cursor.close()
+            return jsonify({"error": "Post not found"}), 404
+        
+        # Delete associated files first (to maintain referential integrity)
+        delete_files_query = "DELETE FROM Files WHERE ResearchPostID = %s"
+        cursor.execute(delete_files_query, (post_id,))
+        
+        # Then delete the post
+        delete_post_query = "DELETE FROM ResearchFindings WHERE ResearchPostID = %s"
+        cursor.execute(delete_post_query, (post_id,))
+        
+        conn.commit()
+        cursor.close()
+        
+        return jsonify({"message": f"Post {post_id} deleted successfully"}), 200
+        
+    except Error as e:
+        if conn:
+            conn.rollback()
         return jsonify({"error": str(e)}), 500
