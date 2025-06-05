@@ -6,6 +6,7 @@ import pandas as pd
 import pydeck as pdk
 from urllib.error import URLError
 from modules.nav import SideBarLinks
+import plotly.express as px
 
 SideBarLinks()
 
@@ -102,6 +103,21 @@ except URLError as e:
     """
         % e.reason
     )
+
+st.plotly_chart(empty_visual())
+
+def empty_visual(): 
+    fig = px.choropleth(locationmode='ISO-3', 
+                    scope='europe', 
+                    ) 
+    fig.update_layout(
+        margin = dict(l=10, r = 10, t = 35, b = 0), 
+        width = 500, 
+        height = 300, 
+        title = (f"Top 5 Recommended Countries"), 
+    )
+    #fig.show() 
+    return fig
 
 def map_visual(country_dataframe):
     eu_iso_codes = {
