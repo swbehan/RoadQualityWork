@@ -2,6 +2,9 @@ from flask import Blueprint, jsonify, request
 from backend.db_connection import db
 from mysql.connector import Error
 from flask import current_app
+import json
+import pandas as pd
+from recommender_ml import get_top_5_recommendations
 
 # Create a Blueprint for routes
 tourism_bp = Blueprint("tourism", __name__)
@@ -14,6 +17,7 @@ def get_road_qualities():
 
         cursor.execute("SELECT * FROM RoadQuality;")
         data = cursor.fetchall()
+
         if not data:
             return jsonify({"error": "Data not found"}), 404
         
@@ -68,7 +72,7 @@ def get_fuel_price():
 
         cursor.execute("SELECT * FROM AvgFuelPrice;")
         data = cursor.fetchall()
-        print("Data:", data)
+
         if not data:
             return jsonify({"error": "Data not found"}), 404
         
@@ -87,7 +91,7 @@ def get_road_spending():
 
         cursor.execute("SELECT * FROM RoadSpending;")
         data = cursor.fetchall()
-        print("Data:", data)
+
         if not data:
             return jsonify({"error": "Data not found"}), 404
         
@@ -106,7 +110,7 @@ def get_pass_cars():
 
         cursor.execute("SELECT * FROM PassengerCars;")
         data = cursor.fetchall()
-        print("Data:", data)
+
         if not data:
             return jsonify({"error": "Data not found"}), 404
         
@@ -125,12 +129,48 @@ def get_trips():
 
         cursor.execute("SELECT * FROM Trips;")
         data = cursor.fetchall()
-        print("Data:", data)
+
         if not data:
             return jsonify({"error": "Data not found"}), 404
         
         cursor.close()
         return jsonify(data), 200
+    
+    except Error as e:
+        return jsonify({"error": str(e)}), 500
+    
+@tourism_bp.route("/recommender/<int:fuel_price>/<int:road_density>/<int:trips>", methods=["GET"])
+def recommender_model(fuel_price, road_density, trips):
+    try:
+        cursor = db.get_db().cursor()
+
+        cursor.execute("""SELECT afp.Country AS Country, afp.FuelPriceYear AS Year, afp.Score AS FuelPriceScore,
+                rd.Score AS RoadDensityScore, t.NumTrips AS NumTrips
+            FROM AvgFuelPrice afp
+            JOIN RoadDensity rd ON afp.Country = rd.Country
+                AND afp.FuelPriceYear = rd.DataYear
+            JOIN Trips t ON afp.Country = t.Country
+                AND afp.FuelPriceYear = t.TripYear
+            WHERE afp.FuelPriceYear = 2019 
+                AND t.Duration = '1 night or over';""")
+        data = cursor.fetchall()
+        if not data:
+            return jsonify({"error": "Data not found"}), 404
+        
+        #json_data = json.loads(data)
+
+        merged_df = pd.DataFrame(data)
+
+        user_input = {"fuel_price": fuel_price,
+                      "traffic_time": road_density,
+                      "tourism_num": trips}
+        
+        recommendations = get_top_5_recommendations(user_input, merged_df)
+
+        recom_dict = recommendations.to_dict(orient="records")
+
+        cursor.close()
+        return jsonify(recom_dict), 200
     
     except Error as e:
         return jsonify({"error": str(e)}), 500
