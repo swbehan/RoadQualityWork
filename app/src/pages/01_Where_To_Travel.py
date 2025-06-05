@@ -12,14 +12,8 @@ from modules.nav import SideBarLinks
 # Call the SideBarLinks from the nav module in the modules directory
 SideBarLinks()
 
-# set the header of the page
-st.header('World Bank Data')
-
-# You can access the session state to make a more customized/personalized app experience
-st.write(f"### Hi, {st.session_state['first_name']}.")
-
-# get the countries from the world bank data
-
+st.header('Lost on where to travel in Europe?')
+st.subheader('No Worries! Input your preferences below!')
 
 with st.form("traveler_form"):
 

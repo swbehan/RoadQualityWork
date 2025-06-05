@@ -26,15 +26,34 @@ def delete_post(post_id):
         st.error(f"Connection error: {str(e)}")
         return False
 
+def edit_post(post_id, current_title, current_research):
+    """Edit post function"""
+    try:
+        response = requests.put(
+            f"http://host.docker.internal:4000/researcher/update_post/{post_id}",
+            json={
+                "Title": current_title,
+                "Research": current_research
+            }
+        )
+        
+        if response.status_code == 200:
+            return True
+        else:
+            st.error(f"Update failed: {response.json().get('error', 'Unknown error')}")
+            return False
+            
+    except Exception as e:
+        st.error(f"Connection error: {str(e)}")
+        return False
+
+
 def display_posts(posts):
     """Display posts in Streamlit"""
     if posts:
         st.success(f"✅ Found {len(posts)} posts")
-        
-        # Add search functionality
         search_term = st.text_input("🔍 Search posts", placeholder="Search by title or content...")
-        
-        # Filter posts if search term provided
+    
         if search_term:
             filtered_posts = []
             for post in posts:
@@ -42,7 +61,7 @@ def display_posts(posts):
                 research = str(post.get('Research', '')).lower()
                 author_name = str(post.get('ResearcherName', '')).lower()
                 field_of_study = str(post.get('FieldOfStudy', '')).lower()
-                
+            
                 search_lower = search_term.lower()
                 if (search_lower in title or 
                     search_lower in research or 
@@ -50,17 +69,15 @@ def display_posts(posts):
                     search_lower in field_of_study):
                     filtered_posts.append(post)
             posts = filtered_posts
-            
+        
             if not posts:
                 st.warning(f"No posts found matching '{search_term}'")
                 return
-        
+    
         st.write(f"**Showing {len(posts)} posts**")
         st.divider()
-        
-        # Display each post
+
         for post in posts:
-            # Extract data from the post dictionary
             research_post_id = post.get('ResearchPostID', 'N/A')
             title = post.get('Title', 'No Title')
             post_date = post.get('PostDate', 'No Date')
@@ -69,28 +86,71 @@ def display_posts(posts):
             author_name = post.get('ResearcherName', 'Unknown Author')
             field_of_study = post.get('FieldOfStudy', 'Unknown Field')
             
+            edit_key = f"edit_{research_post_id}"
+            is_editing = st.session_state.get(edit_key, False)
+            
             with st.expander(f"📄 {title} ({author_name})", expanded=False):
-                col1, col2 = st.columns([2, 1])
                 
-                with col1:
-                    st.write("**Posted:**", str(post_date))
-                    st.write("**Author:**", author_name)
-                    st.write("**Field:**", field_of_study)
+                if is_editing:
+                    # Edit mode
+                    st.write("**✏️ Editing Post**")
+
+                    with st.form(f"edit_form_{research_post_id}"):
+                        new_title = st.text_input("Title", value=title, key=f"title_{research_post_id}")
+                        new_research = st.text_area("Research Content", value=research_content, height=150, key=f"research_{research_post_id}")
+
+                        col1, col2 = st.columns(2)
+                        
+                        with col1:
+                            save_submitted = st.form_submit_button("💾 Save Changes", type="primary")
+                        with col2: 
+                            cancel_submitted = st.form_submit_button("❌ Cancel")
+
+                        if save_submitted:
+                            if new_title and new_research:
+                                if edit_post(research_post_id, new_title, new_research):
+                                    st.success("✅ Post updated successfully!")
+                                    st.session_state[edit_key] = False
+                                    st.rerun()
+                            else:
+                                st.error("❌ Please fill in both fields!")
+                        
+                        if cancel_submitted:
+                            st.session_state[edit_key] = False
+                            st.rerun()
                 
-                with col2:
-                    st.write("**Post ID:**", research_post_id)
+                else:
+                    # View mode
+                    col1, col2 = st.columns([2, 1])
                 
-                st.divider()
+                    with col1:
+                        st.write("**Posted:**", str(post_date))
+                        st.write("**Author:**", author_name)
+                        st.write("**Field:**", field_of_study)
                 
-                st.write("**📝 Research Content:**")
-                st.write(research_content)
+                    with col2:
+                        st.write("**Post ID:**", research_post_id)
                 
-                if st.button(f"🗑️ Delete Post", key=f"delete_{research_post_id}", type="secondary"):
-                    if delete_post(research_post_id):
-                        st.success(f"✅ Post {research_post_id} deleted successfully!")
-                        st.rerun()
-                    else:
-                        st.error(f"Failed to delete post {research_post_id}")
+                    st.divider()
+                
+                    st.write("**Research Content:**")
+                    st.write(research_content)
+                
+                    # Action buttons
+                    col1, col2 = st.columns(2)
+
+                    with col1:
+                        if st.button(f"✏️ Edit Post", key=f"edit_btn_{research_post_id}", type="secondary"):
+                            st.session_state[edit_key] = True
+                            st.rerun()
+                    
+                    with col2:
+                        if st.button(f"🗑️ Delete Post", key=f"delete_{research_post_id}", type="secondary"):
+                            if delete_post(research_post_id):
+                                st.success(f"Post {research_post_id} deleted successfully!")
+                                st.rerun()
+                            else:
+                                st.error(f"❌ Failed to delete post {research_post_id}")
                 
                 st.write("---")
     

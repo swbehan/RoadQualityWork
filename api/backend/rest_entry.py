@@ -8,6 +8,7 @@ from backend.db_connection import db
 from backend.simple.simple_routes import simple_routes
 from backend.ngos.ngo_routes import ngos
 from backend.researcher.reseacher_routes import researcher_api
+from backend.traveler.traveler_routes import traveler_api
 
 def create_app():
     app = Flask(__name__)
@@ -49,6 +50,7 @@ def create_app():
     app.register_blueprint(simple_routes)
     app.register_blueprint(ngos, url_prefix="/ngo")
     app.register_blueprint(researcher_api, url_prefix="/researcher")
+    app.register_blueprint(traveler_api, url_prefix="/traveler")
 
     # Don't forget to return the app object
     return app
