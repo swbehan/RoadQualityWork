@@ -11900,4 +11900,4 @@ VALUES
 ('4 nights or over','Switzerland',2022,6714367),
 ('4 nights or over','Switzerland',2022,8076794),
 ('4 nights or over','Switzerland',2022,1362427),
-('4 nights or over','Switzerland',2022,10633610);
+('4 nights or over','Switzerland',2022,10633610)
