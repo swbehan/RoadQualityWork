@@ -4,7 +4,7 @@ from mysql.connector import Error
 from flask import current_app
 import json
 import pandas as pd
-from reccomender_ml import get_top_5_recommendations
+from backend.tourism.reccomender_ml import get_top_5_recommendations
 
 # Create a Blueprint for routes
 tourism_bp = Blueprint("tourism", __name__)

@@ -1,9 +1,4 @@
-import requests
-import json
-import requests
 import pandas as pd
-from plotly import graph_objects as go
-import plotly.graph_objects as go
 import numpy as np
 
 def standardize(df_merged):
