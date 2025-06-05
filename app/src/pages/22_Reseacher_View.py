@@ -27,7 +27,7 @@ def delete_post(post_id):
         return False
 
 def display_posts(posts):
-    """Display posts in user-friendly Streamlit format"""
+    """Display posts in Streamlit"""
     if posts:
         st.success(f"✅ Found {len(posts)} posts")
         
@@ -69,55 +69,44 @@ def display_posts(posts):
             author_name = post.get('ResearcherName', 'Unknown Author')
             field_of_study = post.get('FieldOfStudy', 'Unknown Field')
             
-            # Create expandable section for each post
             with st.expander(f"📄 {title} ({author_name})", expanded=False):
-                # Post metadata
                 col1, col2 = st.columns([2, 1])
                 
                 with col1:
-                    st.write("**📅 Posted:**", str(post_date))
-                    st.write("**👤 Author:**", author_name)
-                    st.write("**🎓 Field:**", field_of_study)
+                    st.write("**Posted:**", str(post_date))
+                    st.write("**Author:**", author_name)
+                    st.write("**Field:**", field_of_study)
                 
                 with col2:
-                    st.write("**🆔 Post ID:**", research_post_id)
+                    st.write("**Post ID:**", research_post_id)
                 
                 st.divider()
                 
-                # Post content
                 st.write("**📝 Research Content:**")
                 st.write(research_content)
                 
-                # Delete button
                 if st.button(f"🗑️ Delete Post", key=f"delete_{research_post_id}", type="secondary"):
                     if delete_post(research_post_id):
                         st.success(f"✅ Post {research_post_id} deleted successfully!")
-                        st.rerun()  # Refresh the page to show updated posts
+                        st.rerun()
                     else:
-                        st.error(f"❌ Failed to delete post {research_post_id}")
+                        st.error(f"Failed to delete post {research_post_id}")
                 
                 st.write("---")
     
     else:
-        st.info("📭 No posts found. Create your first post!")
+        st.info("No posts found. Create your first post!")
 
 def view_posts_page():
     """Main function to fetch and display posts"""
     st.title("📖 View Research Posts")
-    
-    # Add refresh button
-    if st.button("🔄 Refresh Posts"):
-        st.rerun()
-    
     try:
-        # Make GET request to Flask API
         response = requests.get("http://host.docker.internal:4000/researcher/get_all_posts")
         
         if response.status_code == 200:
             data = response.json()
             posts = data.get('posts', [])
             
-            # Display posts using your function
             display_posts(posts)
             
         else:
@@ -128,14 +117,8 @@ def view_posts_page():
             except:
                 st.error(f"Response: {response.text}")
     
-    except requests.exceptions.ConnectionError:
-        st.error("❌ Cannot connect to the API. Make sure your Flask server is running.")
-    except requests.exceptions.Timeout:
-        st.error("❌ Request timed out. Please try again.")
     except Exception as e:
         st.error(f"❌ Unexpected error: {str(e)}")
 
-# Usage:
-# Call this function in your Streamlit app
 if __name__ == "__main__":
     view_posts_page()
