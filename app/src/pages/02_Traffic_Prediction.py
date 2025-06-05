@@ -102,3 +102,51 @@ except URLError as e:
     """
         % e.reason
     )
+
+def map_visual(country_dataframe):
+    eu_iso_codes = {
+    "Austria": "AUT",
+    "Belgium": "BEL",
+    "Bulgaria": "BGR",
+    "Croatia": "HRV",
+    "Cyprus": "CYP",
+    "Czechia": "CZE",
+    "Denmark": "DNK",
+    "Estonia": "EST",
+    "Finland": "FIN",
+    "France": "FRA",
+    "Germany": "DEU",
+    "Greece": "GRC",
+    "Hungary": "HUN",
+    "Ireland": "IRL",
+    "Italy": "ITA",
+    "Latvia": "LVA",
+    "Lithuania": "LTU",
+    "Luxembourg": "LUX",
+    "Malta": "MLT",
+    "Netherlands": "NLD",
+    "Poland": "POL",
+    "Portugal": "PRT",
+    "Romania": "ROU",
+    "Slovakia": "SVK",
+    "Slovenia": "SVN",
+    "Spain": "ESP",
+    "Sweden": "SWE"
+}
+    country_dataframe["ISO"] = country_dataframe["Country"].map(eu_iso_codes)
+    country_dataframe["Match Rating"] = country_dataframe["Similarity"]
+
+    fig = px.choropleth(country_dataframe, locations="ISO",
+                    color="Match Rating", 
+                    locationmode='ISO-3',
+                    hover_name = "Country", 
+                    scope='europe',         
+                    color_continuous_scale=px.colors.sequential.Teal, 
+                    ) 
+    fig.update_layout(
+        margin = dict(l=10, r = 10, t = 35, b = 0), 
+        width = 500, 
+        height = 300, 
+        title = (f"Top 5 Recommended Countries"), 
+    )
+    fig.show()        

@@ -6,43 +6,25 @@ from plotly import graph_objects as go
 import plotly.graph_objects as go
 import numpy as np
 
-def standardize_merged(df_merged):
+def standardize(df_merged):
+    """
+    standardize data 
+    """
     fuel = df_merged[["Fuel Score"]].astype(float)
     Fuel_standardize = (fuel -1) / (7-1)
+
     density = df_merged[["Density Score"]].astype(float)
     Density_standardize = (density -1) / (7-1)
+
     df_merged["Fuel Score St."] = Fuel_standardize
     df_merged["Density Score St."] = Density_standardize
-    df_merged_standardized = pd.DataFrame(df_merged, columns = ["Country", "Year", "Fuel Score St.", "Density Score St."])
-    df_merged_standardized['Year'] = df_merged_standardized['Year'].astype(int) 
-    df_merged_standardized.loc[df_merged_standardized['Country'] == 'Slovak Republic', 'Country'] = 'Slovakia'  
-    fuel_density_2019 = df_merged_standardized[df_merged_standardized['Year'] == 2019]
 
-    return fuel_density_2019
+    min_trips = df_merged['NumTrips'].min()
+    max_trips = df_merged['NumTrips'].max()
 
+    df_merged['Tourism St.'] = (df_merged['NumTrips'] - min_trips) / (max_trips - min_trips)
 
-def standardize_trips(final_1plus_df):
-    trips_2019 = final_1plus_df[final_1plus_df['Year'] == 2019]
-    trips_2019 = trips_2019[~trips_2019['Country'].isin([
-        'European Union - 27 countries (from 2020)',
-        'Albania',
-        'Switzerland',
-        'North Macedonia'
-    ])]
-
-    min_trips = trips_2019['NumTrips'].min()
-    max_trips = trips_2019['NumTrips'].max()
-
-    trips_2019['Tourism St.'] = (trips_2019['NumTrips'] - min_trips) / (max_trips - min_trips)
-
-    trips_2019.drop(columns = ['NumTrips', 'Duration'])
-    return trips_2019
-
-def recommender_data(fuel_density_2019, trips_2019):
-    recommender_data = pd.merge(fuel_density_2019, trips_2019, on = ['Country', 'Year'])
-
-    recommender_data = pd.DataFrame(recommender_data, columns = ['Country', 'Year', 'Fuel Score St.', 'Density Score St.', 'Tourism St.'])
-    return recommender_data
+    return df_merged
 
 def normalize_user_input(user_input):
     """
@@ -100,3 +82,5 @@ def get_top_5_recommendations(user_input, recommender_data):
 
     return top_5
 
+def map_visualization(country_list):
+    
