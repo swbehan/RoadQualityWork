@@ -82,5 +82,4 @@ def get_top_5_recommendations(user_input, recommender_data):
 
     return top_5
 
-def map_visualization(country_list):
     
