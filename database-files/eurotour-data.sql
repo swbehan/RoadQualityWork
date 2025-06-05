@@ -67,6 +67,13 @@ CREATE TABLE Trips (
 -- FOREIGN KEY (Country, TripYear) REFERENCES RoadQuality (Country, RoadYear),
 -- FOREIGN KEY (Country, TripYear) REFERENCES TourismPrioritization (Country, TourismYear)
 
+CREATE TABLE RoadDeaths (
+    DeathRate DECIMAL (4,3),
+    Country VARCHAR(255) NOT NULL,
+    DeathsYear YEAR,
+    NumDeaths INT,
+    RoadType VARCHAR(100)
+);
 
 -- Researcher Stuff
 CREATE TABLE Researcher (
@@ -76,7 +83,18 @@ CREATE TABLE Researcher (
 );
 
 INSERT INTO Researcher (ResearcherName, FieldOfStudy)
-Values ('Ellie Willems', 'Tourism Studies');
+Values 
+('Ellie Willems', 'Tourism Studies'),
+('Sarah Martinez', 'Tourism Management'),
+('Ahmed Hassan', 'Sustainable Tourism'),
+('Elena Rossi', 'Cultural Tourism'),
+('James Chen', 'Hospitality Management'),
+('Maria Santos', 'Tourism Marketing'),
+('Raj Patel', 'Ecotourism'),
+('Anna Kowalski', 'Event Management'),
+('Carlos Mendez', 'Tourism Economics'),
+('Yuki Tanaka', 'Heritage Tourism'),
+('Fatima Al-Zahra', 'Destination Management');
 
 CREATE TABLE ResearchFindings (
     ResearchPostID INT AUTO_INCREMENT PRIMARY KEY,
@@ -86,6 +104,28 @@ CREATE TABLE ResearchFindings (
     AuthorID INT,
     FOREIGN KEY (AuthorID) REFERENCES Researcher (ResearcherID)
 );
+
+INSERT INTO ResearchFindings (Title, Research, AuthorID) VALUES
+
+('Digital Transformation in Tourism Operations', 'Our recent study examines how digital technologies are reshaping tourism management practices. We analyzed 150 tourism businesses and found that companies implementing integrated digital solutions saw a 34% increase in operational efficiency. Key findings include the importance of mobile-first booking systems and real-time customer feedback integration.', 2),
+
+('Carbon Footprint Reduction in European Hotels', 'This research investigates sustainable practices in the hospitality sector across 12 European countries. We discovered that hotels implementing comprehensive sustainability programs reduced their carbon emissions by an average of 28% while maintaining guest satisfaction scores above 4.2/5. Solar energy adoption and waste reduction initiatives showed the highest impact.', 3),
+
+('Impact of UNESCO Sites on Local Community Identity', 'A three-year ethnographic study exploring how UNESCO World Heritage designation affects local cultural practices in Mediterranean communities. Our findings reveal both positive preservation outcomes and challenges related to over-tourism. Local residents reported 67% positive impact on cultural pride but concerns about commercialization of traditions.', 4),
+
+('Post-Pandemic Recovery Strategies for Luxury Hotels', 'Analysis of 85 luxury hotel properties and their recovery strategies following COVID-19. Properties that invested in enhanced health protocols and personalized guest experiences recovered to 89% of pre-pandemic revenue levels by 2023. Contactless service integration proved crucial for guest confidence restoration.', 5),
+
+('Social Media Influence on Destination Choice', 'Comprehensive analysis of Instagram and TikTok impact on millennial travel decisions. Survey of 2,400 travelers aged 25-35 revealed that 73% of destination choices were influenced by social media content. User-generated content proved 5x more influential than traditional advertising in driving booking decisions.', 6),
+
+('Biodiversity Conservation Through Community-Based Ecotourism', 'Five-year study of ecotourism projects in Costa Rica and Kenya examining conservation outcomes. Communities participating in well-managed ecotourism programs showed 42% increase in local wildlife populations. Revenue sharing models directly correlated with conservation success rates and community engagement levels.', 7),
+
+('Economic Impact of Large-Scale Sporting Events', 'Comprehensive economic analysis of hosting major sporting events in mid-sized cities. Our research covering 8 international events shows average economic impact of $127 million per event. However, long-term benefits depend heavily on infrastructure legacy and ongoing event programming post-competition.', 8),
+
+('Tourism Revenue Optimization in Island Destinations', 'Economic modeling study of 15 Caribbean island destinations examining seasonal revenue patterns and optimization strategies. Islands implementing dynamic pricing and diversified activity portfolios achieved 23% higher annual revenue per visitor. Off-season programming proved critical for year-round sustainability.', 9),
+
+('Digital Preservation of Intangible Cultural Heritage in Tourism', 'Research on innovative methods for preserving and presenting intangible cultural heritage in tourism settings. Through partnerships with 12 heritage sites in Japan, we developed AR-enhanced experiences that increased visitor engagement by 45% while maintaining cultural authenticity and community involvement.', 10),
+
+('Crisis Management Strategies for Tourist Destinations', 'Comparative analysis of destination management responses to natural disasters and global crises. Study of 20 destinations revealed that those with pre-established crisis communication protocols and diversified market strategies recovered 40% faster. Community stakeholder engagement proved essential for resilient destination management.', 11);
 
 
 

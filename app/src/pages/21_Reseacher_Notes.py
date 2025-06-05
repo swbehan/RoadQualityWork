@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-# Page title
+
 st.title("Research Post & Data Upload")
 
 with st.form("research_form"):
@@ -47,12 +47,12 @@ with st.form("research_form"):
                 if response.status_code == 201:
                     st.switch_page("pages/23_Success_Page.py")
                 else:
-                    st.error(f"❌ Error: {response.json()['error']}")
+                    st.error(f"Error: {response.json()['error']}")
                     
             except Exception as e:
-                st.error(f"❌ Connection error: {str(e)}")
+                st.error(f"Connection error: {str(e)}")
         else:
-            st.error("❌ Please fill in Title and Notes!")
+            st.error("Please fill in Title and Notes!")
 
 if st.button("🗑️ Clear All"):
         st.rerun()
