@@ -51,7 +51,6 @@ def edit_post(post_id, current_title, current_research):
 def display_posts(posts):
     """Display posts in Streamlit"""
     if posts:
-        st.success(f"✅ Found {len(posts)} posts")
         search_term = st.text_input("🔍 Search posts", placeholder="Search by title or content...")
     
         if search_term:
@@ -90,7 +89,6 @@ def display_posts(posts):
             is_editing = st.session_state.get(edit_key, False)
             
             with st.expander(f"📄 {title} ({author_name})", expanded=False):
-                
                 if is_editing:
                     # Edit mode
                     st.write("**✏️ Editing Post**")
@@ -120,7 +118,7 @@ def display_posts(posts):
                             st.rerun()
                 
                 else:
-                    # View mode
+
                     col1, col2 = st.columns([2, 1])
                 
                     with col1:
@@ -136,23 +134,23 @@ def display_posts(posts):
                     st.write("**Research Content:**")
                     st.write(research_content)
                 
-                    # Action buttons
-                    col1, col2 = st.columns(2)
+                    if st.session_state["AuthorID"] == author_id:
+                        col1, col2 = st.columns(2)
 
-                    with col1:
-                        if st.button(f"✏️ Edit Post", key=f"edit_btn_{research_post_id}", type="secondary"):
-                            st.session_state[edit_key] = True
-                            st.rerun()
-                    
-                    with col2:
-                        if st.button(f"🗑️ Delete Post", key=f"delete_{research_post_id}", type="secondary"):
-                            if delete_post(research_post_id):
-                                st.success(f"Post {research_post_id} deleted successfully!")
+                        with col1:
+                            if st.button(f"✏️ Edit Post", key=f"edit_btn_{research_post_id}", type="secondary"):
+                                st.session_state[edit_key] = True
                                 st.rerun()
-                            else:
-                                st.error(f"❌ Failed to delete post {research_post_id}")
-                
-                st.write("---")
+                    
+                        with col2:
+                            if st.button(f"🗑️ Delete Post", key=f"delete_{research_post_id}", type="secondary"):
+                                if delete_post(research_post_id):
+                                    st.success(f"Post {research_post_id} deleted successfully!")
+                                    st.rerun()
+                                else:
+                                    st.error(f"Failed to delete post {research_post_id}")
+                    else:
+                        st.write("---")
     
     else:
         st.info("No posts found. Create your first post!")
@@ -170,7 +168,7 @@ def view_posts_page():
             display_posts(posts)
             
         else:
-            st.error(f"❌ Failed to load posts: {response.status_code}")
+            st.error(f"Failed to load posts: {response.status_code}")
             try:
                 error_data = response.json()
                 st.error(f"Error: {error_data.get('error', 'Unknown error')}")
@@ -178,7 +176,7 @@ def view_posts_page():
                 st.error(f"Response: {response.text}")
     
     except Exception as e:
-        st.error(f"❌ Unexpected error: {str(e)}")
+        st.error(f"Unexpected error: {str(e)}")
 
 if __name__ == "__main__":
     view_posts_page()
