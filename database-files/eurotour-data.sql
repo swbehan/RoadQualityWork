@@ -87,17 +87,6 @@ CREATE TABLE ResearchFindings (
     FOREIGN KEY (AuthorID) REFERENCES Researcher (ResearcherID)
 );
 
-CREATE TABLE Files (
-    FileID INT AUTO_INCREMENT PRIMARY KEY,
-    FileName VARCHAR(255) NOT NULL,  
-    FileType VARCHAR(50),                       
-    MimeType VARCHAR(100),                       
-    FileSize INT,                               
-    FileData LONGBLOB,                           
-    UploadDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
-    ResearchPostID INT,                              
-    FOREIGN KEY (ResearchPostID) REFERENCES ResearchFindings (ResearchPostID)
-);
 
 
 -- Add In
