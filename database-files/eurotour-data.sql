@@ -9017,3 +9017,4 @@ VALUES
 ('4 nights or over','Switzerland',2020,7220380),
 ('4 nights or over','Switzerland',2021,7555836),
 ('4 nights or over','Switzerland',2022,10633610);
+

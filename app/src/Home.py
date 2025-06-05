@@ -81,6 +81,7 @@ with right_col:
         st.session_state['authenticated'] = True
         st.session_state['role'] = 'reseacher'
         st.session_state['first_name'] = 'Ellie'
+        st.session_state["AuthorID"] = 1
         st.switch_page('pages/20_Reseacher_Home.py')
 
 
