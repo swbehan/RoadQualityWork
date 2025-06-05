@@ -5,18 +5,11 @@ def standardize(df_merged):
     """
     standardize data 
     """
-    fuel = df_merged[["Fuel Score"]].astype(float)
-    Fuel_standardize = (fuel -1) / (7-1)
-
-    density = df_merged[["Density Score"]].astype(float)
-    Density_standardize = (density -1) / (7-1)
-
-    df_merged["Fuel Score St."] = Fuel_standardize
-    df_merged["Density Score St."] = Density_standardize
+    df_merged["Fuel Score St."] = (df_merged["FuelPriceScore"].astype(float) - 1) / (7-1)
+    df_merged["Density Score St."] = (df_merged["RoadDensityScore"].astype(float) - 1) / (7-1)
 
     min_trips = df_merged['NumTrips'].min()
     max_trips = df_merged['NumTrips'].max()
-
     df_merged['Tourism St.'] = (df_merged['NumTrips'] - min_trips) / (max_trips - min_trips)
 
     return df_merged
@@ -62,6 +55,9 @@ def get_top_5_recommendations(user_input, recommender_data):
 
     similarities = []
 
+    recommender_data = standardize(recommender_data)
+
+    print(recommender_data)
     for index, row in recommender_data.iterrows():
         country_vector = np.array([
             row["Fuel Score St."], 
