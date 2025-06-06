@@ -5,11 +5,13 @@ import pandas as pd
 from PIL import Image
 import json
 from modules.nav import SideBarLinks
+from pages.styling_pages import style_buttons
 
 logger = logging.getLogger(__name__)
 
 st.set_page_config(layout='wide')
 SideBarLinks()
+style_buttons()
 
 def delete_post(post_id):
     """Delete a post by ID"""
@@ -88,7 +90,7 @@ def display_posts(posts):
             edit_key = f"edit_{research_post_id}"
             is_editing = st.session_state.get(edit_key, False)
             
-            with st.expander(f"📄 {title} ({author_name})", expanded=False):
+            with st.expander(f"{title} ({author_name})", expanded=False):
                 if is_editing:
                     # Edit mode
                     st.write("**✏️ Editing Post**")
@@ -107,7 +109,6 @@ def display_posts(posts):
                         if save_submitted:
                             if new_title and new_research:
                                 if edit_post(research_post_id, new_title, new_research):
-                                    st.success("✅ Post updated successfully!")
                                     st.session_state[edit_key] = False
                                     st.rerun()
                             else:
@@ -157,7 +158,7 @@ def display_posts(posts):
 
 def view_posts_page():
     """Main function to fetch and display posts"""
-    st.title("📖 View Research Posts")
+    st.title("View Research Posts")
     try:
         response = requests.get("http://host.docker.internal:4000/researcher/get_all_posts")
         

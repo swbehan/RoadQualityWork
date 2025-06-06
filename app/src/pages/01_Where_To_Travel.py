@@ -8,10 +8,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
 from modules.nav import SideBarLinks
+from pages.styling_pages import style_buttons
 import requests
 
 # Call the SideBarLinks from the nav module in the modules directory
 SideBarLinks()
+style_buttons()
 
 st.header('Lost on where to travel in Europe?')
 st.subheader('No Worries! Input your preferences below!')

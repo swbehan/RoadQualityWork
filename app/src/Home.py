@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 # as SideBarLinks function from src/modules folder
 import streamlit as st
 from modules.nav import SideBarLinks
+from pages.styling_pages import style_buttons, style_front_image
 
 # streamlit supports reguarl and wide layout (how the controls
 # are organized/displayed on the screen).
@@ -33,10 +34,11 @@ SideBarLinks(show_home=True)
 # ***************************************************
 
 # set the title of the page and provide a simple prompt. 
+style_buttons() 
+style_front_image()
+
 logger.info("Loading the Home page of the app")
-st.title("EuroTour 🌍")
 st.write('\n\n')
-st.write('### Connecting Journeys, Guiding Policy, Fueling Research')
 st.write('\n')
 st.write('#### Welcome. Who is logging in today?')
 
