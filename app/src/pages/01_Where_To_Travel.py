@@ -20,7 +20,7 @@ with st.form("traveler_form"):
 
     costSlider = st.slider("How important is saving money on fuel/travel cost?", 0, 10, 5)
     trafficSlider = st.slider("How much do you value avoiding long travel times/traffic?", 0, 10, 5)
-    tourismSlider = st.slider("How important is avoiding high tourim levels?", 0, 10, 5)
+    tourismSlider = st.slider("How important is it to visit high tourism areas?", 0, 10, 5)
 
     submitted = st.form_submit_button("📤 Submit Research Post", type="primary")
 
