@@ -5,12 +5,14 @@ import pandas as pd
 from PIL import Image
 import json
 from modules.nav import SideBarLinks
+from pages.styling_pages import style_buttons
+
 
 logger = logging.getLogger(__name__)
 
 st.set_page_config(layout='wide')
 SideBarLinks()
-
+style_buttons()
 
 st.title("Research Post & Data Upload")
 
@@ -53,7 +55,4 @@ with st.form("research_form"):
                 st.error(f"Connection error: {str(e)}")
         else:
             st.error("Please fill in Title and Notes!")
-
-if st.button("🗑️ Clear All"):
-        st.rerun()
 st.divider()
