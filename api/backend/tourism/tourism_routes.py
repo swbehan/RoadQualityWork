@@ -5,6 +5,7 @@ from flask import current_app
 import json
 import pandas as pd
 from backend.tourism.reccomender_ml import get_top_5_recommendations
+from backend.tourism.time_series_predictions import get_country_prediction
 
 # Create a Blueprint for routes
 tourism_bp = Blueprint("tourism", __name__)
@@ -168,6 +169,36 @@ def recommender_model(fuel_price, road_density, trips):
         recommendations = get_top_5_recommendations(user_input, merged_df)
 
         recom_dict = recommendations.to_dict(orient="records")
+
+        cursor.close()
+        return jsonify(recom_dict), 200
+    
+    except Error as e:
+        return jsonify({"error": str(e)}), 500
+    
+
+@tourism_bp.route("/timeseries/<str:country>>", methods=["GET"])
+def timeseries_lr_model(country):
+    try:
+        cursor = db.get_db().cursor()
+
+        cursor.execute("""SELECT rs.Country AS Country, rs.SpendingYear, rs.GDP AS GDP, t.NumTrips
+            FROM RoadSpending rs
+            JOIN Trips t ON rs.Country = t.Country
+                AND rs.SpendingYear = t.TripYear
+            WHERE t.Duration = '1 night or over';""")
+        
+        data = cursor.fetchall()
+        if not data:
+            return jsonify({"error": "Data not found"}), 404
+
+        merged_df = pd.DataFrame(data)
+
+        user_input = {"country": country}
+        
+        model_results = get_country_prediction(user_input, merged_df)
+
+        recom_dict = model_results.to_dict(orient="records")
 
         cursor.close()
         return jsonify(recom_dict), 200
