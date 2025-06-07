@@ -106,7 +106,7 @@ def style_front_image():
     <img src="https://www.pocketwanderings.com/wp-content/uploads/2022/06/Dinant-Belgium.jpg" class="full-hero-image" alt="European Adventure">
     <div class="hero-overlay">
         <div class="hero-title">EuroTour</div>
-        <div class="hero-subtitle">Connecting Journeys, Guiding Policy, Fueling Research</div>
+        <div class="hero-subtitle">Smarter Travel, Stronger Insights, One Europe</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
