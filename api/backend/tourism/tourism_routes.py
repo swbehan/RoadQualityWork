@@ -177,7 +177,7 @@ def recommender_model(fuel_price, road_density, trips):
         return jsonify({"error": str(e)}), 500
     
 
-@tourism_bp.route("/timeseries/<str:country>>", methods=["GET"])
+@tourism_bp.route("/timeseries/<string:country>", methods=["GET"])
 def timeseries_lr_model(country):
     try:
         cursor = db.get_db().cursor()
