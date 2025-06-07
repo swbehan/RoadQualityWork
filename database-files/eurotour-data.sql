@@ -75,38 +75,26 @@ CREATE TABLE RoadDeaths (
     RoadType VARCHAR(100)
 );
 
-
-CREATE TABLE User (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
-    UserName VARCHAR(255),
-    UserType VARCHAR(255),
-    Nationality VARCHAR(255)
+-- Researcher Stuff
+CREATE TABLE Researcher (
+    ResearcherID INT AUTO_INCREMENT PRIMARY KEY,
+    ResearcherName VARCHAR(255),
+    FieldOfStudy VARCHAR(255)
 );
 
-INSERT INTO User (UserName, UserType, Nationality)
-VALUES
-('Rycca Durrans', 'National Official', 'Latvia');
-('Ab Lumm', 'National Official', 'Hungary');
-('Lyn Doddemeade', 'Tourist', 'Slovakia');
-('Gabriellia Ccomini', 'Researcher', 'Netherlands');
-('Giffer Curror', 'National Official', 'Latvia');
-('Sibbie Stillman', 'Researcher', 'Greece');
-('Caprice Jerromes', 'Tourist', 'Romania');
-('Percy Yellep', 'National Official', 'Slovenia');
-('Gayel Pautot', 'National Official', 'Hungary');
-('Erwin Balwin', 'Researcher', 'Ireland');
-('Broderic Johnys', 'Tourist', 'Poland');
-('Joceline Haggerstone', 'Tourist', 'Slovenia');
-('Irita Robinson', 'National Official', 'Bulgaria');
-('Laurent O''Keaveny', 'Tourist', 'Netherlands');
-('Douglas Curless', 'National Official', 'Netherlands');
-('Robbi Dyster', 'National Official', 'Denmark');
-('Waldo Malbon', 'Tourist', 'Malta');
-('Hilliard McCoid', 'National Official', 'Malta');
-('Liesa Pocknell', 'Researcher', 'Spain');
-('Levy Bicknell', 'Researcher', 'Lithuania');
-
-
+INSERT INTO Researcher (ResearcherName, FieldOfStudy)
+Values 
+('Ellie Willems', 'Tourism Studies'),
+('Sarah Martinez', 'Tourism Management'),
+('Ahmed Hassan', 'Sustainable Tourism'),
+('Elena Rossi', 'Cultural Tourism'),
+('James Chen', 'Hospitality Management'),
+('Maria Santos', 'Tourism Marketing'),
+('Raj Patel', 'Ecotourism'),
+('Anna Kowalski', 'Event Management'),
+('Carlos Mendez', 'Tourism Economics'),
+('Yuki Tanaka', 'Heritage Tourism'),
+('Fatima Al-Zahra', 'Destination Management');
 
 CREATE TABLE ResearchFindings (
     ResearchPostID INT AUTO_INCREMENT PRIMARY KEY,
