@@ -212,7 +212,7 @@ def get_countries_list():
     try:
         cursor = db.get_db().cursor()
 
-        cursor.execute("SELECT Country FROM Attractions;")
+        cursor.execute("SELECT DISTINCT Country FROM Attractions ORDER BY Country;")
         data = cursor.fetchall()
 
         if not data:
