@@ -8,15 +8,24 @@ import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
 from modules.nav import SideBarLinks
-from pages.styling_pages import style_buttons
+from pages.styling_pages import style_buttons, traveler_font
 import requests
 
 # Call the SideBarLinks from the nav module in the modules directory
 SideBarLinks()
 style_buttons()
 
-st.header('Lost on where to travel in Europe?')
-st.subheader('No Worries! Input your preferences below!')
+traveler_font("Lost on where to travel in ...", False)
+
+st.markdown(f"""
+<div style="text-align: center; margin: 20px 0;">
+    <img src="https://media.licdn.com/dms/image/v2/D4D12AQFaZb3clRqKSQ/article-cover_image-shrink_720_1280/B4DZagAVE2H0AI-/0/1746441164204?e=2147483647&v=beta&t=cNbo_k4zxulu34vKK_WRB4qS3mlF8EA9KRrLvZsACOg"
+         style="width: 800px; height: 400px; 
+                border-radius: 8px; object-fit: cover;"
+         alt="Europe">
+</div>
+""", unsafe_allow_html=True)
+traveler_font("No Worries! Input your preferences below!", False)
 
 with st.form("traveler_form"):
 
@@ -24,7 +33,7 @@ with st.form("traveler_form"):
     trafficSlider = st.slider("How much do you value avoiding long travel times/traffic?", 0, 10, 5)
     tourismSlider = st.slider("How important is it to visit high tourism areas?", 0, 10, 5)
 
-    submitted = st.form_submit_button("📤 Submit Research Post", type="primary")
+    submitted = st.form_submit_button("Submit Preferences", type="primary")
 
 def empty_visual(): 
     fig = px.choropleth(locationmode='ISO-3', 
@@ -90,7 +99,6 @@ def map_visual(country_dataframe):
 
 
 
-
 if submitted:
     try:
         
@@ -100,14 +108,30 @@ if submitted:
 
         if response.status_code == 200:
             st.plotly_chart(map_visual(pd.DataFrame(response.json())))
+            traveler_font("Your Recommended Countries", False)
             for i in range(len(response.json())):
-                st.write(f"{i + 1}) {response.json()[i]['Country']}")
-            
+                rank_icons = ["🥇", "🥈", "🥉", "🏅", "⭐"]
+                icon = rank_icons[i] if i < len(rank_icons) else "🌟"
+                
+                st.markdown(f"""
+                <div style="
+                    background: linear-gradient(135deg, rgba(8, 145, 178, 0.1), rgba(181, 211, 176, 0.1));
+                    padding: 1rem;
+                    border-radius: 12px;
+                    margin: 0.5rem 0;
+                    border-left: 4px solid #0891B2;
+                    display: flex;
+                    align-items: center;
+                ">
+                    <span style="font-size: 1.5rem; margin-right: 1rem;">{icon}</span>
+                    <div>
+                        <h4 style="margin: 0; color: #2B6CB0;">#{i + 1} {response.json()[i]['Country']}</h4>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
         else:
             st.error(f"Error: {response.json()['error']}")
-            
     except Exception as e:
         st.error(f"Connection error: {str(e)}")
-
 else:
     st.plotly_chart(empty_visual())
