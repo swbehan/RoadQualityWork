@@ -28,7 +28,7 @@ def WhereToTravelNav():
 
 
 def MapDemoNav():
-    st.sidebar.page_link("pages/02_Tourist_Attractions.py", label="Tourist Attractions", icon="🏰")
+    st.sidebar.page_link("pages/02_TouristAttractions.py", label="Tourist Attractions", icon="🏰")
 
 
 ## ------------------------ Examples for Role of tourist_offical ------------------------
