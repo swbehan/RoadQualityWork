@@ -205,3 +205,39 @@ def timeseries_lr_model(country):
     
     except Error as e:
         return jsonify({"error": str(e)}), 500
+    
+
+@tourism_bp.route("/countrieslist", methods=["GET"])
+def get_countries_list():
+    try:
+        cursor = db.get_db().cursor()
+
+        cursor.execute("SELECT Country FROM Attractions;")
+        data = cursor.fetchall()
+
+        if not data:
+            return jsonify({"error": "Data not found"}), 404
+        
+        cursor.close()
+        return jsonify(data), 200
+    
+    except Error as e:
+        return jsonify({"error": str(e)}), 500
+    
+
+@tourism_bp.route("/tourismattractions/<string:country>", methods=["GET"])
+def get_country_attractions(country):
+    try:
+        cursor = db.get_db().cursor()
+
+        cursor.execute(f"SELECT * FROM Attractions WHERE Country = '{country}';")
+        data = cursor.fetchall()
+
+        if not data:
+            return jsonify({"error": "Data not found"}), 404
+        
+        cursor.close()
+        return jsonify(data), 200
+    
+    except Error as e:
+        return jsonify({"error": str(e)}), 500

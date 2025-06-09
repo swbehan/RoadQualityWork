@@ -29,7 +29,8 @@ if st.button('Where to Travel?',
              use_container_width=True):
   st.switch_page('pages/01_Where_To_Travel.py')
 
-if st.button('Tourist Attractions', 
+
+if st.button('Find Tourist Attractions', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/02_TouristAttractions.py')
