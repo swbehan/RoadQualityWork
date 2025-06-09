@@ -40,7 +40,25 @@ style_front_image()
 logger.info("Loading the Home page of the app")
 st.write('\n\n')
 st.write('\n')
-st.write('#### Welcome. Who is logging in today?')
+st.markdown("""
+<style>
+.login-welcome {
+    border: 2px solid #C1D5C0 !important;
+    border-radius: 8px !important;
+    padding: 25px !important;
+    text-align: center !important;
+    background: #FFFFFF !important; 
+    margin: 15px 0 !important;
+    font-size: 1.3rem !important;
+    color: #0891B2 !important;
+}
+</style>
+
+<div class="login-welcome">
+    <strong>Welcome</strong><br>
+    Please Login Below
+</div>
+""", unsafe_allow_html=True)
 
 # For each of the user personas for which we are implementing
 # functionality, we put a button on the screen that the user 
