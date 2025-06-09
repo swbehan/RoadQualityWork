@@ -17,7 +17,7 @@ def AboutPageNav():
 #### ------------------------ Examples for Role of traveler ------------------------
 def TravelerHomeNav():
     st.sidebar.page_link(
-        "pages/00_Traveler_Home.py", label="Traveler Home", icon="👤"
+        "pages/00_Traveler_Home.py", label="Traveler Home", icon="🏠"
     )
 
 
@@ -28,10 +28,15 @@ def WhereToTravelNav():
 
 
 def MapDemoNav():
-    st.sidebar.page_link("pages/02_Tourist_Attractions.py", label="Tourist Attractions", icon="🏰")
+    st.sidebar.page_link("pages/02_TouristAttractions.py", label="Tourist Attractions", icon="🏰")
 
 
 ## ------------------------ Examples for Role of tourist_offical ------------------------
+def OfficalHomeNav():
+    st.sidebar.page_link(
+        "pages/10_Tourist_Offical_Home.py", label="Offical Home", icon="🏠"
+    )
+
 def ApiTestNav():
     st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
 
@@ -82,6 +87,7 @@ def SideBarLinks(show_home=False):
 
         # If the user role is usaid worker, show the Api Testing page
         if st.session_state["role"] == "tourist_offical":
+            OfficalHomeNav()
             PredictionNav()
             ApiTestNav()
 

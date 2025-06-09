@@ -4,176 +4,24 @@ logger = logging.getLogger(__name__)
 import streamlit as st
 from modules.nav import SideBarLinks
 import requests
-from pages.styling_pages import style_buttons
+from pages.styling_pages import style_buttons, offical_font, collage_form
 
 st.set_page_config(layout = 'wide')
-
 SideBarLinks()
 style_buttons()
-
-st.markdown(f"""
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-    .researcher-classic {{
-        font-family: 'Playfair Display', serif !important;
-        font-size: 2.5rem !important;
-        font-weight: 600 !important;
-        color: #1a365d !important;
-        text-align: center !important;
-        margin: 0 !important;
-        line-height: 1.2 !important;
-        position: relative !important;
-        padding: 20px 0 30px 0 !important;
-    }}
-    
-    .researcher-classic .name {{
-        color: #2b6cb0 !important;
-        font-weight: 700 !important;
-    }}
-    
-    .researcher-classic::after {{
-        content: '' !important;
-        position: absolute !important;
-        bottom: 8px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: 80px !important;
-        height: 2px !important;
-        background: linear-gradient(90deg, #2b6cb0, #4299e1) !important;
-        border-radius: 1px !important;
-    }}
-    
-    </style>
-    
-    <div class="researcher-classic">
-        Welcome Researcher, <span class="name">{st.session_state['first_name']}</span>.
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("""
-<style>
-.research-collage {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: 200px 200px;
-    gap: 10px;
-    border-radius: 15px;
-    overflow: hidden;
-    margin: 2rem 0;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.research-item {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    transition: transform 0.3s ease;
-}
-
-.research-item:hover {
-    transform: scale(1.02);
-    z-index: 2;
-}
-
-.research-main {
-    grid-row: 1 / 3;
-    grid-column: 1;
-    background-image: url('https://www.usatoday.com/gcdn/-mm-/d2a691f1f64d8069f144791917ccdcf1e7d1fa16/c=0-0-1800-1015/local/-/media/USATODAY/test/2013/11/01/1383327500000-692-FreewaySlovenia.jpg?width=1800&height=1015&fit=crop&format=pjpg&auto=webp');
-}
-
-.research-top-right {
-    grid-row: 1;
-    grid-column: 2;
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv501qROXIU_LqNNg6rIclHtTGf3sNuqltOw&s');
-}
-
-.research-bottom-right {
-    grid-row: 2;
-    grid-column: 2;
-    background-image: url('https://compote.slate.com/images/49bf62d0-9a1f-4207-bd43-494c0ce31431.jpg?crop=568%2C379%2Cx0%2Cy0&width=2200');
-}
-
-.research-top-far-right {
-    grid-row: 1;
-    grid-column: 3;
-    background-image: url('https://pxlv6-mdxacuk.terminalfour.net/fit-in/2200x1610/filters:quality(75)/64x0:1376x960/prod01/channel_4/media/middlesexmu/course-images/mba-short-learning-programme-application/businesswoman-pointing-at-flip-chart-and-discussi-2024-11-14-11-39-13-utc.jpg');
-}
-
-.research-bottom-far-right {
-    grid-row: 2;
-    grid-column: 3;
-    background-image: url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=400');
-}
-
-.research-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    color: white;
-    padding: 1rem;
-    font-weight: 600;
-    font-size: 14px;
-}
-</style>
-
-<div class="research-collage">
-    <div class="research-item research-main">
-        <div class="research-overlay">View Road Statistics on the Country Level</div>
-    </div>
-    <div class="research-item research-top-right">
-        <div class="research-overlay">Create Posts Regarding Your Findings</div>
-    </div>
-    <div class="research-item research-bottom-right">
-        <div class="research-overlay">View Others Users Insights</div>
-    </div>
-    <div class="research-item research-top-far-right">
-        <div class="research-overlay">Study Trends</div>
-    </div>
-    <div class="research-item research-bottom-far-right">
-        <div class="research-overlay">Learn More About Europe</div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+offical_font(st.session_state['first_name'], True)
+collage_form('https://www.usatoday.com/gcdn/-mm-/d2a691f1f64d8069f144791917ccdcf1e7d1fa16/c=0-0-1800-1015/local/-/media/USATODAY/test/2013/11/01/1383327500000-692-FreewaySlovenia.jpg?width=1800&height=1015&fit=crop&format=pjpg&auto=webp',
+             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv501qROXIU_LqNNg6rIclHtTGf3sNuqltOw&s',
+             'https://compote.slate.com/images/49bf62d0-9a1f-4207-bd43-494c0ce31431.jpg?crop=568%2C379%2Cx0%2Cy0&width=2200',
+             'https://media.istockphoto.com/id/1071915654/photo/excited-black-coach-make-flipchart-presentation-for-employees.jpg?s=612x612&w=0&k=20&c=1kxSV8DLbhJ2vee0ulwOSgVYU4v7HfrO-WMbAXIro-g=',
+             'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=400',
+             'View Road Statistics on the Country Level',
+             'Create Posts Regarding Your Findings',
+             'View Others Users Insights',
+             'Study Trends',
+             'Learn More About Europe')
 st.write('')
-
-st.markdown(f"""
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-    .researcher-classic {{
-        font-family: 'Playfair Display', serif !important;
-        font-size: 2.5rem !important;
-        font-weight: 600 !important;
-        color: #1a365d !important;
-        text-align: center !important;
-        margin: 0 !important;
-        line-height: 1.2 !important;
-        position: relative !important;
-        padding: 20px 0 30px 0 !important;
-    }}
-    
-    .researcher-classic::after {{
-        content: '' !important;
-        position: absolute !important;
-        bottom: 8px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: 80px !important;
-        height: 2px !important;
-        background: linear-gradient(90deg, #2b6cb0, #4299e1) !important;
-        border-radius: 1px !important;
-    }}
-    
-    </style>
-    
-    <div class="researcher-classic">
-        What would you like to do today?
-    </div>
-    """, unsafe_allow_html=True)
+offical_font("What would you like to do today?", False)
 
 if st.button('Create Posts', 
              type='primary',
