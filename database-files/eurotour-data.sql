@@ -112,7 +112,7 @@ CREATE TABLE ResearchFindings (
     PostDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Research TEXT,
     AuthorID INT,
-    FOREIGN KEY (AuthorID) REFERENCES Researcher (ResearcherID)
+    FOREIGN KEY (AuthorID) REFERENCES Users (UserID)
 );
 
 INSERT INTO ResearchFindings (Title, Research, AuthorID) VALUES
