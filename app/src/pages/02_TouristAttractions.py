@@ -7,6 +7,7 @@ import pydeck as pdk
 from urllib.error import URLError
 from modules.nav import SideBarLinks
 import plotly.express as px
+from pages.styling_pages import traveler_font, traveler_font_country
 import requests
 
 SideBarLinks()
@@ -15,7 +16,15 @@ SideBarLinks()
 add_logo("assets/logo.png", height=400)
 
 # set up the page
-st.markdown("# Top Tourism Attractions")
+traveler_font("Top Tourism Attractions", False)
+st.markdown(f"""
+<div style="text-align: center; margin: 20px 0;">
+    <img src="https://st4.depositphotos.com/5392356/39424/i/450/depositphotos_394249644-stock-photo-happy-traveling-tourists-friends-sightseeing.jpg"
+         style="width: 800px; height: 400px; 
+                border-radius: 8px; object-fit: cover;"
+         alt="Tourism">
+</div>
+""", unsafe_allow_html=True)
 
 countries_list = requests.get("http://web-api:4000/tourism/countrieslist").json()
 for i in range(len(countries_list)):
@@ -25,9 +34,17 @@ countries_list = ["Select"] + countries_list
 selected_country = st.selectbox("Select Country", countries_list)
 
 if selected_country != "Select":
-    st.markdown(f"### Best Tourist Attractions In {selected_country}")
-
+    traveler_font_country(selected_country)
     attractions_list = requests.get(f"http://web-api:4000/tourism/tourismattractions/{selected_country}").json()
-
-    for attraction in attractions_list:
-        st.markdown(f" - **{attraction['AttractionName']}:** {attraction['City']}, {attraction['Country']}")
+    
+    for i, attraction in enumerate(attractions_list, 1):
+        with st.expander(f"{attraction['AttractionName']}"):
+            col1, col2 = st.columns([1, 3])
+            with col1:
+                st.metric("Location", attraction['City'])
+            with col2:
+                st.write(f"**Country:** {attraction['Country']}")
+                if attraction['AttractionWebsite']:
+                    st.markdown(f"🌐 **Website:** [{attraction['AttractionWebsite']}]({attraction['AttractionWebsite']})")
+                else:
+                    st.info("No website available")

@@ -14,7 +14,7 @@ with left_col:
 
 with middle_col_one:
     st.image("assets/SeanPicture.PNG", use_container_width=True)
-    st.markdown("**Aidan Kelley**")
+    st.markdown("**Aidan Kelly**")
 
 with middle_col_two:
     st.image("assets/SeanPicture.PNG", use_container_width=True)
@@ -38,7 +38,6 @@ st.markdown(
     - Academic researchers face yet another barrier: while they 
     need historical and comparative data for modeling and publication, much of the available information 
     is fragmented or lacks interoperability.
-    
     """
 )
 

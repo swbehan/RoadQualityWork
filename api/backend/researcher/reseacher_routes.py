@@ -130,3 +130,4 @@ def update_post(research_post_id):
         return jsonify({"message": "Post updated successfully"}), 200
     except Error as e:
         return jsonify({"error": str(e)}), 500
+    

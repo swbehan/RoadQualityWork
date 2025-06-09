@@ -398,6 +398,34 @@ def researcher_font(text, bool):
     </div>
     """, unsafe_allow_html=True)
 
+def traveler_font_country(text):
+        st.markdown(f"""
+<style>
+.welcome-handwritten {{
+    font-family: 'Caveat', cursive !important;
+    font-size: 3rem !important;
+    font-weight: 600 !important;
+    color: #2c3e50 !important;
+    text-align: center !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    position: relative;
+}}
+
+.welcome-handwritten .name {{
+    color: #e67e22 !important;
+    font-weight: 700 !important;
+}}
+            
+.stMarkdown h1 {{
+    font-family: 'Caveat', cursive !important;
+}}
+</style>
+
+<h1 class="welcome-handwritten">
+    Best Tourist Attractions In <span class="name">{text}</span>.
+</h1>
+""", unsafe_allow_html=True)
 
         
 

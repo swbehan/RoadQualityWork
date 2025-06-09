@@ -37,8 +37,8 @@ def OfficalHomeNav():
         "pages/10_Tourist_Offical_Home.py", label="Offical Home", icon="🏠"
     )
 
-def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
+def TourismAnalyticsNav():
+    st.sidebar.page_link("pages/12_Tourism_Analytics.py", label="Tourism Analytics", icon="📊")
 
 
 def PredictionNav():
@@ -89,7 +89,7 @@ def SideBarLinks(show_home=False):
         if st.session_state["role"] == "tourist_offical":
             OfficalHomeNav()
             PredictionNav()
-            ApiTestNav()
+            TourismAnalyticsNav()
 
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "reseacher":
