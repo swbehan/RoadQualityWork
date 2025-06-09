@@ -11,7 +11,46 @@ st.set_page_config(layout = 'wide')
 SideBarLinks()
 style_buttons()
 
-st.title('Welcome Reseacher, Ellie')
+st.markdown(f"""
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+    .researcher-classic {{
+        font-family: 'Playfair Display', serif !important;
+        font-size: 2.5rem !important;
+        font-weight: 600 !important;
+        color: #1a365d !important;
+        text-align: center !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
+        position: relative !important;
+        padding: 20px 0 30px 0 !important;
+    }}
+    
+    .researcher-classic .name {{
+        color: #2b6cb0 !important;
+        font-weight: 700 !important;
+    }}
+    
+    .researcher-classic::after {{
+        content: '' !important;
+        position: absolute !important;
+        bottom: 8px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 80px !important;
+        height: 2px !important;
+        background: linear-gradient(90deg, #2b6cb0, #4299e1) !important;
+        border-radius: 1px !important;
+    }}
+    
+    </style>
+    
+    <div class="researcher-classic">
+        Welcome Researcher, <span class="name">{st.session_state['first_name']}</span>.
+    </div>
+    """, unsafe_allow_html=True)
+
 st.markdown("""
 <style>
 .research-collage {
@@ -100,7 +139,42 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 st.write('')
-st.write('### What would you like to do today?')
+
+st.markdown(f"""
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+    .researcher-classic {{
+        font-family: 'Playfair Display', serif !important;
+        font-size: 2.5rem !important;
+        font-weight: 600 !important;
+        color: #1a365d !important;
+        text-align: center !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
+        position: relative !important;
+        padding: 20px 0 30px 0 !important;
+    }}
+    
+    .researcher-classic::after {{
+        content: '' !important;
+        position: absolute !important;
+        bottom: 8px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 80px !important;
+        height: 2px !important;
+        background: linear-gradient(90deg, #2b6cb0, #4299e1) !important;
+        border-radius: 1px !important;
+    }}
+    
+    </style>
+    
+    <div class="researcher-classic">
+        What would you like to do today?
+    </div>
+    """, unsafe_allow_html=True)
+
 if st.button('Create Posts', 
              type='primary',
              use_container_width=True):

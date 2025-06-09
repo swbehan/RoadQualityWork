@@ -28,7 +28,7 @@ def WhereToTravelNav():
 
 
 def MapDemoNav():
-    st.sidebar.page_link("pages/02_TouristAttractions.py", label="Tourist Attractions", icon="🕔")
+    st.sidebar.page_link("pages/02_TouristAttractions.py", label="Tourist Attractions", icon="🏰")
 
 
 ## ------------------------ Examples for Role of tourist_offical ------------------------
@@ -38,22 +38,8 @@ def ApiTestNav():
 
 def PredictionNav():
     st.sidebar.page_link(
-        "pages/11_Prediction.py", label="Regression Prediction", icon="📈"
+        "pages/11_Tourism_Prediction.py", label="Tourism Prediction", icon="📈"
     )
-
-
-def ClassificationNav():
-    st.sidebar.page_link(
-        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
-    )
-
-
-def NgoDirectoryNav():
-    st.sidebar.page_link("pages/14_NGO_Directory.py", label="NGO Directory", icon="📁")
-
-
-def AddNgoNav():
-    st.sidebar.page_link("pages/15_Add_NGO.py", label="Add New NGO", icon="➕")
 
 
 #### ------------------------ Examples for Role of reseacher ------------------------
@@ -98,9 +84,6 @@ def SideBarLinks(show_home=False):
         if st.session_state["role"] == "tourist_offical":
             PredictionNav()
             ApiTestNav()
-            ClassificationNav()
-            NgoDirectoryNav()
-            AddNgoNav()
 
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "reseacher":

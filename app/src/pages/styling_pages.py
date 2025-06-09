@@ -110,3 +110,5 @@ def style_front_image():
     </div>
 </div>
 """, unsafe_allow_html=True)
+    
+
