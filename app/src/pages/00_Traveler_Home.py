@@ -12,7 +12,34 @@ st.set_page_config(layout = 'wide')
 SideBarLinks()
 style_buttons()
 
-st.title(f"Welcome Traveler, {st.session_state['first_name']}.")
+st.markdown(f"""
+<style>
+.welcome-handwritten {{
+    font-family: 'Caveat', cursive !important;
+    font-size: 3rem !important;
+    font-weight: 600 !important;
+    color: #2c3e50 !important;
+    text-align: center !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    position: relative;
+}}
+
+.welcome-handwritten .name {{
+    color: #e67e22 !important;
+    font-weight: 700 !important;
+}}
+            
+.stMarkdown h1 {{
+    font-family: 'Caveat', cursive !important;
+}}
+</style>
+
+<h1 class="welcome-handwritten">
+    Welcome Traveler, <span class="name">{st.session_state['first_name']}</span>.
+</h1>
+""", unsafe_allow_html=True)
+
 st.markdown("""
 <style>
 .welcome-collage {
@@ -90,14 +117,36 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 st.write('')
-st.write('### What would you like to do today?')
+
+st.markdown(f"""
+<style>
+.welcome-handwritten {{
+    font-family: 'Caveat', cursive !important;
+    font-size: 3rem !important;
+    font-weight: 600 !important;
+    color: #2c3e50 !important;
+    text-align: center !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    position: relative;
+}}
+            
+.stMarkdown h1 {{
+    font-family: 'Caveat', cursive !important;
+}}
+</style>
+
+<h1 class="welcome-handwritten">
+    What would you like to do today?
+</h1>
+""", unsafe_allow_html=True)
 
 if st.button('Where to Travel?', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/01_Where_To_Travel.py')
 
-if st.button('Traffic Prediction', 
+if st.button('Tourist Attractions', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Traffic_Prediction.py')
+  st.switch_page('pages/02_Tourist_Attractions.py')
