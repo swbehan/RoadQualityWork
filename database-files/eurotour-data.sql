@@ -137,7 +137,7 @@ CREATE TABLE Attractions (
 
 -- AUSTRIA
 INSERT INTO Attractions (Country, City, AttractionName) VALUES
-('Austria', 'Vienna', 'Schönbrunn Palace'),
+('Austria', 'Vienna', 'Schonbrunn Palace'),
 ('Austria', 'Vienna', 'Hofburg Palace'),
 ('Austria', 'Salzburg', 'Hohensalzburg Fortress'),
 ('Austria', 'Salzburg', 'Mozart''s Birthplace'),
@@ -180,7 +180,7 @@ INSERT INTO Attractions (Country, City, AttractionName) VALUES
 ('Denmark', 'Copenhagen', 'Tivoli Gardens'),
 ('Denmark', 'Copenhagen', 'The Little Mermaid'),
 ('Denmark', 'Copenhagen', 'Nyhavn'),
-('Denmark', 'Helsingør', 'Kronborg Castle'),
+('Denmark', 'Helsingor', 'Kronborg Castle'),
 ('Denmark', 'Copenhagen', 'Rosenborg Castle');
 
 -- ESTONIA
@@ -227,7 +227,7 @@ INSERT INTO Attractions (Country, City, AttractionName) VALUES
 INSERT INTO Attractions (Country, City, AttractionName) VALUES
 ('Hungary', 'Budapest', 'Hungarian Parliament Building'),
 ('Hungary', 'Budapest', 'Buda Castle'),
-('Hungary', 'Budapest', 'Széchenyi Thermal Baths'),
+('Hungary', 'Budapest', 'Szechenyi Thermal Baths'),
 ('Hungary', 'Budapest', 'Fisherman''s Bastion'),
 ('Hungary', 'Budapest', 'Chain Bridge');
 
@@ -297,11 +297,11 @@ INSERT INTO Attractions (Country, City, AttractionName) VALUES
 
 -- PORTUGAL
 INSERT INTO Attractions (Country, City, AttractionName) VALUES
-('Portugal', 'Lisbon', 'Jerónimos Monastery'),
+('Portugal', 'Lisbon', 'Jeronimos Monastery'),
 ('Portugal', 'Porto', 'Porto Historic Center'),
 ('Portugal', 'Sintra', 'Pena Palace'),
-('Portugal', 'Lisbon', 'Belém Tower'),
-('Portugal', 'Óbidos', 'Óbidos Medieval Town');
+('Portugal', 'Lisbon', 'Belem Tower'),
+('Portugal', 'Obidos', 'Obidos Medieval Town');
 
 -- ROMANIA
 INSERT INTO Attractions (Country, City, AttractionName) VALUES
@@ -315,7 +315,7 @@ INSERT INTO Attractions (Country, City, AttractionName) VALUES
 INSERT INTO Attractions (Country, City, AttractionName) VALUES
 ('Slovakia', 'Bratislava', 'Bratislava Castle'),
 ('Slovakia', 'Bratislava', 'Bratislava Old Town'),
-('Slovakia', 'Spiš', 'Spiš Castle'),
+('Slovakia', 'Spis', 'Spis Castle'),
 ('Slovakia', 'Bojnice', 'Bojnice Castle'),
 ('Slovakia', 'High Tatras', 'High Tatras Mountains');
 
@@ -332,7 +332,7 @@ INSERT INTO Attractions (Country, City, AttractionName) VALUES
 ('Spain', 'Barcelona', 'Sagrada Familia'),
 ('Spain', 'Madrid', 'Prado Museum'),
 ('Spain', 'Granada', 'Alhambra'),
-('Spain', 'Barcelona', 'Park Güell'),
+('Spain', 'Barcelona', 'Park Guell'),
 ('Spain', 'Seville', 'Seville Cathedral');
 
 -- SWEDEN
@@ -340,7 +340,7 @@ INSERT INTO Attractions (Country, City, AttractionName) VALUES
 ('Sweden', 'Stockholm', 'Vasa Museum'),
 ('Sweden', 'Stockholm', 'Gamla Stan'),
 ('Sweden', 'Stockholm', 'Stockholm City Hall'),
-('Sweden', 'Göteborg', 'Liseberg Amusement Park'),
+('Sweden', 'Goteborg', 'Liseberg Amusement Park'),
 ('Sweden', 'Stockholm', 'ABBA Museum');
 
 
