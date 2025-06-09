@@ -128,6 +128,221 @@ INSERT INTO ResearchFindings (Title, Research, AuthorID) VALUES
 ('Crisis Management Strategies for Tourist Destinations', 'Comparative analysis of destination management responses to natural disasters and global crises. Study of 20 destinations revealed that those with pre-established crisis communication protocols and diversified market strategies recovered 40% faster. Community stakeholder engagement proved essential for resilient destination management.', 11);
 
 
+CREATE TABLE Attractions (
+    Country VARCHAR(255),
+    City VARCHAR(255),
+    AttractionName VARCHAR(255),
+    PRIMARY KEY (AttractionName, Country)
+);
+
+-- AUSTRIA
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Austria', 'Vienna', 'Schönbrunn Palace'),
+('Austria', 'Vienna', 'Hofburg Palace'),
+('Austria', 'Salzburg', 'Hohensalzburg Fortress'),
+('Austria', 'Salzburg', 'Mozart''s Birthplace'),
+('Austria', 'Hallstatt', 'Hallstatt Historic Center');
+
+-- BELGIUM
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Belgium', 'Brussels', 'Grand Place'),
+('Belgium', 'Brussels', 'Atomium'),
+('Belgium', 'Bruges', 'Historic City Center'),
+('Belgium', 'Ghent', 'Gravensteen Castle'),
+('Belgium', 'Brussels', 'Manneken Pis');
+
+-- BULGARIA
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Bulgaria', 'Sofia', 'Alexander Nevsky Cathedral'),
+('Bulgaria', 'Plovdiv', 'Old Town Plovdiv'),
+('Bulgaria', 'Rila', 'Rila Monastery'),
+('Bulgaria', 'Veliko Tarnovo', 'Tsarevets Fortress'),
+('Bulgaria', 'Nessebar', 'Nessebar Old Town');
+
+-- CROATIA
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Croatia', 'Dubrovnik', 'Dubrovnik Old Town'),
+('Croatia', 'Split', 'Diocletian''s Palace'),
+('Croatia', 'Plitvice Lakes', 'Plitvice Lakes National Park'),
+('Croatia', 'Zagreb', 'Zagreb Cathedral'),
+('Croatia', 'Hvar', 'Hvar Old Town');
+
+-- CZECH REPUBLIC
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Czech Republic', 'Prague', 'Prague Castle'),
+('Czech Republic', 'Prague', 'Charles Bridge'),
+('Czech Republic', 'Prague', 'Old Town Square'),
+('Czech Republic', 'Cesky Krumlov', 'Cesky Krumlov Castle'),
+('Czech Republic', 'Prague', 'Prague Astronomical Clock');
+
+-- DENMARK
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Denmark', 'Copenhagen', 'Tivoli Gardens'),
+('Denmark', 'Copenhagen', 'The Little Mermaid'),
+('Denmark', 'Copenhagen', 'Nyhavn'),
+('Denmark', 'Helsingør', 'Kronborg Castle'),
+('Denmark', 'Copenhagen', 'Rosenborg Castle');
+
+-- ESTONIA
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Estonia', 'Tallinn', 'Tallinn Old Town'),
+('Estonia', 'Tallinn', 'Toompea Castle'),
+('Estonia', 'Tartu', 'Tartu University'),
+('Estonia', 'Saaremaa', 'Kuressaare Castle'),
+('Estonia', 'Lahemaa', 'Lahemaa National Park');
+
+-- FINLAND
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Finland', 'Helsinki', 'Suomenlinna Fortress'),
+('Finland', 'Helsinki', 'Helsinki Cathedral'),
+('Finland', 'Rovaniemi', 'Santa Claus Village'),
+('Finland', 'Turku', 'Turku Castle'),
+('Finland', 'Helsinki', 'Temppeliaukio Church');
+
+-- FRANCE
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('France', 'Paris', 'Eiffel Tower'),
+('France', 'Paris', 'Louvre Museum'),
+('France', 'Paris', 'Notre-Dame Cathedral'),
+('France', 'Versailles', 'Palace of Versailles'),
+('France', 'Paris', 'Arc de Triomphe');
+
+-- GERMANY
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Germany', 'Berlin', 'Brandenburg Gate'),
+('Germany', 'Bavaria', 'Neuschwanstein Castle'),
+('Germany', 'Berlin', 'Berlin Wall Memorial'),
+('Germany', 'Cologne', 'Cologne Cathedral'),
+('Germany', 'Munich', 'Marienplatz');
+
+-- GREECE
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Greece', 'Athens', 'Acropolis of Athens'),
+('Greece', 'Athens', 'Parthenon'),
+('Greece', 'Delphi', 'Delphi Archaeological Site'),
+('Greece', 'Santorini', 'Oia Village'),
+('Greece', 'Mykonos', 'Mykonos Old Town');
+
+-- HUNGARY
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Hungary', 'Budapest', 'Hungarian Parliament Building'),
+('Hungary', 'Budapest', 'Buda Castle'),
+('Hungary', 'Budapest', 'Széchenyi Thermal Baths'),
+('Hungary', 'Budapest', 'Fisherman''s Bastion'),
+('Hungary', 'Budapest', 'Chain Bridge');
+
+-- IRELAND
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Ireland', 'Dublin', 'Trinity College Dublin'),
+('Ireland', 'Dublin', 'Guinness Storehouse'),
+('Ireland', 'County Clare', 'Cliffs of Moher'),
+('Ireland', 'Kerry', 'Ring of Kerry'),
+('Ireland', 'Dublin', 'Dublin Castle');
+
+-- ITALY
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Italy', 'Rome', 'Colosseum'),
+('Italy', 'Vatican City', 'Vatican Museums'),
+('Italy', 'Florence', 'Uffizi Gallery'),
+('Italy', 'Venice', 'St. Mark''s Basilica'),
+('Italy', 'Rome', 'Trevi Fountain');
+
+-- LATVIA
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Latvia', 'Riga', 'Riga Old Town'),
+('Latvia', 'Riga', 'Riga Cathedral'),
+('Latvia', 'Sigulda', 'Turaida Castle'),
+('Latvia', 'Cesis', 'Cesis Castle'),
+('Latvia', 'Jurmala', 'Jurmala Beach');
+
+-- LITHUANIA
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Lithuania', 'Vilnius', 'Vilnius Old Town'),
+('Lithuania', 'Vilnius', 'Gediminas Castle'),
+('Lithuania', 'Trakai', 'Trakai Castle'),
+('Lithuania', 'Kaunas', 'Kaunas Old Town'),
+('Lithuania', 'Klaipeda', 'Curonian Spit');
+
+-- LUXEMBOURG
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Luxembourg', 'Luxembourg City', 'Casemates du Bock'),
+('Luxembourg', 'Luxembourg City', 'Grand Ducal Palace'),
+('Luxembourg', 'Vianden', 'Vianden Castle'),
+('Luxembourg', 'Luxembourg City', 'Notre-Dame Cathedral'),
+('Luxembourg', 'Echternach', 'Echternach Abbey');
+
+-- MALTA
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Malta', 'Valletta', 'St. John''s Co-Cathedral'),
+('Malta', 'Mdina', 'Mdina Old City'),
+('Malta', 'Marsaxlokk', 'Blue Grotto'),
+('Malta', 'Gozo', 'Azure Window Ruins'),
+('Malta', 'Valletta', 'Grand Master''s Palace');
+
+-- NETHERLANDS
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Netherlands', 'Amsterdam', 'Rijksmuseum'),
+('Netherlands', 'Amsterdam', 'Van Gogh Museum'),
+('Netherlands', 'Amsterdam', 'Anne Frank House'),
+('Netherlands', 'Lisse', 'Keukenhof Gardens'),
+('Netherlands', 'Kinderdijk', 'Kinderdijk Windmills');
+
+-- POLAND
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Poland', 'Krakow', 'Wawel Castle'),
+('Poland', 'Krakow', 'Main Market Square'),
+('Poland', 'Auschwitz', 'Auschwitz-Birkenau Memorial'),
+('Poland', 'Warsaw', 'Warsaw Old Town'),
+('Poland', 'Gdansk', 'Gdansk Old Town');
+
+-- PORTUGAL
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Portugal', 'Lisbon', 'Jerónimos Monastery'),
+('Portugal', 'Porto', 'Porto Historic Center'),
+('Portugal', 'Sintra', 'Pena Palace'),
+('Portugal', 'Lisbon', 'Belém Tower'),
+('Portugal', 'Óbidos', 'Óbidos Medieval Town');
+
+-- ROMANIA
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Romania', 'Brasov', 'Bran Castle'),
+('Romania', 'Bucharest', 'Palace of Parliament'),
+('Romania', 'Sighisoara', 'Sighisoara Historic Center'),
+('Romania', 'Brasov', 'Brasov Old Town'),
+('Romania', 'Constanta', 'Constanta Casino');
+
+-- SLOVAKIA
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Slovakia', 'Bratislava', 'Bratislava Castle'),
+('Slovakia', 'Bratislava', 'Bratislava Old Town'),
+('Slovakia', 'Spiš', 'Spiš Castle'),
+('Slovakia', 'Bojnice', 'Bojnice Castle'),
+('Slovakia', 'High Tatras', 'High Tatras Mountains');
+
+-- SLOVENIA
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Slovenia', 'Ljubljana', 'Ljubljana Castle'),
+('Slovenia', 'Bled', 'Lake Bled'),
+('Slovenia', 'Postojna', 'Postojna Cave'),
+('Slovenia', 'Piran', 'Piran Old Town'),
+('Slovenia', 'Ljubljana', 'Triple Bridge');
+
+-- SPAIN
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Spain', 'Barcelona', 'Sagrada Familia'),
+('Spain', 'Madrid', 'Prado Museum'),
+('Spain', 'Granada', 'Alhambra'),
+('Spain', 'Barcelona', 'Park Güell'),
+('Spain', 'Seville', 'Seville Cathedral');
+
+-- SWEDEN
+INSERT INTO Attractions (Country, City, AttractionName) VALUES
+('Sweden', 'Stockholm', 'Vasa Museum'),
+('Sweden', 'Stockholm', 'Gamla Stan'),
+('Sweden', 'Stockholm', 'Stockholm City Hall'),
+('Sweden', 'Göteborg', 'Liseberg Amusement Park'),
+('Sweden', 'Stockholm', 'ABBA Museum');
+
 
 -- Add In
 INSERT INTO RoadQuality (Country, RoadYear, Score)
