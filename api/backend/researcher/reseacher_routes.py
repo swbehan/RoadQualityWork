@@ -57,10 +57,10 @@ def get_all_posts():
                 rf.PostDate,
                 rf.Research,
                 rf.AuthorID,
-                r.ResearcherName,
-                r.FieldOfStudy
+                u.UserName,
+                u.Nationality
             FROM ResearchFindings rf
-            LEFT JOIN Researcher r ON rf.AuthorID = r.ResearcherID
+            LEFT JOIN Users u ON rf.AuthorID = u.UserID
             ORDER BY rf.PostDate DESC
         """
         cursor.execute(query)

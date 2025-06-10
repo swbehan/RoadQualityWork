@@ -60,14 +60,14 @@ def display_posts(posts):
             for post in posts:
                 title = str(post.get('Title', '')).lower()
                 research = str(post.get('Research', '')).lower()
-                author_name = str(post.get('ResearcherName', '')).lower()
-                field_of_study = str(post.get('FieldOfStudy', '')).lower()
+                author_name = str(post.get('UserName', '')).lower()
+                nationality = str(post.get('Nationality', '')).lower()
             
                 search_lower = search_term.lower()
                 if (search_lower in title or 
                     search_lower in research or 
                     search_lower in author_name or 
-                    search_lower in field_of_study):
+                    search_lower in nationality):
                     filtered_posts.append(post)
             posts = filtered_posts
         
@@ -84,8 +84,8 @@ def display_posts(posts):
             post_date = post.get('PostDate', 'No Date')
             research_content = post.get('Research', 'No Content')
             author_id = post.get('AuthorID', 'N/A')
-            author_name = post.get('ResearcherName', 'Unknown Author')
-            field_of_study = post.get('FieldOfStudy', 'Unknown Field')
+            author_name = post.get('UserName', 'Unknown Author')
+            nationality = post.get('Nationality', 'Unknown Field')
             
             edit_key = f"edit_{research_post_id}"
             is_editing = st.session_state.get(edit_key, False)
@@ -125,7 +125,7 @@ def display_posts(posts):
                     with col1:
                         st.write("**Posted:**", str(post_date))
                         st.write("**Author:**", author_name)
-                        st.write("**Field:**", field_of_study)
+                        st.write("**Nationality:**", nationality)
                 
                     with col2:
                         st.write("**Post ID:**", research_post_id)

@@ -13,7 +13,7 @@ with left_col:
     st.text("I am a rising second year studying computer science with a concentration in AI with a minor in usiness administration")
 
 with middle_col_one:
-    st.image("assets/SeanPicture.PNG", use_container_width=True)
+    st.image("assets/aidanpic.jpeg", use_container_width=True)
     st.markdown("**Aidan Kelly**")
 
 with middle_col_two:
