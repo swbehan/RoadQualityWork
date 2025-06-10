@@ -3,7 +3,7 @@ from backend.db_connection import db
 from mysql.connector import Error
 
 # Create a Blueprint for routes
-offical_bp = Blueprint("offical", __name__)
+offical_bp = Blueprint("official", __name__)
 
 @offical_bp.route("/get_merged_data", methods=["GET"])
 def get_merged_data():

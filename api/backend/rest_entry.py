@@ -52,7 +52,7 @@ def create_app():
     app.register_blueprint(ngos, url_prefix="/ngo")
     app.register_blueprint(researcher_api, url_prefix="/researcher")
     app.register_blueprint(tourism_bp, url_prefix="/tourism")
-    app.register_blueprint(offical_bp, url_prefix="/offical")
+    app.register_blueprint(offical_bp, url_prefix="/official")
 
     # Don't forget to return the app object
     return app
