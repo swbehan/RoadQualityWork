@@ -84,25 +84,25 @@ CREATE TABLE Users (
 
 INSERT INTO Users (UserName, UserType, Nationality)
 VALUES
-('Rycca Durrans', 'National Official', 'Latvia');
-('Ab Lumm', 'National Official', 'Hungary');
-('Lyn Doddemeade', 'Tourist', 'Slovakia');
-('Gabriellia Ccomini', 'Researcher', 'Netherlands');
-('Giffer Curror', 'National Official', 'Latvia');
-('Sibbie Stillman', 'Researcher', 'Greece');
-('Caprice Jerromes', 'Tourist', 'Romania');
-('Percy Yellep', 'National Official', 'Slovenia');
-('Gayel Pautot', 'National Official', 'Hungary');
-('Erwin Balwin', 'Researcher', 'Ireland');
-('Broderic Johnys', 'Tourist', 'Poland');
-('Joceline Haggerstone', 'Tourist', 'Slovenia');
-('Irita Robinson', 'National Official', 'Bulgaria');
-('Laurent O''Keaveny', 'Tourist', 'Netherlands');
-('Douglas Curless', 'National Official', 'Netherlands');
-('Robbi Dyster', 'National Official', 'Denmark');
-('Waldo Malbon', 'Tourist', 'Malta');
-('Hilliard McCoid', 'National Official', 'Malta');
-('Liesa Pocknell', 'Researcher', 'Spain');
+('Rycca Durrans', 'National Official', 'Latvia'),
+('Ab Lumm', 'National Official', 'Hungary'),
+('Lyn Doddemeade', 'Tourist', 'Slovakia'),
+('Gabriellia Ccomini', 'Researcher', 'Netherlands'),
+('Giffer Curror', 'National Official', 'Latvia'),
+('Sibbie Stillman', 'Researcher', 'Greece'),
+('Caprice Jerromes', 'Tourist', 'Romania'),
+('Percy Yellep', 'National Official', 'Slovenia'),
+('Gayel Pautot', 'National Official', 'Hungary'),
+('Erwin Balwin', 'Researcher', 'Ireland'),
+('Broderic Johnys', 'Tourist', 'Poland'),
+('Joceline Haggerstone', 'Tourist', 'Slovenia'),
+('Irita Robinson', 'National Official', 'Bulgaria'),
+('Laurent O''Keaveny', 'Tourist', 'Netherlands'),
+('Douglas Curless', 'National Official', 'Netherlands'),
+('Robbi Dyster', 'National Official', 'Denmark'),
+('Waldo Malbon', 'Tourist', 'Malta'),
+('Hilliard McCoid', 'National Official', 'Malta'),
+('Liesa Pocknell', 'Researcher', 'Spain'),
 ('Levy Bicknell', 'Researcher', 'Lithuania');
 
 
