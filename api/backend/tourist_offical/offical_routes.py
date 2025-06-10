@@ -165,3 +165,23 @@ def get_trips():
     
     except Error as e:
         return jsonify({"error": str(e)}), 500
+    
+
+# Get users of specific type
+@offical_bp.route("/usersoftype/<string:type>", methods=["GET"])
+def get_users_of_type(type):
+    try:
+        cursor = db.get_db().cursor()
+
+        cursor.execute(f"""SELECT Username, Nationality FROM Users 
+                       WHERE UserType = '{type}';""")
+        data = cursor.fetchall()
+
+        if not data:
+            return jsonify({"error": "Data not found"}), 404
+        
+        cursor.close()
+        return jsonify(data), 200
+    
+    except Error as e:
+        return jsonify({"error": str(e)}), 500
