@@ -128,14 +128,6 @@ def tourism_official_data_tables():
     offical_font("Tourism Infrastructure Analytics", False)
     BASE_URL = "http://host.docker.internal:4000/official"
     tables = {
-        # "Merged Data": {
-        #     "endpoint": "/get_merged_data",
-        #     "description": """This dataset integrates road infrastructure spending, GDP, 
-        #     road quality scores, and tourism trip statistics by country and year to examine the correlation 
-        #     between government road investment, infrastructure quality, and tourism performance. These values
-        #     reveal each country's road spending as a percentage of GDP, combined with actual road quality 
-        #     measurements, influences tourism patterns including total trip volumes and the variety of trip duration preferences."""
-        # },
         "Road Quality": {
             "endpoint": "/roadquality",
             "description": """This dataset tracks road infrastructure quality scores for different countries
@@ -145,25 +137,23 @@ def tourism_official_data_tables():
         },
         "Tourism Prioritization": {
             "endpoint": "/tourismprioritization",
-            "description": """This dataset measures government tourism prioritization scores by country and year, 
-            indicating how much emphasis each nation places on developing and promoting its tourism sector. 
-            The scoring system allows for tracking changes in tourism policy focus over time within countries 
-            and comparing tourism investment priorities across different nations."""
+            "description": """This graph shows government tourism prioritization scores by country and year, 
+            indicating how much emphasis each nation places on developing and promoting its tourism sector, 
+            and how it has changed over time."""
         },
         "Road Spending": {
             "endpoint": "/roadspending",
-            "description": """This dataset tracks government road infrastructure spending by country and year, 
+            "description": """This graph tracks government road infrastructure spending by country and year, 
             capturing both absolute spending amounts and each nation's GDP to calculate road investment as 
-            a percentage of economic output. The data enables analysis of infrastructure investment trends 
+            a percentage of economic output. It enables analysis of infrastructure investment trends 
             over time within countries and allows for meaningful comparisons of road spending priorities 
             across nations regardless of economic size."""
         },
         "Trips": {
             "endpoint": "/trips",
-            "description": """This dataset records tourism trip volumes by country, year, and duration category, 
-            breaking down the total number of trips into different length classifications such as short, medium, 
-            and long stays. The data structure allows for analysis of tourism patterns and preferences, showing 
-            not just overall trip volumes but also how travelers' duration choices vary across countries and change over time"""
+            "description": """This graph records tourism trip volumes by country and year, for stays of 1 night or more.
+            The line plot helps analyze tourism patterns and preferences to help national officials understand
+            the recent history of tourism in their country."""
         }
     }
     
