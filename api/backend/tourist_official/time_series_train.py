@@ -1,12 +1,5 @@
-import requests
 import pandas as pd
-from plotly import graph_objects as go
-import plotly.graph_objects as go
 import numpy as np
-import plotly.express as px
-from sklearn.metrics import mean_squared_error, r2_score
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 
 def get_country_prediction(user_input, merged_df):
     return merged_df
