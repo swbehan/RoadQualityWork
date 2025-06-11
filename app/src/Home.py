@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 # as SideBarLinks function from src/modules folder
 import streamlit as st
 from modules.nav import SideBarLinks
-from pages.styling_pages import style_buttons, style_front_image
+from pages.styling_pages import style_buttons, style_front_image, basic_font
 
 # streamlit supports reguarl and wide layout (how the controls
 # are organized/displayed on the screen).
@@ -41,26 +41,6 @@ style_front_image()
 logger.info("Loading the Home page of the app")
 st.write('\n\n')
 st.write('\n')
-st.markdown("""
-<style>
-.login-welcome {
-    border: 2px solid #C1D5C0 !important;
-    border-radius: 8px !important;
-    padding: 25px !important;
-    text-align: center !important;
-    background: #FFFFFF !important; 
-    margin: 15px 0 !important;
-    font-size: 1.3rem !important;
-    color: #0891B2 !important;
-}
-</style>
-
-<div class="login-welcome">
-    <strong>Welcome</strong><br>
-    Please Login Below
-</div>
-""", unsafe_allow_html=True)
-
 # For each of the user personas for which we are implementing
 # functionality, we put a button on the screen that the user 
 # can click to MIMIC logging in as that mock user. 
@@ -87,7 +67,7 @@ def display_user_buttons(users, user_type, page_path, log_message):
             user_name = user.get('Username', 'No Name')
             nationality = user.get('Nationality', 'No Nation')
             
-            if st.button(f"Sign in as {user_name}, a {user_type} from {nationality}",
+            if st.button(f"Sign in as {user_name} from {nationality}",
                        key=f"{user_type.lower()}_{user_id}",
                        type='primary',
                        use_container_width=True):
@@ -95,6 +75,7 @@ def display_user_buttons(users, user_type, page_path, log_message):
                 st.session_state['role'] = user_type
                 st.session_state['first_name'] = user_name
                 st.session_state['AuthorID'] = user_id
+                st.session_state['Nationality'] = nationality
                 logger.info(log_message)
                 st.switch_page(page_path)
     else:
@@ -102,7 +83,7 @@ def display_user_buttons(users, user_type, page_path, log_message):
 
 def view_users():
     """Main function to display user selection interface"""
-    st.title("Select User Login")
+    basic_font("Select User Login")
     
     left_col, middle_col, right_col = st.columns(3)
     
