@@ -29,87 +29,82 @@ div.stButton > button:active {
 ## drop on the screen 
 def style_front_image():
     st.markdown("""
-<style>
-.hero-container {
-    position: relative;
-    width: 100vw;
-    height: 500px;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    overflow: hidden;
-}
-
-.full-hero-image {
-    animation: slideUp 2s ease-out;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 2;
-    animation: fadeIn 3s ease-in-out;
-}
-
-.hero-title {
-    font-family: 'Nunito', sans-serif;
-    font-size: 4rem;
-    font-weight: 800;
-    color: white;
-    text-shadow: 
-        3px 3px 0px rgba(0,0,0,0.8),
-        -1px -1px 0px rgba(0,0,0,0.8),
-        1px -1px 0px rgba(0,0,0,0.8),
-        -1px 1px 0px rgba(0,0,0,0.8),
-        0px 4px 8px rgba(0,0,0,0.6);
-    margin-bottom: 1rem;
-    letter-spacing: 1px;
-}
-
-.hero-subtitle {
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: white;
-    text-shadow: 
-        2px 2px 0px rgba(0,0,0,0.8),
-        -1px -1px 0px rgba(0,0,0,0.8),
-        1px -1px 0px rgba(0,0,0,0.8),
-        -1px 1px 0px rgba(0,0,0,0.8),
-        0px 3px 6px rgba(0,0,0,0.5);
-}
-
-@keyframes slideUp {
-    0% {
-        transform: translateY(50px);
-        opacity: 0;
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <style>
+    .hero-container {
+        position: relative;
+        width: 100vw;
+        height: 500px;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        overflow: hidden;
     }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
+    .full-hero-image {
+        animation: slideUp 2s ease-out;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
-}
-
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-</style>
-
-<div class="hero-container">
-    <img src="https://www.pocketwanderings.com/wp-content/uploads/2022/06/Dinant-Belgium.jpg" class="full-hero-image" alt="European Adventure">
-    <div class="hero-overlay">
-        <div class="hero-title">EuroTour</div>
-        <div class="hero-subtitle">Smarter Travel, Stronger Insights, One Europe</div>
+    .hero-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 2;
+        animation: fadeIn 3s ease-in-out;
+    }
+    .hero-title {
+        font-family: 'Bungee', sans-serif;
+        font-size: 4rem;
+        font-weight: 800;
+        color: white;
+        text-shadow:
+            3px 3px 0px rgba(0,0,0,0.8),
+            -1px -1px 0px rgba(0,0,0,0.8),
+            1px -1px 0px rgba(0,0,0,0.8),
+            -1px 1px 0px rgba(0,0,0,0.8),
+            0px 4px 8px rgba(0,0,0,0.6);
+        margin-bottom: 1rem;
+        letter-spacing: 1px;
+    }
+    .hero-subtitle {
+        font-family: 'Bungee', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: white;
+        text-shadow:
+            2px 2px 0px rgba(0,0,0,0.8),
+            -1px -1px 0px rgba(0,0,0,0.8),
+            1px -1px 0px rgba(0,0,0,0.8),
+            -1px 1px 0px rgba(0,0,0,0.8),
+            0px 3px 6px rgba(0,0,0,0.5);
+    }
+    @keyframes slideUp {
+        0% {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    </style>
+    
+    <div class="hero-container">
+        <img src="https://www.pocketwanderings.com/wp-content/uploads/2022/06/Dinant-Belgium.jpg" class="full-hero-image" alt="European Adventure">
+        <div class="hero-overlay">
+            <div class="hero-title">EuroTour</div>
+            <div class="hero-subtitle">Smarter Travel, Stronger Insights, One Europe</div>
+        </div>
     </div>
-</div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
     
 ##the boolean means if the text is going to be welcoming the user (in which the function will highlight their name)
 def traveler_font(text, bool):
@@ -336,67 +331,57 @@ def offical_font(text, bool):
 def researcher_font(text, bool):
     if bool:
         st.markdown(f"""
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-    .researcher-classic {{
-        font-family: 'Playfair Display', serif !important;
-        font-size: 2.5rem !important;
-        font-weight: 600 !important;
-        color: #1a365d !important;
-        text-align: center !important;
-        margin: 0 !important;
-        line-height: 1.2 !important;
-        position: relative !important;
-        padding: 20px 0 30px 0 !important;
-    }}
-    
-    .researcher-classic .name {{
-        color: #2b6cb0 !important;
-        font-weight: 700 !important;
-    }}
-    
-    .researcher-classic::after {{
-        content: '' !important;
-        position: absolute !important;
-        bottom: 8px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: 80px !important;
-        height: 2px !important;
-        background: linear-gradient(90deg, #2b6cb0, #4299e1) !important;
-        border-radius: 1px !important;
-    }}
-    
-    </style>
-    
-    <div class="researcher-classic">
-        Welcome Researcher, <span class="name">{text}</span>.
-    </div>
-    """, unsafe_allow_html=True)
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+        <style>
+        .researcher-classic {{
+            font-family: 'Playfair Display', serif !important;
+            font-size: 2.5rem !important;
+            font-weight: 600 !important;
+            color: #1a365d !important;
+            text-align: center !important;
+            margin: 0 !important;
+            line-height: 1.2 !important;
+            position: relative !important;
+            padding: 20px 0 30px 0 !important;
+        }}
+        .researcher-classic .name {{
+            color: #2b6cb0 !important;
+            font-weight: 700 !important;
+        }}
+        .researcher-classic::after {{
+            content: '' !important;
+            position: absolute !important;
+            bottom: 8px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 80px !important;
+            height: 2px !important;
+            background: linear-gradient(90deg, #2b6cb0, #4299e1) !important;
+            border-radius: 1px !important;
+        }}
+        </style>
+        <div class="researcher-classic">
+            Welcome Researcher, <span class="name">{text}</span>.
+        </div>
+        """, unsafe_allow_html=True)
     else:
         st.markdown(f"""
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-    .researchers-classic {{
-        font-family: 'Playfair Display', serif !important;
-        font-size: 2.5rem !important;
-        font-weight: 600 !important;
-        color: #1a365d !important;
-        text-align: center !important;
-        margin: 0 !important;
-        line-height: 1.2 !important;
-        position: relative !important;
-        padding: 20px 0 30px 0 !important;
-    }}
-    
-    </style>
-    
-    <div class="researcher-classic">
-        {text}
-    </div>
-    """, unsafe_allow_html=True)
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+        <style>
+        .researcher-simple {{
+            font-family: 'Playfair Display', serif !important;
+            font-size: 2.5rem !important;
+            font-weight: 600 !important;
+            color: #1a365d !important;
+            text-align: center !important;
+            margin: 0 !important;
+            line-height: 1.2 !important;
+            position: relative !important;
+            padding: 20px 0 30px 0 !important;
+        }}
+        </style>
+        <div class="researcher-simple">{text}</div>
+        """, unsafe_allow_html=True)
 
 def traveler_font_country(text):
         st.markdown(f"""
@@ -426,6 +411,25 @@ def traveler_font_country(text):
     Best Tourist Attractions In <span class="name">{text}</span>.
 </h1>
 """, unsafe_allow_html=True)
+        
+def basic_font(text):
+    st.markdown(f"""
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    .bubble-text {{
+        font-family: 'Poppins', sans-serif;
+        font-size: 3rem;
+        font-weight: 600;
+        color: #C1D5C0;
+        text-align: center;
+        text-stroke:
+        margin: 1rem 0;
+        letter-spacing: 1px;
+    }}
+    </style>
+    
+    <div class="bubble-text">{text}</div>
+    """, unsafe_allow_html=True)
 
         
 

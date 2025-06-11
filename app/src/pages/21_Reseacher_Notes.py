@@ -5,7 +5,7 @@ import pandas as pd
 from PIL import Image
 import json
 from modules.nav import SideBarLinks
-from pages.styling_pages import style_buttons
+from pages.styling_pages import style_buttons, researcher_font
 
 
 logger = logging.getLogger(__name__)
@@ -14,7 +14,7 @@ st.set_page_config(layout='wide')
 SideBarLinks()
 style_buttons()
 
-st.title("Research Post & Data Upload")
+researcher_font("Research Post & Data Upload", False)
 
 with st.form("research_form"):
     st.header("📝 Jot down thoughts and queries")
@@ -42,7 +42,7 @@ with st.form("research_form"):
             
             try:
                 response = requests.post(
-                    "http://web-api:4000/researcher/new_post",
+                    "http://web-api:4000/researcher/posts",
                     json=post_data
                 )
 

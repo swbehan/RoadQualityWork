@@ -5,7 +5,7 @@ import pandas as pd
 from PIL import Image
 import json
 from modules.nav import SideBarLinks
-from pages.styling_pages import style_buttons
+from pages.styling_pages import style_buttons, researcher_font
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +16,7 @@ style_buttons()
 def delete_post(post_id):
     """Delete a post by ID"""
     try:
-        response = requests.delete(f"http://host.docker.internal:4000/researcher/delete_post/{post_id}")
+        response = requests.delete(f"http://host.docker.internal:4000/researcher/posts/{post_id}")
         
         if response.status_code == 200:
             return True
@@ -32,7 +32,7 @@ def edit_post(post_id, current_title, current_research):
     """Edit post function"""
     try:
         response = requests.put(
-            f"http://host.docker.internal:4000/researcher/update_post/{post_id}",
+            f"http://host.docker.internal:4000/researcher/posts/{post_id}",
             json={
                 "Title": current_title,
                 "Research": current_research
@@ -53,7 +53,7 @@ def edit_post(post_id, current_title, current_research):
 def display_posts(posts):
     """Display posts in Streamlit"""
     if posts:
-        search_term = st.text_input("🔍 Search posts", placeholder="Search by title or content...")
+        search_term = st.text_input("", placeholder="Search by title or content...")
     
         if search_term:
             filtered_posts = []
@@ -158,9 +158,9 @@ def display_posts(posts):
 
 def view_posts_page():
     """Main function to fetch and display posts"""
-    st.title("View Research Posts")
+    researcher_font("View Research Posts", False)
     try:
-        response = requests.get("http://host.docker.internal:4000/researcher/get_all_posts")
+        response = requests.get("http://host.docker.internal:4000/researcher/posts")
         
         if response.status_code == 200:
             data = response.json()

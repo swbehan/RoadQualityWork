@@ -87,12 +87,11 @@ VALUES
 ('Ellie Willems', 'Researcher', 'German'),
 ('Ab Lumm', 'National Official', 'Hungary'),
 ('Lyn Doddemeade', 'Tourist', 'Slovakia'),
-('Gabriellia Ccomini', 'Researcher', 'Netherlands'),
+('Gabriellia Comini', 'Researcher', 'Netherlands'),
 ('Giffer Curror', 'National Official', 'Latvia'),
 ('Sibbie Stillman', 'Researcher', 'Greece'),
 ('Caprice Jerromes', 'Tourist', 'Romania'),
 ('Percy Yellep', 'National Official', 'Slovenia'),
-('Gayel Pautot', 'National Official', 'Hungary'),
 ('Erwin Balwin', 'Researcher', 'Ireland'),
 ('Broderic Johnys', 'Tourist', 'Poland'),
 ('Joceline Haggerstone', 'Tourist', 'Slovenia'),
@@ -101,7 +100,6 @@ VALUES
 ('Douglas Curless', 'National Official', 'Netherlands'),
 ('Robbi Dyster', 'National Official', 'Denmark'),
 ('Waldo Malbon', 'Tourist', 'Malta'),
-('Hilliard McCoid', 'National Official', 'Malta'),
 ('Liesa Pocknell', 'Researcher', 'Spain'),
 ('Levy Bicknell', 'Researcher', 'Lithuania');
 
