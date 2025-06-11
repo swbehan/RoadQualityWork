@@ -3,9 +3,9 @@ from backend.db_connection import db
 from mysql.connector import Error
 
 # Create a Blueprint for routes
-offical_bp = Blueprint("official", __name__)
+official_bp = Blueprint("official", __name__)
 
-@offical_bp.route("/get_merged_data", methods=["GET"])
+@official_bp.route("/get_merged_data", methods=["GET"])
 def get_merged_data():
     try:
         cursor = db.get_db().cursor()
@@ -37,7 +37,7 @@ GROUP BY rs.SpendingYear, rs.Country, rs.RoadSpending, rs.GDP, rs.SpendingByGDPP
         return jsonify({"error": str(e)}), 500
     
 # Get the data from the RoadQuality table
-@offical_bp.route("/roadquality", methods=["GET"])
+@official_bp.route("/roadquality", methods=["GET"])
 def get_road_qualities():
     try:
         cursor = db.get_db().cursor()
@@ -56,7 +56,7 @@ def get_road_qualities():
     
 
 # Get the data from the TourismPrioritization table
-@offical_bp.route("/tourismprioritization", methods=["GET"])
+@official_bp.route("/tourismprioritization", methods=["GET"])
 def get_tourism_prior():
     try:
         cursor = db.get_db().cursor()
@@ -74,7 +74,7 @@ def get_tourism_prior():
     
 
 # Get the data from the RoadDensity table
-@offical_bp.route("/roaddensity", methods=["GET"])
+@official_bp.route("/roaddensity", methods=["GET"])
 def get_road_density():
     try:
         cursor = db.get_db().cursor()
@@ -92,7 +92,7 @@ def get_road_density():
     
 
 # Get the data from the AvgFuelPrice table
-@offical_bp.route("/avgfuelprice", methods=["GET"])
+@official_bp.route("/avgfuelprice", methods=["GET"])
 def get_fuel_price():
     try:
         cursor = db.get_db().cursor()
@@ -111,7 +111,7 @@ def get_fuel_price():
     
 
 # Get the data from the RoadSpending table
-@offical_bp.route("/roadspending", methods=["GET"])
+@official_bp.route("/roadspending", methods=["GET"])
 def get_road_spending():
     try:
         cursor = db.get_db().cursor()
@@ -130,7 +130,7 @@ def get_road_spending():
     
 
 # Get the data from the PassengerCars table
-@offical_bp.route("/passengercars", methods=["GET"])
+@official_bp.route("/passengercars", methods=["GET"])
 def get_pass_cars():
     try:
         cursor = db.get_db().cursor()
@@ -149,7 +149,7 @@ def get_pass_cars():
     
 
 # Get the data from the Trips table
-@offical_bp.route("/trips", methods=["GET"])
+@official_bp.route("/trips", methods=["GET"])
 def get_trips():
     try:
         cursor = db.get_db().cursor()
@@ -168,12 +168,12 @@ def get_trips():
     
 
 # Get users of specific type
-@offical_bp.route("/usersoftype/<string:type>", methods=["GET"])
+@official_bp.route("/usersoftype/<string:type>", methods=["GET"])
 def get_users_of_type(type):
     try:
         cursor = db.get_db().cursor()
 
-        cursor.execute(f"""SELECT Username, Nationality FROM Users 
+        cursor.execute(f"""SELECT Username, Nationality, UserID, UserType FROM Users 
                        WHERE UserType = '{type}';""")
         data = cursor.fetchall()
 
@@ -182,6 +182,5 @@ def get_users_of_type(type):
         
         cursor.close()
         return jsonify(data), 200
-    
     except Error as e:
         return jsonify({"error": str(e)}), 500

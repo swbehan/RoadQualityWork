@@ -80,19 +80,19 @@ def SideBarLinks(show_home=False):
     if st.session_state["authenticated"]:
 
         # Show the wher to travel Link and traffic prediction link if the user is a traveler role.
-        if st.session_state["role"] == "traveler":
+        if st.session_state["role"] == "Tourist":
             TravelerHomeNav()
             WhereToTravelNav()
             MapDemoNav()
 
         # If the user role is usaid worker, show the Api Testing page
-        if st.session_state["role"] == "tourist_offical":
+        if st.session_state["role"] == "National Official":
             OfficalHomeNav()
             PredictionNav()
             TourismAnalyticsNav()
 
         # If the user is an administrator, give them access to the administrator pages
-        if st.session_state["role"] == "reseacher":
+        if st.session_state["role"] == "Researcher":
             AdminPageNav()
 
     # Always show the About page at the bottom of the list of links

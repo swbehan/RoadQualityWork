@@ -7,7 +7,7 @@ from logging.handlers import RotatingFileHandler
 from backend.db_connection import db
 from backend.researcher.reseacher_routes import researcher_api
 from backend.tourism.tourism_routes import tourism_bp
-from backend.tourist_offical.offical_routes import offical_bp
+from backend.tourist_official.official_routes import official_bp
 
 def create_app():
     app = Flask(__name__)
@@ -48,7 +48,7 @@ def create_app():
     app.logger.info("create_app(): registering blueprints with Flask app object.")
     app.register_blueprint(researcher_api, url_prefix="/researcher")
     app.register_blueprint(tourism_bp, url_prefix="/tourism")
-    app.register_blueprint(offical_bp, url_prefix="/official")
+    app.register_blueprint(official_bp, url_prefix="/official")
 
     # Don't forget to return the app object
     return app
