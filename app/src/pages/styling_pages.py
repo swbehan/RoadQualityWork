@@ -110,61 +110,56 @@ def style_front_image():
 def traveler_font(text, bool):
     if bool:
         st.markdown(f"""
-<style>
-.welcome-handwritten {{
-    font-family: 'Caveat', cursive !important;
-    font-size: 3rem !important;
-    font-weight: 600 !important;
-    color: #2c3e50 !important;
-    text-align: center !important;
-    margin: 0 !important;
-    line-height: 1.2 !important;
-    position: relative;
-}}
-
-.welcome-handwritten .name {{
-    color: #e67e22 !important;
-    font-weight: 700 !important;
-}}
-            
-.stMarkdown h1 {{
-    font-family: 'Caveat', cursive !important;
-}}
-</style>
-
-<h1 class="welcome-handwritten">
-    Welcome Traveler, <span class="name">{text}</span>.
-</h1>
-""", unsafe_allow_html=True)
-        
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+        .welcome-handwritten {{
+            font-family: 'Poppins', sans-serif !important;
+            font-size: 3rem !important;
+            font-weight: 600 !important;
+            color: #2c3e50 !important;
+            text-align: center !important;
+            margin: 0 !important;
+            line-height: 1.2 !important;
+            position: relative;
+        }}
+        .welcome-handwritten .name {{
+            color: #e67e22 !important;
+            font-weight: 700 !important;
+        }}
+        .stMarkdown h1 {{
+            font-family: 'Poppins', sans-serif !important;
+        }}
+        </style>
+        <h1 class="welcome-handwritten">
+            Welcome Traveler, <span class="name">{text}</span>.
+        </h1>
+        """, unsafe_allow_html=True)
     else:
         st.markdown(f"""
-<style>
-.welcome-handwritten {{
-    font-family: 'Caveat', cursive !important;
-    font-size: 3rem !important;
-    font-weight: 600 !important;
-    color: #2c3e50 !important;
-    text-align: center !important;
-    margin: 0 !important;
-    line-height: 1.2 !important;
-    position: relative;
-}}
-
-.welcome-handwritten .name {{
-    color: #e67e22 !important;
-    font-weight: 700 !important;
-}}
-            
-.stMarkdown h1 {{
-    font-family: 'Caveat', cursive !important;
-}}
-</style>
-
-<h1 class="welcome-handwritten">
-    {text}
-</h1>
-""", unsafe_allow_html=True)
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+        .welcome-handwritten {{
+            font-family: 'Poppins', sans-serif !important;
+            font-size: 3rem !important;
+            font-weight: 600 !important;
+            color: #2c3e50 !important;
+            text-align: center !important;
+            margin: 0 !important;
+            line-height: 1.2 !important;
+            position: relative;
+        }}
+        .welcome-handwritten .name {{
+            color: #e67e22 !important;
+            font-weight: 700 !important;
+        }}
+        .stMarkdown h1 {{
+            font-family: 'Poppins', sans-serif !important;
+        }}
+        </style>
+        <h1 class="welcome-handwritten">
+            {text}
+        </h1>
+        """, unsafe_allow_html=True)
         
 def collage_form(pic1, pic2, pic3, pic4, pic5, word1, word2, word3, word4, word5):
     st.markdown(f"""
@@ -331,109 +326,189 @@ def offical_font(text, bool):
 def researcher_font(text, bool):
     if bool:
         st.markdown(f"""
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-        <style>
-        .researcher-classic {{
-            font-family: 'Playfair Display', serif !important;
-            font-size: 2.5rem !important;
-            font-weight: 600 !important;
-            color: #1a365d !important;
-            text-align: center !important;
-            margin: 0 !important;
-            line-height: 1.2 !important;
-            position: relative !important;
-            padding: 20px 0 30px 0 !important;
-        }}
-        .researcher-classic .name {{
-            color: #2b6cb0 !important;
-            font-weight: 700 !important;
-        }}
-        .researcher-classic::after {{
-            content: '' !important;
-            position: absolute !important;
-            bottom: 8px !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            width: 80px !important;
-            height: 2px !important;
-            background: linear-gradient(90deg, #2b6cb0, #4299e1) !important;
-            border-radius: 1px !important;
-        }}
-        </style>
-        <div class="researcher-classic">
-            Welcome Researcher, <span class="name">{text}</span>.
-        </div>
-        """, unsafe_allow_html=True)
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+    .researcher-classic {{
+        font-family: 'Playfair Display', serif !important;
+        font-size: 2.5rem !important;
+        font-weight: 600 !important;
+        color: #1a365d !important;
+        text-align: center !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
+        position: relative !important;
+        padding: 20px 0 30px 0 !important;
+    }}
+    
+    .researcher-classic .name {{
+        color: #2b6cb0 !important;
+        font-weight: 700 !important;
+    }}
+    
+    .researcher-classic::after {{
+        content: '' !important;
+        position: absolute !important;
+        bottom: 8px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 80px !important;
+        height: 2px !important;
+        background: linear-gradient(90deg, #2b6cb0, #4299e1) !important;
+        border-radius: 1px !important;
+    }}
+    
+    </style>
+    
+    <div class="researcher-classic">
+        Welcome Researcher, <span class="name">{text}</span>.
+    </div>
+    """, unsafe_allow_html=True)
     else:
         st.markdown(f"""
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-        <style>
-        .researcher-simple {{
-            font-family: 'Playfair Display', serif !important;
-            font-size: 2.5rem !important;
-            font-weight: 600 !important;
-            color: #1a365d !important;
-            text-align: center !important;
-            margin: 0 !important;
-            line-height: 1.2 !important;
-            position: relative !important;
-            padding: 20px 0 30px 0 !important;
-        }}
-        </style>
-        <div class="researcher-simple">{text}</div>
-        """, unsafe_allow_html=True)
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+    .researchers-classic {{
+        font-family: 'Playfair Display', serif !important;
+        font-size: 2.5rem !important;
+        font-weight: 600 !important;
+        color: #1a365d !important;
+        text-align: center !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
+        position: relative !important;
+        padding: 20px 0 30px 0 !important;
+    }}
+    
+    </style>
+    
+    <div class="researchers-classic">
+        {text}
+    </div>
+    """, unsafe_allow_html=True)
 
 def traveler_font_country(text):
-        st.markdown(f"""
-<style>
-.welcome-handwritten {{
-    font-family: 'Caveat', cursive !important;
-    font-size: 3rem !important;
-    font-weight: 600 !important;
-    color: #2c3e50 !important;
-    text-align: center !important;
-    margin: 0 !important;
-    line-height: 1.2 !important;
-    position: relative;
-}}
-
-.welcome-handwritten .name {{
-    color: #e67e22 !important;
-    font-weight: 700 !important;
-}}
-            
-.stMarkdown h1 {{
-    font-family: 'Caveat', cursive !important;
-}}
-</style>
-
-<h1 class="welcome-handwritten">
-    Best Tourist Attractions In <span class="name">{text}</span>.
-</h1>
-""", unsafe_allow_html=True)
+    st.markdown(f"""
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    .welcome-handwritten {{
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 3rem !important;
+        font-weight: 600 !important;
+        color: #2c3e50 !important;
+        text-align: center !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
+        position: relative;
+    }}
+    .welcome-handwritten .name {{
+        color: #e67e22 !important;
+        font-weight: 700 !important;
+    }}
+    .stMarkdown h1 {{
+        font-family: 'Poppins', sans-serif !important;
+    }}
+    </style>
+    <h1 class="welcome-handwritten">
+        Best Tourist Attractions In <span class="name">{text}</span>.
+    </h1>
+    """, unsafe_allow_html=True)
         
 def basic_font(text):
     st.markdown(f"""
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
     .bubble-text {{
-        font-family: 'Poppins', sans-serif;
-        font-size: 3rem;
-        font-weight: 600;
-        color: #C1D5C0;
-        text-align: center;
-        text-stroke:
-        margin: 1rem 0;
-        letter-spacing: 1px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    font-weight: 600;
+    color: 
+    #C1D5C0;
+    text-align: center;
+    text-stroke:
+    margin: 1rem 0;
+    letter-spacing: 1px;
     }}
     </style>
-    
     <div class="bubble-text">{text}</div>
     """, unsafe_allow_html=True)
 
-        
-
+def style_interactive_hero():
+    st.markdown("""
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    .hero-container {
+        position: relative;
+        text-align: center;
+        padding: 3rem 1rem;
+        background: linear-gradient(135deg, #C1D5C0 0%, rgba(193, 213, 192, 0.3) 100%);
+        border-radius: 15px;
+        margin: 1rem 0 2rem 0;
+        overflow: hidden;
+    }
     
-
-
+    .hero-title-interactive {
+        font-family: 'Poppins', sans-serif;
+        font-size: 3rem;
+        font-weight: 700;
+        color: #1C3334;
+        margin-bottom: 1rem;
+        animation: fadeInDown 1s ease-out;
+    }
+    
+    .hero-subtitle-interactive {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: #0891B2;
+        animation: fadeInUp 1s ease-out 0.5s both;
+    }
+    
+    .floating-icon {
+        position: absolute;
+        font-size: 2rem;
+        animation: float 3s ease-in-out infinite;
+        opacity: 0.7;
+    }
+    
+    .icon-1 { top: 20%; left: 10%; animation-delay: 0s; }
+    .icon-2 { top: 30%; right: 15%; animation-delay: 1s; }
+    .icon-3 { bottom: 25%; left: 15%; animation-delay: 2s; }
+    .icon-4 { bottom: 35%; right: 10%; animation-delay: 0.5s; }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+    
+    @keyframes fadeInDown {
+        0% { opacity: 0; transform: translateY(-30px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    .hero-container:hover .floating-icon {
+        animation-duration: 1.5s;
+    }
+    </style>
+    
+    <div class="hero-container">
+        <div class="floating-icon icon-1">🏰</div>
+        <div class="floating-icon icon-2">✈️</div>
+        <div class="floating-icon icon-3">🗺️</div>
+        <div class="floating-icon icon-4">🎯</div>
+        
+        <div class="hero-title-interactive">
+            Lost on where to travel in Europe?
+        </div>
+        <div class="hero-subtitle-interactive">
+            🌟 No Worries! Input your preferences below! 🌟
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 

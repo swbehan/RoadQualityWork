@@ -44,7 +44,7 @@ st.write('\n')
 # For each of the user personas for which we are implementing
 # functionality, we put a button on the screen that the user 
 # can click to MIMIC logging in as that mock user. 
-
+    
 def fetch_users_of_type(user_type):
     """Fetch users of a specific type from API"""
     try:
@@ -84,6 +84,7 @@ def display_user_buttons(users, user_type, page_path, log_message):
 def view_users():
     """Main function to display user selection interface"""
     basic_font("Select User Login")
+    st.write("---")
     
     left_col, middle_col, right_col = st.columns(3)
     
