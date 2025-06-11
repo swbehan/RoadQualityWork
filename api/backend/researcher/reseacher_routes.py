@@ -101,13 +101,11 @@ def update_post(research_post_id):
     try:
         data = request.get_json()
 
-        # Check if post exists
         cursor = db.get_db().cursor()
         cursor.execute("SELECT * FROM ResearchFindings WHERE ResearchPostID = %s", (research_post_id,))
         if not cursor.fetchone():
             return jsonify({"error": "Post not found"}), 404
-
-        # Build update query dynamically based on provided fields
+        
         update_fields = []
         params = []
         allowed_fields = ["Title", "Research"]

@@ -10,7 +10,7 @@ import pandas as pd
 SideBarLinks()
 def tourism_official_data_tables():
     offical_font("Tourism Infrastructure Analytics", False)
-    BASE_URL = "http://host.docker.internal:4000/offical"
+    BASE_URL = "http://host.docker.internal:4000/official"
     tables = {
         "Merged Data": {
             "endpoint": "/get_merged_data",
