@@ -15,24 +15,38 @@ import requests
 SideBarLinks()
 style_buttons()
 
-traveler_font("Lost on where to travel in ...", False)
-
-st.markdown(f"""
-<div style="text-align: center; margin: 20px 0;">
-    <img src="https://media.licdn.com/dms/image/v2/D4D12AQFaZb3clRqKSQ/article-cover_image-shrink_720_1280/B4DZagAVE2H0AI-/0/1746441164204?e=2147483647&v=beta&t=cNbo_k4zxulu34vKK_WRB4qS3mlF8EA9KRrLvZsACOg"
-         style="width: 800px; height: 400px; 
-                border-radius: 8px; object-fit: cover;"
-         alt="Europe">
-</div>
-""", unsafe_allow_html=True)
-traveler_font("No Worries! Input your preferences below!", False)
+traveler_font("Where to Travel in Europe?", False)
 
 with st.form("traveler_form"):
 
-    costSlider = st.slider("How important is saving money on fuel/travel cost?", 0, 10, 5)
-    trafficSlider = st.slider("How much do you value avoiding long travel times/traffic?", 0, 10, 5)
-    tourismSlider = st.slider("How important is it to visit high tourism areas?", 0, 10, 5)
+    st.write("**How important is saving money on fuel/travel cost?**")
+    col1, col2, col3 = st.columns([2, 8, 2])
+    with col1:
+        st.write("0 - Not Important")
+    with col2:
+        costSlider = st.slider("", 0, 10, 5, key="cost_slider", label_visibility="collapsed")
+    with col3:
+        st.write("10 - Very Important")
 
+    # Traffic Slider  
+    st.write("**How much do you value avoiding long travel times/traffic?**")
+    col1, col2, col3 = st.columns([2, 8, 2])
+    with col1:
+        st.write("0 - Don't Mind")  
+    with col2:
+        trafficSlider = st.slider("", 0, 10, 5, key="traffic_slider", label_visibility="collapsed")
+    with col3:
+        st.write("10 - Avoid at All Costs")
+
+    # Tourism Slider
+    st.write("**How important is it to visit high tourism areas?**")
+    col1, col2, col3 = st.columns([2, 8, 2])
+    with col1:
+        st.write("0 - Avoid Crowds")
+    with col2:
+        tourismSlider = st.slider("", 0, 10, 5, key="tourism_slider", label_visibility="collapsed")
+    with col3:
+        st.write("10 - Love Popular Spots")
     submitted = st.form_submit_button("Submit Preferences", type="primary")
 
 def empty_visual(): 
@@ -112,7 +126,6 @@ if submitted:
             for i in range(len(response.json())):
                 rank_icons = ["🥇", "🥈", "🥉", "🏅", "⭐"]
                 icon = rank_icons[i] if i < len(rank_icons) else "🌟"
-                
                 st.markdown(f"""
                 <div style="
                     background: linear-gradient(135deg, rgba(8, 145, 178, 0.1), rgba(181, 211, 176, 0.1));

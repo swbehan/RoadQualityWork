@@ -13,6 +13,8 @@ st.set_page_config(layout='wide')
 SideBarLinks()
 style_buttons()
 
+
+
 def delete_post(post_id):
     """Delete a post by ID"""
     try:

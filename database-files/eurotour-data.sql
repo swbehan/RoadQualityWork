@@ -84,7 +84,7 @@ CREATE TABLE Users (
 
 INSERT INTO Users (UserName, UserType, Nationality)
 VALUES
-('Ellie Willems', 'Researcher', 'German'),
+('Ellie Willems', 'Researcher', 'Germany'),
 ('Ab Lumm', 'National Official', 'Hungary'),
 ('Lyn Doddemeade', 'Tourist', 'Slovakia'),
 ('Gabriellia Comini', 'Researcher', 'Netherlands'),
