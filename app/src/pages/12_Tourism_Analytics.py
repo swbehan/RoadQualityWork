@@ -79,12 +79,20 @@ def get_road_spending_graph(final_gdp_roadspending_df):
     road_spend = final_gdp_roadspending_df['RoadSpending']
     country = final_gdp_roadspending_df["Country"]
     year = final_gdp_roadspending_df['SpendingYear']
-    df = df = final_gdp_roadspending_df
-    fig = px.scatter(df , x= gdp, y= road_spend, animation_frame= year, size= gdp, color= country,
-            hover_name= country, log_x=True, size_max=60, range_x=[5e+9,6e+12], range_y=[(-1000000000),2.5e+10])
+    df = final_gdp_roadspending_df
+
+    fig = px.scatter(df, x=gdp, y=road_spend, animation_frame=year, size=gdp, color=country,
+            hover_name=country, log_x=True, size_max=60, range_x=[5e+9,6e+12], range_y=[(-1000000000),2.5e+10],
+            color_discrete_sequence=px.colors.qualitative.Alphabet)
+
+    # Hide all countries except Hungary
+    fig.for_each_trace(
+        lambda trace: trace.update(visible='legendonly') if trace.name != 'Hungary' else trace.update(visible=True)
+    )
+
     fig.update_layout(
         xaxis_title="GDP",
-        yaxis_title= "Road Spending", 
+        yaxis_title="Road Spending", 
         title={
             "text": "Country GDP vs. Road Spending (1995-2023)",
             "x": 0.5,
@@ -97,12 +105,18 @@ def get_trips_graph(start_df, country):
     final_1plus_df = start_df.groupby(['Country', 'TripYear'], as_index = False)['NumTrips'].sum()
     final_1plus_df['Purpose'] = 'Personal Reasons'
     final_1plus_df['Duration'] = '1 night or over'
-    final_1plus_df[country]
 
     final_1plus_df = final_1plus_df[['Purpose', 'Duration', 'Country', 'TripYear', 'NumTrips']]
 
     # Plot the line graph
-    fig = px.line(final_1plus_df, x='TripYear', y='NumTrips', color='Country', color_discrete_sequence = px.colors.qualitative.Bold)
+    fig = px.line(final_1plus_df, x='TripYear', y='NumTrips', color='Country', 
+                color_discrete_sequence=px.colors.qualitative.Alphabet,)
+
+    # Set all countries to 'legendonly' (hidden but clickable) except Hungary
+    fig.for_each_trace(
+        lambda trace: trace.update(visible='legendonly') if trace.name != st.session_state["Nationality"] else trace.update(visible=True)
+    )
+
     fig.update_layout(title='Number of Trips (1 Plus Nights) per Year by Country',
                     xaxis_title='TripYear',
                     yaxis_title='Number of Trips',
@@ -228,7 +242,7 @@ def tourism_official_data_tables():
                                 cur_graph = get_road_spending_graph(df)
 
                             elif table_info["endpoint"] == "/trips":
-                                cur_graph = get_trips_graph(df, st.session_state["country"])
+                                cur_graph = get_trips_graph(df, st.session_state["Nationality"])
 
                             st.plotly_chart(cur_graph, use_container_width=True)
 
