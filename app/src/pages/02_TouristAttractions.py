@@ -43,7 +43,6 @@ if selected_country != "Select":
             with col1:
                 st.metric("Location", attraction['City'])
             with col2:
-                st.write(f"**Country:** {attraction['Country']}")
                 if attraction['AttractionWebsite']:
                     st.markdown(f"🌐 **Website:** [{attraction['AttractionWebsite']}]({attraction['AttractionWebsite']})")
                 else:
