@@ -5,7 +5,7 @@ from flask import current_app
 import json
 import pandas as pd
 from backend.tourism.reccomender_ml import get_top_5_recommendations
-from api.backend.tourist_official.time_series_predict import get_country_prediction
+from backend.tourist_official.time_series_predict import get_country_prediction
 
 # Create a Blueprint for routes
 tourism_bp = Blueprint("tourism", __name__)
