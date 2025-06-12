@@ -4,18 +4,77 @@ CREATE DATABASE EuroTour;
 
 USE EuroTour;
 
+CREATE TABLE Countries (
+    Country VARCHAR(255) PRIMARY KEY
+);
+
+INSERT INTO Countries (Country) VALUES
+('Albania'),
+('Austria'),
+('Belgium'),
+('Bulgaria'),
+('Bosnia and Herzegovina'),
+('Croatia'),
+('Cyprus'),
+('Czechia'),
+('Denmark'),
+('Estonia'),
+('Finland'),
+('France'),
+('Georgia'),
+('Germany'),
+('Greece'),
+('Hungary'),
+('Ireland'),
+('Italy'),
+('Latvia'),
+('Lithuania'),
+('Liechtenstein'),
+('Luxembourg'),
+('Malta'),
+('Moldova'),
+('Montenegro'),
+('Netherlands'),
+('North Macedonia'),
+('Norway'),
+('Poland'),
+('Portugal'),
+('Romania'),
+('Slovak Republic'),
+('Slovenia'),
+('Spain'),
+('Sweden'),
+('Switzerland'),
+('Türkiye'),
+('United Kingdom'),
+('Kosovo*');
+
+
+CREATE TABLE TimeSeriesPredictions (
+    Country VARCHAR(255) PRIMARY KEY,
+    2024_Prediction INT,
+    2025_Prediction INT,
+    2026_Prediction INT,
+    FOREIGN KEY (Country) REFERENCES Countries (Country)
+);
+
+INSERT INTO TimeSeriesPredictions (Country, 2024_Prediction, 2025_Prediction, 2026_Prediction) VALUES
+;
+
 CREATE TABLE RoadQuality (
     Country VARCHAR(255) NOT NULL,
     RoadYear YEAR,
     Score DECIMAL,
-    PRIMARY KEY (Country, RoadYear)
+    PRIMARY KEY (Country, RoadYear),
+    FOREIGN KEY (Country) REFERENCES Countries (Country)
 );
 
 CREATE TABLE TourismPrioritization (
     Country VARCHAR(255) NOT NULL,
     TourismYear YEAR,
     Score DECIMAL(4, 3),
-    PRIMARY KEY (Country, TourismYear)
+    PRIMARY KEY (Country, TourismYear),
+    FOREIGN KEY (Country) REFERENCES Countries (Country)
 );
 
 CREATE TABLE RoadDensity (
@@ -23,7 +82,8 @@ CREATE TABLE RoadDensity (
     DataYear YEAR,
     KmRoadPerKmSquared DECIMAL(8, 4),
     Score DECIMAL(6, 5),
-    PRIMARY KEY (Country, DataYear)
+    PRIMARY KEY (Country, DataYear),
+    FOREIGN KEY (Country) REFERENCES Countries (Country)
 );
 
 CREATE TABLE AvgFuelPrice (
@@ -31,7 +91,8 @@ CREATE TABLE AvgFuelPrice (
     FuelPriceYear YEAR,
     Score DECIMAL(4, 3),
     AvgPricePerLiter DECIMAL(4, 3),
-    PRIMARY KEY (Country, FuelPriceYear)
+    PRIMARY KEY (Country, FuelPriceYear),
+    FOREIGN KEY (Country) REFERENCES Countries (Country)
 );
 
 CREATE TABLE RoadSpending (
@@ -40,7 +101,8 @@ CREATE TABLE RoadSpending (
     RoadSpending BIGINT,
     GDP BIGINT,
     SpendingByGDPPercent DECIMAL(4, 3),
-    PRIMARY KEY (Country, SpendingYear)
+    PRIMARY KEY (Country, SpendingYear),
+    FOREIGN KEY (Country) REFERENCES Countries (Country)
 
 );
 -- FOREIGN KEY (Country, SpendingYear) REFERENCES RoadQuality (Country, RoadYear)
@@ -51,7 +113,8 @@ CREATE TABLE PassengerCars (
     MotorType VARCHAR(50),
     EngineSize VARCHAR(100),
     NumCars INT,
-    PRIMARY KEY (Country, PCDataYear, MotorType, EngineSize)
+    PRIMARY KEY (Country, PCDataYear, MotorType, EngineSize),
+    FOREIGN KEY (Country) REFERENCES Countries (Country)
 );
 -- FOREIGN KEY (Country, PCDataYear) REFERENCES RoadQuality (Country, RoadYear),
 -- FOREIGN KEY (Country, PCDataYear) REFERENCES RoadDensity (Country, DataYear),
@@ -62,7 +125,8 @@ CREATE TABLE Trips (
     TripYear YEAR,
     Duration VARCHAR(255),
     NumTrips INTEGER,
-    PRIMARY KEY (Country, TripYear, Duration)
+    PRIMARY KEY (Country, TripYear, Duration),
+    FOREIGN KEY (Country) REFERENCES Countries (Country)
 );
 -- FOREIGN KEY (Country, TripYear) REFERENCES RoadQuality (Country, RoadYear),
 -- FOREIGN KEY (Country, TripYear) REFERENCES TourismPrioritization (Country, TourismYear)
@@ -72,14 +136,16 @@ CREATE TABLE RoadDeaths (
     Country VARCHAR(255) NOT NULL,
     DeathsYear YEAR,
     NumDeaths INT,
-    RoadType VARCHAR(100)
+    RoadType VARCHAR(100),
+    FOREIGN KEY (Country) REFERENCES Countries (Country)
 );
 
 CREATE TABLE Users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
     UserName VARCHAR(255),
     UserType VARCHAR(255),
-    Nationality VARCHAR(255)
+    Nationality VARCHAR(255),
+    FOREIGN KEY (Nationality) REFERENCES Countries (Country)
 );
 
 INSERT INTO Users (UserName, UserType, Nationality)
@@ -141,7 +207,8 @@ CREATE TABLE Attractions (
     City VARCHAR(255),
     AttractionName VARCHAR(255),
     AttractionWebsite VARCHAR(255),
-    PRIMARY KEY (AttractionName, Country)
+    PRIMARY KEY (AttractionName, Country),
+    FOREIGN KEY (Country) REFERENCES Countries (Country)
 );
 
 -- AUSTRIA
