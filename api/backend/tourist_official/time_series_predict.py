@@ -45,7 +45,7 @@ def get_lag_columns(country_df, lag = 3):
 
     return x_matrix, y_vector
 
-def fit_regression_(X, y):
+def fit_regression(X, y):
     Xt = X.T
     XtX = np.dot(Xt, X)
     XtX_inv = np.linalg.inv(XtX)
@@ -89,44 +89,63 @@ def get_country_years_pred(data, country, lag = 3):
 
     return all_years_results
 
-def get_country_prediction(data, weights, country, lag=3):
-    country_df = data.copy()
-    # print(data)
-    country_df, y = get_lag_columns(country_df, lag=lag)
-
-    lag_cols = [f'lag{i}' for i in range(1, lag + 1)]
-    feature_cols = ['Bias', 'Covid'] + lag_cols
-
-    X = country_df[feature_cols].values
+def get_country_prediction(data, weights_row, country, lag=3):
+    """
+    Predict future tourism values using pre-trained weights
     
-    last_year = country_df['Year'].max()
-
-    last_row = country_df[country_df['Year'] == last_year].iloc[0]
-    lag_values = [last_row[f'lag{i}'] for i in range(1, lag + 1)]
-
-    tmp_x = last_row[feature_cols].to_numpy()
-    x_old = np.hstack([tmp_x[:2], y[-1], tmp_x[2:4]])
-    
-    year_list = [last_year + 1]
-    country_list = [country]
-    pred_list = [predict_next_year(beta_tourism, x_old)]
-
-    for i in range(1, lag):
-        year = last_year + i + 1
+    Args:
+        data: DataFrame with historical tourism data
+        weights_row: Series with weights [Y_Intercept, Covid, Lag_1, Lag_2, Lag_3]
+        country: Country name
+        lag: Number of lag periods
+    """
+    try:
+        country_df = data[data['Country'] == country].copy()
         
-        X_new = np.hstack([x_old[:2], pred_list[i-1], x_old[2:4]])
-        pred_tourism = predict_next_year(beta_tourism, X_new)
-
-        year_list.append(year)
-        country_list.append(country)
-        pred_list.append(pred_tourism)
-
-        x_old = X_new
-
-    predictions = {'Year': year_list,
-                   'Country': country_list,
-                   'Predicted_Tourism': pred_list}
-
-    final_df = pd.DataFrame(predictions)
-    final_df = unstandardize_results(final_df)
-    return final_df
+        if country_df.empty:
+            raise ValueError(f"No data found for country: {country}")
+        
+        country_df = country_df.sort_values('Year').reset_index(drop=True)
+        
+        if len(country_df) < lag + 1:
+            raise ValueError(f"Not enough historical data for {country}. Need at least {lag + 1} years.")
+        
+        country_df['Covid'] = country_df['Year'].apply(lambda x: 1 if x in [2020, 2021] else 0)
+        
+        last_year = country_df['Year'].max()
+        last_tourism_values = country_df['Tourism St.'].tail(lag).values
+        
+        y_intercept = weights_row['Y_Intercept']
+        covid_weight = weights_row['Covid']
+        lag_weights = [weights_row[f'Lag_{i}'] for i in range(1, lag + 1)]
+        
+        predictions = []
+        current_lags = last_tourism_values.tolist()
+        
+        for i in range(3): 
+            year = last_year + i + 1
+            covid_indicator = 1 if year in [2020, 2021] else 0
+            
+            prediction = y_intercept + covid_weight * covid_indicator
+            for j, lag_weight in enumerate(lag_weights):
+                if j < len(current_lags):
+                    prediction += lag_weight * current_lags[-(j+1)]
+            
+            predictions.append({
+                'Country': country,
+                'Year': year,
+                'Predicted_Tourism': prediction
+            })
+            
+            current_lags.append(prediction)
+            if len(current_lags) > lag:
+                current_lags.pop(0)
+        
+        final_df = pd.DataFrame(predictions)
+        unstandardize_results(final_df)
+        
+        return final_df
+        
+    except Exception as e:
+        print(f"Error in get_country_prediction: {str(e)}")
+        raise

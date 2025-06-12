@@ -116,7 +116,7 @@ def handle_single_post(post_id):
             data = request.get_json()
 
             cursor = db.get_db().cursor()
-            cursor.execute("SELECT * FROM ResearchFindings WHERE ResearchPostID = %s", (research_post_id,))
+            cursor.execute("SELECT * FROM ResearchFindings WHERE ResearchPostID = %s", (post_id,))
             if not cursor.fetchone():
                 return jsonify({"error": "Post not found"}), 404
             
