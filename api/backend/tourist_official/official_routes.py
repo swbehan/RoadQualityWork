@@ -4,8 +4,6 @@ from mysql.connector import Error
 import pandas as pd
 import numpy as np
 
-from backend.tourist_official.time_series_predict import get_country_prediction
-
 # Create a Blueprint for routes
 official_bp = Blueprint("official", __name__)
 
@@ -190,27 +188,46 @@ def get_users_of_type(type):
         return jsonify({"error": str(e)}), 500
     
 
-@official_bp.route("/timeseries/<string:country>")
+@official_bp.route("/timeseries/<string:country>", methods=["GET"])
 def get_ts_prediction(country):
-    try:
-        cursor = db.get_db().cursor()
+   cursor = None
+   try:
+       cursor = db.get_db().cursor()
 
-        cursor.execute(f"""SELECT Y_Intercept, Covid, Lag_1, Lag_2, Lag_3
-            FROM TimeSeriesWeights
-            WHERE Country = '{country}';""")
-        
-        data = cursor.fetchall()
-        if not data:
-            return jsonify({"error": "Data not found"}), 404
 
-        merged_df = pd.DataFrame(data)
-        
-        model_results = get_country_prediction(merged_df, country)
+       cursor.execute("""SELECT Country, TripYear, PredictedTrips
+                        FROM TimeSeriesPredictions
+                        WHERE Country = %s
+                        ORDER BY TripYear;""", (country,))
+      
+       prediction_rows = cursor.fetchall()
+      
+       if not prediction_rows:
+           return jsonify({"error": "Data not found"}), 404
+      
+       cursor.close()
+       return jsonify(prediction_rows), 200
+   except Error as e:
+       return jsonify({"error": str(e)}), 500
+  
+@official_bp.route("/trips/<string:country>", methods=["GET"])
+def get_trip_for_country(country):
+   cursor = None
+   try:
+       cursor = db.get_db().cursor()
 
-        recom_dict = model_results.to_dict(orient="records")
 
-        cursor.close()
-        return jsonify(recom_dict), 200
-    
-    except Error as e:
-        return jsonify({"error": str(e)}), 500
+       cursor.execute("""SELECT Country, TripYear, NumTrips
+                        FROM Trips
+                        WHERE Country = %s
+                        ORDER BY TripYear;""", (country,))
+      
+       prediction_rows = cursor.fetchall()
+      
+       if not prediction_rows:
+           return jsonify({"error": "Data not found"}), 404
+      
+       cursor.close()
+       return jsonify(prediction_rows), 200
+   except Error as e:
+       return jsonify({"error": str(e)}), 500
