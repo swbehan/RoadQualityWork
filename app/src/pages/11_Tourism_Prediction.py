@@ -27,7 +27,7 @@ def fetch_historical_data(nationality):
                df = pd.DataFrame(data)
                print(f"Historical DataFrame shape: {df.shape}")
                print(f"Historical sample data: {df.head()}")
-              
+            
                df = df.rename(columns={'TripYear': 'Year'})
               
                aggregated_df = df.groupby(['Country', 'Year'])['NumTrips'].sum().reset_index()
