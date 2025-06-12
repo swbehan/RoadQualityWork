@@ -188,39 +188,46 @@ def get_users_of_type(type):
         return jsonify({"error": str(e)}), 500
     
 
-@official_bp.route("/timeseries/<string:country>")
+@official_bp.route("/timeseries/<string:country>", methods=["GET"])
 def get_ts_prediction(country):
-    try:
-        cursor = db.get_db().cursor()
+   cursor = None
+   try:
+       cursor = db.get_db().cursor()
 
-        cursor.execute(f"""SELECT *
-            FROM TimeSeriesPredictions
-            WHERE Country = '{country}';""")
-        
-        pred_data = cursor.fetchall()
-        if not pred_data:
-            return jsonify({"error": "Prediction data not found"}), 404
 
-        pred_df = pd.DataFrame(pred_data)
-        pred_df = pred_df.rename(columns={'PredictedTrips': 'NumTrips'})
+       cursor.execute("""SELECT Country, TripYear, PredictedTrips
+                        FROM TimeSeriesPredictions
+                        WHERE Country = %s
+                        ORDER BY TripYear;""", (country,))
+      
+       prediction_rows = cursor.fetchall()
+      
+       if not prediction_rows:
+           return jsonify({"error": "Data not found"}), 404
+      
+       cursor.close()
+       return jsonify(prediction_rows), 200
+   except Error as e:
+       return jsonify({"error": str(e)}), 500
+  
+@official_bp.route("/trips/<string:country>", methods=["GET"])
+def get_trip_for_country(country):
+   cursor = None
+   try:
+       cursor = db.get_db().cursor()
 
-        cursor.execute(f"""SELECT *
-            FROM Trips
-            WHERE Country = '{country}' AND Duration = '1 night or over';""")
-        
-        past_data = cursor.fetchall()
-        if not past_data:
-            return jsonify({"error": "Past data not found"}), 404
 
-        past_df = pd.DataFrame(past_data)
-        past_df = past_df.drop('Duration', axis=1)
-
-        all_df = pd.concat([past_df, pred_df], ignore_index=True)
-
-        past_and_pred_dict = all_df.to_dict(orient="records")
-
-        cursor.close()
-        return jsonify(past_and_pred_dict), 200
-    
-    except Error as e:
-        return jsonify({"error": str(e)}), 500
+       cursor.execute("""SELECT Country, TripYear, NumTrips
+                        FROM Trips
+                        WHERE Country = %s
+                        ORDER BY TripYear;""", (country,))
+      
+       prediction_rows = cursor.fetchall()
+      
+       if not prediction_rows:
+           return jsonify({"error": "Data not found"}), 404
+      
+       cursor.close()
+       return jsonify(prediction_rows), 200
+   except Error as e:
+       return jsonify({"error": str(e)}), 500
