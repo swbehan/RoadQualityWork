@@ -27,7 +27,7 @@ offical_font("What would you like to do today?", False)
 if st.button('Predict Number of Tourists in Future Years', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/11_Tourism_Prediction.py')
+  st.switch_page('pages/Tourism_Prediction.py')
 
 if st.button('View Tourism Analytics', 
              type='primary',

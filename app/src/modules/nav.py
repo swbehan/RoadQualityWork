@@ -43,7 +43,7 @@ def TourismAnalyticsNav():
 
 def PredictionNav():
     st.sidebar.page_link(
-        "pages/11_Tourism_Prediction.py", label="Tourism Prediction", icon="📈"
+        "pages/Tourism_Prediction.py", label="Tourism Prediction", icon="📈"
     )
 
 
@@ -51,7 +51,7 @@ def PredictionNav():
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Reseacher_Home.py", label="Reseacher Home", icon="🏠")
     st.sidebar.page_link(
-        "pages/21_Reseacher_Notes.py", label="Create Post", icon="📝"
+        "pages/24_Researcher_Graph_View.py", label = "View Graphs", icon= "📊"
     )
     st.sidebar.page_link(
         "pages/22_Reseacher_View.py", label="View Posts", icon="🔍"
