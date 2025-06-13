@@ -29,7 +29,6 @@ def recommender_model(fuel_price, road_density, trips):
         if not data:
             return jsonify({"error": "Data not found"}), 404
         
-        #json_data = json.loads(data)
 
         merged_df = pd.DataFrame(data)
 

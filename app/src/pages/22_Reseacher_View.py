@@ -55,7 +55,7 @@ def edit_post(post_id, current_title, current_research):
 def display_posts(posts):
     """Display posts in Streamlit"""
     if posts:
-        search_term = st.text_input("", placeholder="Search by title or content...")
+        search_term = st.text_input("🔍 Search Posts", placeholder="Search by title or content...")
     
         if search_term:
             filtered_posts = []

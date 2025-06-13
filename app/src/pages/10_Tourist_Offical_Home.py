@@ -19,7 +19,7 @@ collage_form('https://www.cmswire.com/-/media/a7be4403acee498ca21e6861871358b3.a
              'https://www.torontosom.ca/wp-content/uploads/2022/04/the-difference-between-international-and-domestic-tourism.jpg',
              'Predict Future Tourism Numbers',
              'View Tourism Infrastructure Analytics',
-             'Download Filtered Country Data',
+             'Post Comparison Country Data',
              'Understand Factors that Impact Tourism',
              'Gain a Greater Insight to Tourism')
 

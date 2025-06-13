@@ -171,7 +171,6 @@ CREATE TABLE RoadSpending (
     FOREIGN KEY (Country) REFERENCES Countries (Country)
 
 );
--- FOREIGN KEY (Country, SpendingYear) REFERENCES RoadQuality (Country, RoadYear)
 
 CREATE TABLE PassengerCars (
     Country VARCHAR(255) NOT NULL,
@@ -182,9 +181,6 @@ CREATE TABLE PassengerCars (
     PRIMARY KEY (Country, PCDataYear, MotorType, EngineSize),
     FOREIGN KEY (Country) REFERENCES Countries (Country)
 );
--- FOREIGN KEY (Country, PCDataYear) REFERENCES RoadQuality (Country, RoadYear),
--- FOREIGN KEY (Country, PCDataYear) REFERENCES RoadDensity (Country, DataYear),
--- FOREIGN KEY (Country, PCDataYear) REFERENCES AvgFuelPrice (Country, FuelPriceYear)
 
 CREATE TABLE Trips (
     Country VARCHAR(255) NOT NULL,
@@ -194,8 +190,6 @@ CREATE TABLE Trips (
     PRIMARY KEY (Country, TripYear, Duration),
     FOREIGN KEY (Country) REFERENCES Countries (Country)
 );
--- FOREIGN KEY (Country, TripYear) REFERENCES RoadQuality (Country, RoadYear),
--- FOREIGN KEY (Country, TripYear) REFERENCES TourismPrioritization (Country, TourismYear)
 
 CREATE TABLE RoadDeaths (
     DeathRate DECIMAL (4,3),

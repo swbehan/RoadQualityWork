@@ -128,13 +128,6 @@ def tourism_official_data_tables():
     offical_font("Tourism Infrastructure Analytics", False)
     BASE_URL = "http://host.docker.internal:4000/official"
     tables = {
-        "Road Quality": {
-            "endpoint": "/roadquality",
-            "description": """This dataset tracks road infrastructure quality scores for different countries
-              across multiple years, providing a standardized assessment of each nation's road network condition. 
-              The quality scores enable year over year comparisons of road infrastructure improvements or deterioration 
-              within countries and benchmarking across different nations."""
-        },
         "Tourism Prioritization": {
             "endpoint": "/tourismprioritization",
             "description": """This graph shows government tourism prioritization scores by country and year, 
@@ -186,46 +179,8 @@ def tourism_official_data_tables():
                         df = pd.DataFrame(data)
                         if not df.empty:
                             col1, col2 = st.columns(2)
-                            
-                            # with col1:
-                            #     if 'Country' in df.columns:
-                            #         available_countries = sorted(df['Country'].unique())
-                            #         selected_countries = st.multiselect(
-                            #             "Select Countries:",
-                            #             options=available_countries,
-                            #             default=[],
-                            #             key=f"countries_{table_name}"
-                            #         )
-                            #     else:
-                            #         selected_countries = []
-                            
-                            # with col2:
-                            #     year_columns = [col for col in df.columns if 'year' in col.lower() or 'Year' in col]
-                            #     if year_columns:
-                            #         year_column = year_columns[0]
-                            #         available_years = sorted(df[year_column].unique())
-                            #         selected_years = st.multiselect(
-                            #             "Select Years:",
-                            #             options=available_years,
-                            #             default=[],
-                            #             key=f"years_{table_name}"
-                            #         )
-                            #     else:
-                            #         selected_years = []
-                            #         year_column = None
-                            
-                            # filtered_df = df.copy()
-                            # if selected_countries and 'Country' in df.columns:
-                            #     filtered_df = filtered_df[filtered_df['Country'].isin(selected_countries)]
-                            # if selected_years and year_column:
-                            #     filtered_df = filtered_df[filtered_df[year_column].isin(selected_years)]
-
-                            cur_graph = None
-
-                            if table_info["endpoint"] == "/roadquality":
-                                print("RoadQuality")
                                 
-                            elif table_info["endpoint"] == "/tourismprioritization":
+                            if table_info["endpoint"] == "/tourismprioritization":
                                 cur_graph = get_tourism_prior_graph(df)
                             
                             elif table_info["endpoint"] == "/roadspending":
