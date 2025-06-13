@@ -37,7 +37,7 @@ INSERT INTO Countries (Country) VALUES
 ('Sweden');
 
 
-CREATE TABLE TimeSeriesPredictions (
+CREATE TABLE TourismPredictions (
     Country VARCHAR(255),
     TripYear INT,
     PredictedTrips INT,
@@ -45,7 +45,7 @@ CREATE TABLE TimeSeriesPredictions (
     FOREIGN KEY (Country) REFERENCES Countries (Country)
 );
 
-INSERT INTO TourismPredictions (Year, Country, Predicted_Tourism)
+INSERT INTO TourismPredictions (TripYear, Country, PredictedTrips)
 VALUES
 (2024, 'Austria', 34444302),
 (2025, 'Austria', -2236405),
