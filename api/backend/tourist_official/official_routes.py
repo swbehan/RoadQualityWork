@@ -165,7 +165,7 @@ def get_ts_prediction(country):
 
 
        cursor.execute("""SELECT Country, TripYear, PredictedTrips
-                        FROM TimeSeriesPredictions
+                        FROM TourismPredictions
                         WHERE Country = %s
                         ORDER BY TripYear;""", (country,))
       
