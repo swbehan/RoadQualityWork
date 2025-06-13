@@ -23,10 +23,10 @@ collage_form('https://www.usatoday.com/gcdn/-mm-/d2a691f1f64d8069f144791917ccdcf
 st.write('')
 researcher_font("What would you like to do today?", False)
 
-if st.button('Create Posts', 
+if st.button('Create Posts With Data', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/21_Reseacher_Notes.py')
+  st.switch_page('pages/24_Researcher_Graph_View.py')
 
 if st.button('View Existing Posts', 
              type='primary',
