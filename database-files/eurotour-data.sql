@@ -191,7 +191,6 @@ CREATE TABLE Trips (
     FOREIGN KEY (Country) REFERENCES Countries (Country)
 );
 
-
 CREATE TABLE RoadDeaths (
     DeathRate DECIMAL (4,3),
     Country VARCHAR(255) NOT NULL,
