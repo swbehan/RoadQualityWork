@@ -214,6 +214,7 @@ CREATE TABLE Users (
     FOREIGN KEY (Nationality) REFERENCES Countries (Country)
 );
 
+
 INSERT INTO Users (UserName, UserType, Nationality)
 VALUES
 ('Ellie Willems', 'Researcher', 'Germany'),
@@ -235,6 +236,17 @@ VALUES
 ('Liesa Pocknell', 'Researcher', 'Spain'),
 ('Levy Bicknell', 'Researcher', 'Lithuania');
 
+CREATE TABLE GraphFindings (
+    GraphID INT AUTO_INCREMENT PRIMARY KEY,
+    OfficialID INT,
+    NationalityValues JSON,
+    SelectedCountryValues JSON,
+    NationalityName VARCHAR(255),
+    SelectedCountryName VARCHAR(255),
+    ComparisonName VARCHAR(255),
+    GraphDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (OfficialID) REFERENCES Users (UserID)
+);
 
 CREATE TABLE ResearchFindings (
     ResearchPostID INT AUTO_INCREMENT PRIMARY KEY,
@@ -242,30 +254,32 @@ CREATE TABLE ResearchFindings (
     PostDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Research TEXT,
     AuthorID INT,
+    GraphTitle VARCHAR(255),
+    GraphAuthor VARCHAR(255),
     FOREIGN KEY (AuthorID) REFERENCES Users (UserID)
 );
 
-INSERT INTO ResearchFindings (Title, Research, AuthorID) VALUES
 
-('Digital Transformation in Tourism Operations', 'Our recent study examines how digital technologies are reshaping tourism management practices. We analyzed 150 tourism businesses and found that companies implementing integrated digital solutions saw a 34% increase in operational efficiency. Key findings include the importance of mobile-first booking systems and real-time customer feedback integration.', 2),
+INSERT INTO ResearchFindings (Title, Research, AuthorID, GraphTitle, GraphAuthor) VALUES
+('Tourism Recovery Patterns: Germany vs France Analysis', 'After analyzing the Germany vs France tourism comparison graph, I observe distinct recovery trajectories post-2020. Germany shows a more gradual but steady recovery pattern, reaching 85% of pre-pandemic levels by 2023, while France demonstrates more volatile fluctuations with sharper drops and faster rebounds. The data suggests Germany''s domestic tourism strength provided stability, whereas France''s heavy reliance on international visitors created more dramatic variations. Both countries show promising upward trends for 2024-2026 predictions.', 2, 'Germany vs France', 'Klaus Weber'),
 
-('Carbon Footprint Reduction in European Hotels', 'This research investigates sustainable practices in the hospitality sector across 12 European countries. We discovered that hotels implementing comprehensive sustainability programs reduced their carbon emissions by an average of 28% while maintaining guest satisfaction scores above 4.2/5. Solar energy adoption and waste reduction initiatives showed the highest impact.', 3),
+('Mediterranean Tourism Dynamics: Spain vs Italy Comparison', 'The Spain vs Italy graph reveals fascinating seasonal patterns that diverge significantly from expected trends. Spain maintains consistently higher visitor numbers throughout the historical period (15-20% above Italy), but Italy shows more resilience during economic downturns. The 2017-2019 peak period demonstrates Spain''s capacity for handling mass tourism, while Italy''s steadier growth suggests more sustainable tourism development. The predictive models indicate convergence by 2025, with both countries stabilizing around 55-60 million annual visitors.', 4, 'Spain vs Italy', 'Maria Gonzalez'),
 
-('Impact of UNESCO Sites on Local Community Identity', 'A three-year ethnographic study exploring how UNESCO World Heritage designation affects local cultural practices in Mediterranean communities. Our findings reveal both positive preservation outcomes and challenges related to over-tourism. Local residents reported 67% positive impact on cultural pride but concerns about commercialization of traditions.', 4),
+('Northern European Tourism Competitiveness: Netherlands vs Belgium Study', 'Examining the Netherlands vs Belgium tourism data provides insights into small-country tourism strategies. The Netherlands consistently outperforms Belgium by 3:1 visitor ratios, likely attributed to Amsterdam''s global brand recognition and superior tourism infrastructure. However, Belgium shows more stable year-over-year growth rates with less volatility. The graph indicates Belgium''s tourism sector is more recession-resistant, while Netherlands experiences higher peaks but deeper troughs. Both countries'' predictions suggest modest but sustainable growth through 2026.', 4, 'Netherlands vs Belgium', 'Hans Van Der Berg'),
 
-('Post-Pandemic Recovery Strategies for Luxury Hotels', 'Analysis of 85 luxury hotel properties and their recovery strategies following COVID-19. Properties that invested in enhanced health protocols and personalized guest experiences recovered to 89% of pre-pandemic revenue levels by 2023. Contactless service integration proved crucial for guest confidence restoration.', 5),
+('Eastern European Tourism Evolution: Poland vs Czech Republic Analysis', 'The Poland vs Czech Republic comparison graph illustrates the dramatic tourism evolution in post-communist EU states. Czech Republic initially led with Prague''s early tourism development, but Poland has rapidly closed the gap since 2015. Poland''s visitor numbers grew 45% between 2016-2019, compared to Czech Republic''s 23% growth. The data shows Poland''s tourism diversification beyond Warsaw and Krakow is succeeding. Predictive trends suggest Poland will surpass Czech Republic by 2025, with both countries showing strong recovery trajectories.', 6, 'Poland vs Czech Republic', 'Central Europe Analyst Pavel Novak'),
 
-('Social Media Influence on Destination Choice', 'Comprehensive analysis of Instagram and TikTok impact on millennial travel decisions. Survey of 2,400 travelers aged 25-35 revealed that 73% of destination choices were influenced by social media content. User-generated content proved 5x more influential than traditional advertising in driving booking decisions.', 6),
+('Alpine Tourism Comparison: Austria vs Switzerland Economic Impact', 'Analyzing the Austria vs Switzerland graph reveals the premium positioning difference in Alpine tourism. Switzerland commands higher per-visitor revenue despite lower total visitor numbers, indicating successful luxury tourism positioning. Austria demonstrates greater volume capacity with 15-20% more visitors annually but at lower average spending. The 2020 pandemic impact was more severe for Switzerland (-65%) versus Austria (-45%), suggesting Austria''s domestic market resilience. Both countries show strong recovery with Switzerland returning to premium growth patterns by 2024.', 6, 'Austria vs Switzerland', 'Ingrid Mueller'),
 
-('Biodiversity Conservation Through Community-Based Ecotourism', 'Five-year study of ecotourism projects in Costa Rica and Kenya examining conservation outcomes. Communities participating in well-managed ecotourism programs showed 42% increase in local wildlife populations. Revenue sharing models directly correlated with conservation success rates and community engagement levels.', 7),
+('Southern European Recovery: Portugal vs Greece Tourism Trends', 'The Portugal vs Greece comparison provides excellent insights into Mediterranean tourism recovery strategies. Portugal shows remarkable consistency with steady 8-12% annual growth throughout the historical period, while Greece exhibits more dramatic swings correlating with economic crises. Portugal''s diversification into wine tourism and coastal experiences created stability, whereas Greece''s island-focused model creates higher seasonality. The predictive data suggests both countries will reach record visitor levels by 2026, with Portugal maintaining its steady growth trajectory.', 17, 'Portugal vs Greece', 'Andreas Papadopoulos'),
 
-('Economic Impact of Large-Scale Sporting Events', 'Comprehensive economic analysis of hosting major sporting events in mid-sized cities. Our research covering 8 international events shows average economic impact of $127 million per event. However, long-term benefits depend heavily on infrastructure legacy and ongoing event programming post-competition.', 8),
+('Scandinavian Tourism Analysis: Sweden vs Denmark Comparative Study', 'The Sweden vs Denmark graph demonstrates interesting Scandinavian tourism patterns often overlooked in broader European studies. Denmark consistently attracts 20-25% more visitors despite Sweden''s larger size, indicating Copenhagen''s strong urban tourism appeal and Denmark''s accessibility advantages. Sweden shows greater seasonal variation, suggesting stronger nature-based tourism dependence. Both countries experienced minimal pandemic impact compared to Southern Europe, recovering to 95% of 2019 levels by 2022. The forecast models predict continued steady growth for both nations.', 9, 'Sweden vs Denmark', 'Lars Andersen'),
 
-('Tourism Revenue Optimization in Island Destinations', 'Economic modeling study of 15 Caribbean island destinations examining seasonal revenue patterns and optimization strategies. Islands implementing dynamic pricing and diversified activity portfolios achieved 23% higher annual revenue per visitor. Off-season programming proved critical for year-round sustainability.', 9),
+('Western European Tourism Stability: France vs United Kingdom Border Analysis', 'Despite Brexit complications, the France vs UK graph shows resilient tourism flows between these major destinations. France maintains 35-40% higher visitor numbers, but UK shows more consistent year-over-year stability. The 2016 Brexit vote created temporary UK visitor declines, while France experienced terrorism-related impacts in 2015-2016. Post-2019 data shows both countries recovering strongly, with France benefiting from UK visitors seeking European experiences. The predictive models suggest both countries will reach new visitor records by 2025-2026.', 9, 'France vs United Kingdom', 'Sarah Williams'),
 
-('Digital Preservation of Intangible Cultural Heritage in Tourism', 'Research on innovative methods for preserving and presenting intangible cultural heritage in tourism settings. Through partnerships with 12 heritage sites in Japan, we developed AR-enhanced experiences that increased visitor engagement by 45% while maintaining cultural authenticity and community involvement.', 10),
+('Economic Tourism Indicators: Germany vs Italy Infrastructure Analysis', 'The Germany vs Italy comparison graph highlights the relationship between tourism infrastructure and visitor satisfaction. Germany''s consistent growth pattern (5-8% annually) reflects superior transportation networks and digital tourism services, while Italy''s more volatile pattern indicates capacity constraints during peak seasons. Germany''s business tourism component provides stability during economic downturns, whereas Italy''s leisure-focused model creates higher sensitivity to economic cycles. Both countries show strong 2024-2026 projections, with Germany''s technological advantages supporting sustained growth.', 17, 'Germany vs Italy', 'Marco Rossi'),
 
-('Crisis Management Strategies for Tourist Destinations', 'Comparative analysis of destination management responses to natural disasters and global crises. Study of 20 destinations revealed that those with pre-established crisis communication protocols and diversified market strategies recovered 40% faster. Community stakeholder engagement proved essential for resilient destination management.', 11);
+('Small State Tourism Success: Luxembourg vs Malta Island Comparison', 'This unique Luxembourg vs Malta comparison reveals how small EU states develop distinct tourism strategies. Malta''s island advantage generates 4x more visitors per capita than Luxembourg, but Luxembourg shows higher per-visitor economic impact through business and cultural tourism. Malta''s growth pattern is heavily seasonal and weather-dependent, while Luxembourg maintains steadier year-round visitation. The pandemic affected both countries differently - Malta (-75%) versus Luxembourg (-35%) - demonstrating mainland Europe''s resilience advantages. Both show strong recovery trajectories through 2026.', 18, 'Luxembourg vs Malta', 'Jean-Pierre Dubois');
 
 
 CREATE TABLE Attractions (

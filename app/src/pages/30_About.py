@@ -8,21 +8,24 @@ st.write("# About the Authors ")
 left_col, middle_col_one, middle_col_two, right_col = st.columns(4)
 
 with left_col:
-    st.image("assets/SeanPicture.PNG", use_container_width=True)
+    st.image("assets/Sean.jpeg", use_container_width=True)
     st.markdown("**Sean Behan**")
-    st.text("I am a rising second year studying computer science with a concentration in AI with a minor in usiness administration")
+    st.text("I am a rising second year studying Computer Science with a concentration in AI with a minor in Business Administration. A fun fact about me is that I am a triplet!")
 
 with middle_col_one:
-    st.image("assets/aidanpic.jpeg", use_container_width=True)
+    st.image("assets/Aidan.jpeg", use_container_width=True)
     st.markdown("**Aidan Kelly**")
+    st.text("I am a rising third year studying Computer Science and Financial Technology. I enjoy watching hockey, and have been playing since I was three!")
 
 with middle_col_two:
-    st.image("assets/SeanPicture.PNG", use_container_width=True)
+    st.image("assets/Gabby.jpeg", use_container_width=True)
     st.markdown("**Gabby Montalvo**")
+    st.text("I am a rising second year studying Data Science and Marketing Analytics. I am a coffe enthusiast working at two coffe shops!")
 
 with right_col:
-    st.image("assets/SeanPicture.PNG", use_container_width=True)
-    st.markdown("**Maria**")
+    st.image("assets/Maria.jpeg", use_container_width=True)
+    st.markdown("**Maria Samos Rivas**")
+    st.text("I am a rising second year studying Data Science and Finance. Though I was born in Spain, I’ve lived in DC for the last 10 years.")
 
 st.write("# Problem EuroTour Addresses")
 st.markdown(

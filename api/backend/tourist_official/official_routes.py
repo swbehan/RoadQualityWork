@@ -6,37 +6,6 @@ import numpy as np
 
 # Create a Blueprint for routes
 official_bp = Blueprint("official", __name__)
-
-@official_bp.route("/get_merged_data", methods=["GET"])
-def get_merged_data():
-    try:
-        cursor = db.get_db().cursor()
-
-        cursor.execute("""SELECT DISTINCT RoadYear AS Year,
-                t.Country,
-                RoadSpending,
-                GDP,
-                SpendingByGDPPercent,
-                SUM(t.NumTrips) AS TotalTrips,
-                COUNT(t.Duration) AS NumDurationTypes
-FROM RoadSpending rs
-         JOIN RoadQuality rq
-              ON ((rs.Country = rq.Country) AND (rs.SpendingYear = rq.RoadYear))
-         JOIN Trips t
-              ON ((rq.Country = t.Country) AND (rq.RoadYear = t.TripYear))
-         JOIN TourismPrioritization tp
-              ON ((t.Country = tp.Country) AND (t.TripYear = tp.TourismYear))
-GROUP BY rs.SpendingYear, rs.Country, rs.RoadSpending, rs.GDP, rs.SpendingByGDPPercent;""")
-        data = cursor.fetchall()
-
-        if not data:
-            return jsonify({"error": "Data not found"}), 404
-        
-        cursor.close()
-        return jsonify(data), 200
-    
-    except Error as e:
-        return jsonify({"error": str(e)}), 500
     
 # Get the data from the RoadQuality table
 @official_bp.route("/roadquality", methods=["GET"])
@@ -231,3 +200,57 @@ def get_trip_for_country(country):
        return jsonify(prediction_rows), 200
    except Error as e:
        return jsonify({"error": str(e)}), 500
+
+@official_bp.route("/graph", methods=["GET","POST"])
+def graph():
+    if request.method == "POST":
+        try:
+                data = request.get_json()
+                cursor = db.get_db().cursor()
+                query = """
+                INSERT INTO GraphFindings (OfficialID, NationalityValues, SelectedCountryValues, NationalityName, SelectedCountryName, ComparisonName)
+                VALUES (%s, %s, %s, %s, %s, %s)
+                """
+                cursor.execute(
+                    query,
+                    (
+                        data["OfficialID"],
+                        data["NationalityValues"],
+                        data["SelectedCountryValues"],
+                        data["NationalityName"],
+                        data["SelectedCountryName"],
+                        data["ComparisonName"]
+                    ),
+                )
+                db.get_db().commit()
+                cursor.close()
+                return jsonify({"message": "Graph data saved successfully"}), 201
+        except Error as e:
+                return jsonify({"error": str(e)}), 500
+    elif request.method == "GET":
+        try:
+            cursor = db.get_db().cursor()
+            query = """
+                SELECT 
+                    g.GraphID,
+                    g.NationalityValues,
+                    g.SelectedCountryValues,
+                    g.NationalityName,
+                    g.SelectedCountryName,
+                    g.ComparisonName,
+                    g.OfficialID,
+                    g.GraphDate,
+                    u.UserName as OfficialName
+                FROM GraphFindings g
+                LEFT JOIN Users u ON g.OfficialID = u.UserID
+            """
+            cursor.execute(query)
+            graphs = cursor.fetchall()
+            cursor.close()
+            return jsonify({
+                "message": f"Found {len(graphs)} posts",
+                "posts": graphs
+            }), 200
+        except Error as e:
+            return jsonify({"error": str(e)}), 500
+            

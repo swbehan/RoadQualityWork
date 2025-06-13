@@ -17,6 +17,8 @@ def handle_posts():
                     rf.PostDate,
                     rf.Research,
                     rf.AuthorID,
+                    rf.GraphTitle,
+                    rf.GraphAuthor,
                     u.UserName,
                     u.Nationality
                 FROM ResearchFindings rf
@@ -35,18 +37,19 @@ def handle_posts():
     elif request.method == "POST":
         try:
             data = request.get_json()
-            required_fields = ["Title", "Research", "AuthorID"]
             cursor = db.get_db().cursor()
             query = """
-            INSERT INTO ResearchFindings (Title, Research, AuthorID)
-            VALUES (%s, %s, %s)
+            INSERT INTO ResearchFindings (Title, Research, AuthorID, GraphTitle, GraphAuthor)
+            VALUES (%s, %s, %s, %s, %s)
             """
             cursor.execute(
                 query,
                 (
                     data["Title"],
                     data["Research"],
-                    data["AuthorID"]
+                    data["AuthorID"],
+                    data["GraphTitle"],
+                    data["GraphAuthor"],
                 ),
             )
             db.get_db().commit()
@@ -74,6 +77,8 @@ def handle_single_post(post_id):
                     rf.PostDate,
                     rf.Research,
                     rf.AuthorID,
+                    rf.GraphTitle,
+                    rf.GraphAuthor,
                     u.UserName,
                     u.Nationality
                 FROM ResearchFindings rf
@@ -116,7 +121,7 @@ def handle_single_post(post_id):
             data = request.get_json()
 
             cursor = db.get_db().cursor()
-            cursor.execute("SELECT * FROM ResearchFindings WHERE ResearchPostID = %s", (research_post_id,))
+            cursor.execute("SELECT * FROM ResearchFindings WHERE ResearchPostID = %s", (post_id,))
             if not cursor.fetchone():
                 return jsonify({"error": "Post not found"}), 404
             
