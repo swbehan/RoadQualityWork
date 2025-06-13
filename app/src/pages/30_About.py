@@ -20,7 +20,7 @@ with middle_col_one:
 with middle_col_two:
     st.image("assets/Gabby.jpeg", use_container_width=True)
     st.markdown("**Gabby Montalvo**")
-    st.text("I am a rising second year studying Data Science and Marketing Analytics. I am a coffe enthusiast working at two coffe shops!")
+    st.text("I am a rising second year studying Data Science and Marketing Analytics. I play five instruments, and am a coffee enthusiast working at two coffee shops!")
 
 with right_col:
     st.image("assets/Maria.jpeg", use_container_width=True)
