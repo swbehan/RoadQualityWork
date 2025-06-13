@@ -214,6 +214,7 @@ CREATE TABLE Users (
     FOREIGN KEY (Nationality) REFERENCES Countries (Country)
 );
 
+
 INSERT INTO Users (UserName, UserType, Nationality)
 VALUES
 ('Ellie Willems', 'Researcher', 'Germany'),
@@ -235,6 +236,17 @@ VALUES
 ('Liesa Pocknell', 'Researcher', 'Spain'),
 ('Levy Bicknell', 'Researcher', 'Lithuania');
 
+CREATE TABLE GraphFindings (
+    GraphID INT AUTO_INCREMENT PRIMARY KEY,
+    OfficialID INT,
+    NationalityValues JSON,
+    SelectedCountryValues JSON,
+    NationalityName VARCHAR(255),
+    SelectedCountryName VARCHAR(255),
+    ComparisonName VARCHAR(255),
+    GraphDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (OfficialID) REFERENCES Users (UserID)
+);
 
 CREATE TABLE ResearchFindings (
     ResearchPostID INT AUTO_INCREMENT PRIMARY KEY,
@@ -242,8 +254,11 @@ CREATE TABLE ResearchFindings (
     PostDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Research TEXT,
     AuthorID INT,
+    GraphTitle VARCHAR(255),
+    GraphAuthor VARCHAR(255),
     FOREIGN KEY (AuthorID) REFERENCES Users (UserID)
 );
+
 
 INSERT INTO ResearchFindings (Title, Research, AuthorID) VALUES
 

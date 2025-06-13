@@ -6,6 +6,7 @@ import json
 import pandas as pd
 from backend.tourism.reccomender_ml import get_top_5_recommendations
 
+
 # Create a Blueprint for routes
 tourism_bp = Blueprint("tourism", __name__)
 
@@ -111,4 +112,5 @@ def get_country_attractions(country):
     
     except Error as e:
         return jsonify({"error": str(e)}), 500
+    
     

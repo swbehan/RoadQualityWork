@@ -64,6 +64,8 @@ def display_posts(posts):
                 research = str(post.get('Research', '')).lower()
                 author_name = str(post.get('UserName', '')).lower()
                 nationality = str(post.get('Nationality', '')).lower()
+                graph_author = str(post.get('GraphAuthor', '')).lower()
+                graph_title = str(post.get('GraphTitle', '')).lower()
             
                 search_lower = search_term.lower()
                 if (search_lower in title or 
@@ -88,6 +90,8 @@ def display_posts(posts):
             author_id = post.get('AuthorID', 'N/A')
             author_name = post.get('UserName', 'Unknown Author')
             nationality = post.get('Nationality', 'Unknown Field')
+            graph_author = post.get("GraphAuthor", "Unknown Author")
+            graph_title = post.get("GraphTitle", "Unknown Title")
             
             edit_key = f"edit_{research_post_id}"
             is_editing = st.session_state.get(edit_key, False)
@@ -114,7 +118,7 @@ def display_posts(posts):
                                     st.session_state[edit_key] = False
                                     st.rerun()
                             else:
-                                st.error("❌ Please fill in both fields!")
+                                st.error("Please fill in both fields!")
                         
                         if cancel_submitted:
                             st.session_state[edit_key] = False
@@ -130,7 +134,8 @@ def display_posts(posts):
                         st.write("**Nationality:**", nationality)
                 
                     with col2:
-                        st.write("**Post ID:**", research_post_id)
+                        st.write("**Graph Reference:**", graph_title)
+                        st.write("**Graph By:**", graph_author)
                 
                     st.divider()
                 
