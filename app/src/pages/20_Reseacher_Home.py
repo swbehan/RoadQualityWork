@@ -15,7 +15,7 @@ collage_form('https://www.usatoday.com/gcdn/-mm-/d2a691f1f64d8069f144791917ccdcf
              'https://compote.slate.com/images/49bf62d0-9a1f-4207-bd43-494c0ce31431.jpg?crop=568%2C379%2Cx0%2Cy0&width=2200',
              'https://media.istockphoto.com/id/1071915654/photo/excited-black-coach-make-flipchart-presentation-for-employees.jpg?s=612x612&w=0&k=20&c=1kxSV8DLbhJ2vee0ulwOSgVYU4v7HfrO-WMbAXIro-g=',
              'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=400',
-             'View Road Statistics on the Country Level',
+             'View Tourism Comparison Stats',
              'Create Posts Regarding Your Findings',
              'View Others Users Insights',
              'Study Trends',
