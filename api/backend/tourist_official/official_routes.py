@@ -6,37 +6,6 @@ import numpy as np
 
 # Create a Blueprint for routes
 official_bp = Blueprint("official", __name__)
-
-@official_bp.route("/get_merged_data", methods=["GET"])
-def get_merged_data():
-    try:
-        cursor = db.get_db().cursor()
-
-        cursor.execute("""SELECT DISTINCT RoadYear AS Year,
-                t.Country,
-                RoadSpending,
-                GDP,
-                SpendingByGDPPercent,
-                SUM(t.NumTrips) AS TotalTrips,
-                COUNT(t.Duration) AS NumDurationTypes
-FROM RoadSpending rs
-         JOIN RoadQuality rq
-              ON ((rs.Country = rq.Country) AND (rs.SpendingYear = rq.RoadYear))
-         JOIN Trips t
-              ON ((rq.Country = t.Country) AND (rq.RoadYear = t.TripYear))
-         JOIN TourismPrioritization tp
-              ON ((t.Country = tp.Country) AND (t.TripYear = tp.TourismYear))
-GROUP BY rs.SpendingYear, rs.Country, rs.RoadSpending, rs.GDP, rs.SpendingByGDPPercent;""")
-        data = cursor.fetchall()
-
-        if not data:
-            return jsonify({"error": "Data not found"}), 404
-        
-        cursor.close()
-        return jsonify(data), 200
-    
-    except Error as e:
-        return jsonify({"error": str(e)}), 500
     
 # Get the data from the RoadQuality table
 @official_bp.route("/roadquality", methods=["GET"])
